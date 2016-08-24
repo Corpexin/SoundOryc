@@ -13,9 +13,6 @@
         NonActiveBorderBrush="#2b323a"
         NonActiveWindowTitleBrush="#2b323a" >
 
-
-   
-    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary x:Key="resources" Source="Resources.xaml" />
@@ -24,6 +21,21 @@
 
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="9"/>
+            <RowDefinition Height="51"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="44"/>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="197*"/>
+        </Grid.ColumnDefinitions>
+
         
     </Grid>
 </Controls:MetroWindow>
