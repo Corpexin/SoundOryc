@@ -283,6 +283,36 @@
         </Style>
 
 
+    <Style x:Key="neteaseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Overlay" CornerRadius="2">
+                        <ContentPresenter/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0" Color="LightGray" Opacity="0.70" BlurRadius="5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+
+                            <Setter TargetName="Overlay" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="/Resources/netease.png"/>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="selectEngineButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -423,7 +453,7 @@
 
                                 <Setter TargetName="Overlay" Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="Resources/mp3with.png"/>
+                                        <ImageBrush ImageSource="/Resources/mp3with.png"/>
                                     </Setter.Value>
                                 </Setter>
 

@@ -39,5 +39,15 @@
         </TextBox>
         <Button x:Name="btnEngine"  Style="{StaticResource engineButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,19,126,11"  HorizontalAlignment="Right" ToolTip="Search with Netease engine"/>
         <Button x:Name="btnSelectEngine"  Style="{StaticResource selectEngineButtonStyle}"  Height="8"  Width="10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,23,109,12"  HorizontalAlignment="Right" ToolTip="Select Search Engine"/>
+        <DockPanel x:Name="dpEngineSelection" Grid.Column="4" HorizontalAlignment="Left"  Margin="35,0,0,-10" Visibility="Collapsed">
+            <ListView BorderBrush="#898c88" BorderThickness="1" Padding="5, 0, 5, 0">
+                <ListViewItem>
+                    <Button x:Name="btnNetease"  Style="{StaticResource neteaseButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Netease engine"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <Button x:Name="btnMp3With"  Style="{StaticResource mp3WithButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Mp3With engine"/>
+                </ListViewItem>
+            </ListView>
+        </DockPanel>
     </Grid>
 </UserControl>
