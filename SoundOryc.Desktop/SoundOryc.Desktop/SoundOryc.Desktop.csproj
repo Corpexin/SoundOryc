@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -67,7 +68,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="Views\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\CustomAccent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +128,111 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\addAllQueue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\btnSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\closeDialogButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cloud-computing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\downArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EmptyUser.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fildologo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fildo-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fildo-logopeq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\left-chevron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mp3with.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\netease.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nextButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\nextButtonDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pauseButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\playButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\prevButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\prevButtonDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\queueButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RepeatAllButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RepeatNoneButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RepeatOneButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\right-chevron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\savePlaylist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\searchContent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\shuffleOffButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\shuffleOnButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\upArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\userEmpty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\volumeButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\volumeButtonMute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\selectengine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

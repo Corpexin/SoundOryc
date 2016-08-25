@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundOryc.Desktop"
+        xmlns:View="clr-namespace:SoundOryc.Desktop.Views"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
         mc:Ignorable="d"
@@ -18,6 +19,7 @@
             <ResourceDictionary x:Key="resources" Source="Resources.xaml" />
         </ResourceDictionary>
     </Window.Resources>
+
 
 
     <Grid>
@@ -36,6 +38,6 @@
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
 
-        
+        <View:NavigationView DataContext="{Binding Path=NavigationViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
     </Grid>
 </Controls:MetroWindow>
