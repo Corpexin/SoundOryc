@@ -27,8 +27,7 @@
             <RowDefinition Height="45"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="9"/>
-            <RowDefinition Height="51"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*"/>
@@ -39,5 +38,6 @@
         </Grid.ColumnDefinitions>
 
         <View:NavigationView DataContext="{Binding Path=NavigationViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+        <View:PlayerView DataContext="{Binding Path=PlayerViewModel}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
     </Grid>
 </Controls:MetroWindow>

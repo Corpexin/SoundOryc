@@ -29,7 +29,7 @@
                 <VisualBrush Visual="{StaticResource logo}"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Grid.Column="0" Grid.Row="0" Name="btnSettings" Margin="12,-21,0,48"  Content="{StaticResource settings}" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Focusable="False" Padding="0" OverridesDefaultStyle="True" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="18"  FontSize="1" Height="10" MinHeight="18"  />
+        <Button Grid.Column="0" Grid.Row="0" Name="btnSideBar" Margin="12,-21,0,48"  Content="{StaticResource settings}" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Focusable="False" Padding="0" OverridesDefaultStyle="True" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="18"  FontSize="1" Height="10" MinHeight="18"  />
         <TextBox x:Name="tbSearch" Grid.Column="0" Grid.Row="0"  Text="" Margin="90,14,90,5"  controls:TextBoxHelper.Watermark="Search songs, artists, albums..." controls:TextBoxHelper.ClearTextButton="False"  TextWrapping="WrapWithOverflow" FontSize="13" ToolTip="Search songs, artists, albums..." VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5"  BorderBrush="#898c88">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">

@@ -195,7 +195,7 @@
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter TargetName="Overlay" Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="Resources/nextButtonDisabled.png"/>
+                                        <ImageBrush ImageSource="/Resources/nextButtonDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -203,7 +203,7 @@
 
                                 <Setter TargetName="Overlay" Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="Resources/nextButton.png"/>
+                                        <ImageBrush ImageSource="/Resources/nextButton.png"/>
                                     </Setter.Value>
                                 </Setter>
 
@@ -232,7 +232,7 @@
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter TargetName="Overlay" Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="Resources/prevButtonDisabled.png"/>
+                                        <ImageBrush ImageSource="/Resources/prevButtonDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -240,7 +240,7 @@
 
                                 <Setter TargetName="Overlay" Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="Resources/prevButton.png"/>
+                                        <ImageBrush ImageSource="/Resources/prevButton.png"/>
                                     </Setter.Value>
                                 </Setter>
 
@@ -558,18 +558,18 @@
 
         <Image x:Key="logo" Source="/Resources/fildo-logopeq.png"/>
         <Image x:Key="settings" Source="/Resources/btnSettings.png"/>
-        <Image x:Key="playButton" Source="Resources/playButton.png"/>
+        <Image x:Key="playButton" Source="/Resources/playButton.png"/>
         <Image x:Key="nextButton" Source="Resources/nextButton.png"/>
-        <Image x:Key="volumeButton" Source="Resources/volumeButton.png"/>
+        <Image x:Key="volumeButton" Source="/Resources/volumeButton.png"/>
         <Image x:Key="volumeButtonMute" Source="Resources/volumeButtonMute.png"/>
-        <Image x:Key="repeatAllButton" Source="Resources/repeatAllButton.png"/>
+        <Image x:Key="repeatAllButton" Source="/Resources/repeatAllButton.png"/>
         <Image x:Key="loadNextButton" Source="Resources/right-chevron.png"/>
         <Image x:Key="loadPrevButton" Source="Resources/left-chevron.png"/>
         <Image x:Key="repeatOneButton" Source="Resources/repeatOneButton.png"/>
         <Image x:Key="repeatNoneButton" Source="Resources/repeatNoneButton.png"/>
-        <Image x:Key="shuffleOnButton" Source="Resources/shuffleOnButton.png"/>
-        <Image x:Key="shuffleOffButton" Source="Resources/shuffleOffButton.png"/>
-        <Image x:Key="queueButton" Source="Resources/queueButton.png"/>
+        <Image x:Key="shuffleOnButton" Source="/Resources/shuffleOnButton.png"/>
+        <Image x:Key="shuffleOffButton" Source="/Resources/shuffleOffButton.png"/>
+        <Image x:Key="queueButton" Source="/Resources/queueButton.png"/>
         <Image x:Key="closeDialogButton" Source="Resources/closeDialogButton.png"/>
         <Image x:Key="closeDialogQueue" Source="Resources/closeDialogButton1.png"/>
         <Image x:Key="pauseButton" Source="Resources/pauseButton.png"/>
@@ -579,3 +579,5 @@
         <DropShadowEffect x:Key="MyEffect" ShadowDepth="0" Color="Azure" Opacity="0.6" BlurRadius="0"/>
 
 </ResourceDictionary>
+    
+    
