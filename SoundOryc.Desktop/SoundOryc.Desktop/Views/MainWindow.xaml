@@ -14,6 +14,7 @@
         NonActiveBorderBrush="#2b323a"
         NonActiveWindowTitleBrush="#2b323a" >
 
+    <!--All resources / styles are saved on this file -->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary x:Key="resources" Source="Resources.xaml" />
@@ -21,7 +22,16 @@
     </Window.Resources>
 
 
-
+    <!--Flyout for the sidebar with user related stuff-->
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="flSidebar" IsOpen="True"  Position="Left" Width="200" Margin="0,40,0,30" CloseButtonVisibility="Collapsed" Background="#2b323a" TitleVisibility="Collapsed" Theme="Accent">
+                <View:SidebarView DataContext="{Binding Path=SidebarViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>
@@ -37,7 +47,10 @@
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
 
+        <!--The app is divided in 5 or 6 views -->
         <View:NavigationView DataContext="{Binding Path=NavigationViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
         <View:PlayerView DataContext="{Binding Path=PlayerViewModel}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
+
+       
     </Grid>
 </Controls:MetroWindow>

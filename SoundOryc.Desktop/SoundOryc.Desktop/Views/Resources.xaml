@@ -552,11 +552,18 @@
             </Setter>
         </Style>
 
+    <Style  x:Key="labelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="#898c88" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FFF79F8B" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 
-
-        <Image x:Key="logo" Source="/Resources/fildo-logopeq.png"/>
+    <Image x:Key="logo" Source="/Resources/fildo-logopeq.png"/>
         <Image x:Key="settings" Source="/Resources/btnSettings.png"/>
         <Image x:Key="playButton" Source="/Resources/playButton.png"/>
         <Image x:Key="nextButton" Source="Resources/nextButton.png"/>

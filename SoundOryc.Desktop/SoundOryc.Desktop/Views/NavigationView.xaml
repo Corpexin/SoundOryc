@@ -24,7 +24,7 @@
             <ColumnDefinition Width="91*"/>
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="2"  Name="button"   Focusable="False" IsHitTestVisible="False" OverridesDefaultStyle="True" HorizontalAlignment="Center" Width="13" Height="17"  Margin="0,-23,0,47" >
+        <Rectangle Grid.Column="2" Focusable="False" IsHitTestVisible="False" OverridesDefaultStyle="True" HorizontalAlignment="Center" Width="13" Height="17"  Margin="0,-23,0,47" >
             <Rectangle.Fill>
                 <VisualBrush Visual="{StaticResource logo}"/>
             </Rectangle.Fill>
