@@ -11,7 +11,7 @@ You can also:
   - Download every song you want
   - Create and modify your own playlists
 
-Inspired by [Fildo] (in fact the first idea was to create a Windows version of Fildo), SoundOryc use the Netease Catalog + Mp3With Catalog. No links are hosted. In fact, we don't have a proper host ;)
+Inspired by [Fildo], (in fact the first idea was to create a Windows version of Fildo) SoundOryc use the Netease Catalog + Mp3With Catalog. No links are hosted. In fact, we don't have a proper host ;)
 
 ### Requirements
  - Microsoft Windows 7/8/8.1/10 (not tested with others)
@@ -31,4 +31,4 @@ GNU GPL V3
 
 
  
-   [Fildo]: <http://fildo.net>
+[Fildo]: <http://fildo.net>
