@@ -12,7 +12,7 @@ namespace SoundOryc.Desktop
         protected override void OnStartup(StartupEventArgs e)
         { 
             // add custom accent and theme resource dictionaries
-            ThemeManager.AddAccent("CustomAccent1", new Uri("pack://application:,,,/SoundOryc.Desktop;component/Views/CustomAccent.xaml"));
+            ThemeManager.AddAccent("CustomAccent1", new Uri("pack://application:,,,/SoundOryc.Desktop;component/View/CustomAccent.xaml"));
 
             // get the theme from the current application
             AppTheme theme = ThemeManager.DetectAppStyle(Application.Current).Item1;
