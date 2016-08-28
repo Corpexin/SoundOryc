@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\App.xaml
-6-36245412
+9-188000688
 
-12-1638533379
+17-1969641350
 17-1389585884
-Views\CustomAccent.xaml;Views\NavigationView.xaml;Views\PlayerView.xaml;Views\Resources.xaml;Views\MainWindow.xaml;Views\SidebarView.xaml;
+Views\CustomAccent.xaml;Views\LoginView.xaml;Views\NavigationView.xaml;Views\PlayerView.xaml;Views\QueueView.xaml;Views\RegisterView.xaml;Views\Resources.xaml;Views\MainWindow.xaml;Views\SidebarView.xaml;
 
 False
 

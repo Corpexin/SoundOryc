@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SoundOryc.Desktop
+namespace SoundOryc.Desktop.Views
 {
-    public partial class MainWindow : MetroWindow
+    /// <summary>
+    /// Interaction logic for RegisterView.xaml
+    /// </summary>
+    public partial class RegisterView : UserControl
     {
-        public MainWindow()
+        public RegisterView()
         {
             InitializeComponent();
         }
