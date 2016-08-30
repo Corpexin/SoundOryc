@@ -46,16 +46,14 @@
             <DynamicResource ResourceKey="queueButton"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <cmd:EventToCommand Command="{Binding SimpleCommand}" />
+                    <cmd:EventToCommand Command="{Binding openCloseQueue}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button x:Name="btnPrev" Grid.Column="1" Grid.Row="1" Margin="0,17,0,19" Height="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" HorizontalAlignment="Right" Width="15" IsEnabled="False"  MinHeight="1" Visibility="Visible" >
+        <Button x:Name="btnPrev" Style="{StaticResource prevButtonStyle}" Grid.Column="1" Grid.Row="1" Margin="0,17,0,19" Height="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" HorizontalAlignment="Right" Width="15" IsEnabled="False"  MinHeight="1" Visibility="Visible" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <cmd:EventToCommand Command="{Binding SimpleCommand}" 
-                                     PassEventArgsToCommand="False"    
-                                     CommandParameter="{Binding}"/>
+                    <cmd:EventToCommand Command="{Binding SimpleCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
@@ -68,7 +66,7 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Button>
-        <Button x:Name="btnNext"   Grid.Column="3" Grid.Row="1" Margin="0,17,0,19" Height="15" HorizontalAlignment="Left" Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="False"  MinHeight="1" Visibility="Visible" />
+        <Button x:Name="btnNext"   Style="{StaticResource nextButtonStyle}" Grid.Column="3" Grid.Row="1" Margin="0,17,0,19" Height="15" HorizontalAlignment="Left" Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="False"  MinHeight="1" Visibility="Visible" />
         <Button x:Name="btnShuffle"  Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="18"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" ToolTip="Shuffle mode" Grid.Column="1" Margin="0.46,16,64.242,17" >
             <DynamicResource ResourceKey="shuffleOnButton"/>
         </Button>

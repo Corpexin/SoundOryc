@@ -18,7 +18,15 @@ namespace SoundOryc.Desktop.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    isQOpened = true;
+                    if (isQOpened)
+                    {
+                        isQOpened = false;
+                    }
+                    else
+                    {
+                        isQOpened = true;
+                    }
+                    
                 });
             }
         }
@@ -44,6 +52,7 @@ namespace SoundOryc.Desktop.ViewModel
 
                 _isQOpened = value;
                 RaisePropertyChanged(IsQOpenedPropertyName);
+                Messenger.Default.Send(isQOpened, "Hello!");
             }
         }
 

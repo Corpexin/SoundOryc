@@ -8,13 +8,20 @@ namespace SoundOryc.Desktop.ViewModel
     public class PlayerViewModel : ViewModelBase
     {
         //public RelayCommand SimpleCommand { get; private set; }
-        public RelayCommand SimpleCommand
+        public RelayCommand openCloseQueue
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    QueueOpened = true;
+                    if (QueueOpened)
+                    {
+                        QueueOpened = false;
+                    }
+                    else
+                    {
+                        QueueOpened = true;
+                    }
                 });
             }
         }
@@ -47,15 +54,9 @@ namespace SoundOryc.Desktop.ViewModel
 
  
 
-        /**
         public PlayerViewModel()
         {
-            QueueOpened = false;
-            SimpleCommand = new RelayCommand(() =>
-            {
-                QueueOpened = true;
-            });
+           
         }
-    **/
     }
 }

@@ -247,7 +247,7 @@
 
         </Style>
 
-    <!--
+    
         <Style x:Key="nextButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -284,8 +284,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
--->
-    <!--
+
+    
         <Style x:Key="prevButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -322,7 +322,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
--->
+
 
         <Style x:Key="engineButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
