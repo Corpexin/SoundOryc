@@ -143,8 +143,10 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AllowDrop" Value="True" />
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <!--
             <Setter Property="ContextMenu" Value="{StaticResource ItemQueueContextMenu}" />
+        -->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -181,7 +183,9 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <!--
             <Setter Property="ContextMenu" Value="{StaticResource MenuContPl}" />
+            -->
             <Setter Property="Height" Value="30" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -243,6 +247,7 @@
 
         </Style>
 
+    <!--
         <Style x:Key="nextButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -279,7 +284,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+-->
+    <!--
         <Style x:Key="prevButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -316,7 +322,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+-->
 
         <Style x:Key="engineButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">

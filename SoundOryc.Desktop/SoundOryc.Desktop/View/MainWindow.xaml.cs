@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SoundOryc.Desktop
+namespace SoundOryc.Desktop.View
 {
     public partial class MainWindow : MetroWindow
     {

@@ -1,4 +1,6 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace SoundOryc.Desktop.ViewModel
 {
@@ -6,34 +8,37 @@ namespace SoundOryc.Desktop.ViewModel
     public class MainViewModel : ViewModelBase
     {
 
-        //PROPIEDAD BASE LIMPIA!
-        public const string MyPropertyPropertyName = "MyProperty"; //CAMBIAR ESTO SI SE CAMBIA  public bool MyProperty
+        public const string IsQOpenedPropertyName = "isQOpened";
 
-        private bool _myProperty = false;
+        private bool _isQOpened = false;
 
-        public bool MyProperty
+        public bool isQOpened
         {
             get
             {
-                return _myProperty;
+                return _isQOpened;
             }
 
             set
             {
-                if (_myProperty == value)
+                if (_isQOpened == value)
                 {
                     return;
                 }
 
-                _myProperty = value;
-                RaisePropertyChanged(MyPropertyPropertyName);
+                _isQOpened = value;
+                RaisePropertyChanged(IsQOpenedPropertyName);
             }
         }
 
-        
+
         public MainViewModel()
         {
-
+            Messenger.Default.Register<bool>(this, "Hello!", message =>
+            {
+                isQOpened = message;
+            });
         }
+
     }
 }

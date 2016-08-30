@@ -1,11 +1,14 @@
-﻿<UserControl x:Class="SoundOryc.Desktop.Views.NavigationView"
+﻿<UserControl x:Class="SoundOryc.Desktop.View.NavigationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SoundOryc.Desktop.Views"
+             xmlns:local="clr-namespace:SoundOryc.Desktop.View"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d" MinWidth="600">
+                          xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             mc:Ignorable="d" MinWidth="600"
+             DataContext="{Binding Nav, Source={StaticResource Locator}}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -29,7 +32,13 @@
                 <VisualBrush Visual="{StaticResource logo}"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Grid.Column="0" Grid.Row="0" Name="btnSideBar" Margin="12,-21,0,48"  Content="{StaticResource settings}" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Focusable="False" Padding="0" OverridesDefaultStyle="True" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="18"  FontSize="1" Height="10" MinHeight="18"  />
+        <Button Grid.Column="0" Grid.Row="0" Name="btnSideBar" Margin="12,-21,0,48"  Content="{StaticResource settings}" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Focusable="False" Padding="0" OverridesDefaultStyle="True" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="18"  FontSize="1" Height="10" MinHeight="18"  >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding SimpleCommand2}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
         <TextBox x:Name="tbSearch" Grid.Column="0" Grid.Row="0"  Text="" Margin="90,14,90,5"  controls:TextBoxHelper.Watermark="Search songs, artists, albums..." controls:TextBoxHelper.ClearTextButton="False"  TextWrapping="WrapWithOverflow" FontSize="13" ToolTip="Search songs, artists, albums..." VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5"  BorderBrush="#898c88">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">

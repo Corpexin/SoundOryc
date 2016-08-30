@@ -1,40 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace SoundOryc.Desktop.ViewModels
+
+namespace SoundOryc.Desktop.ViewModel
 {
-    class PlayerViewModel
+    public class PlayerViewModel : ViewModelBase
     {
-
-        private ICommand m_openQueueWindow;
-        public ICommand openQueueWindow
+        //public RelayCommand SimpleCommand { get; private set; }
+        public RelayCommand SimpleCommand
         {
             get
             {
-                return m_openQueueWindow;
-            }
-            set
-            {
-                m_openQueueWindow = value;
+                return new RelayCommand(() =>
+                {
+                    QueueOpened = true;
+                });
             }
         }
 
+        public const string queueOpenedPropertyName = "QueueOpened";
+
+        private bool _queueOpened = false;
+
+
+        public bool QueueOpened
+        {
+            get
+            {
+                return _queueOpened;
+            }
+
+            private set
+            {
+                if (_queueOpened == value)
+                {
+                    return;
+                }
+
+                _queueOpened = value;
+
+                RaisePropertyChanged(queueOpenedPropertyName);
+                Messenger.Default.Send(QueueOpened, "Hello!");
+            }
+        }
+
+ 
+
+        /**
         public PlayerViewModel()
         {
-            openQueueWindow = new RelayCommand(new Action<object>(ShowMessage));
+            QueueOpened = false;
+            SimpleCommand = new RelayCommand(() =>
+            {
+                QueueOpened = true;
+            });
         }
-
-        public void ShowMessage(object obj)
-        {
-            MessageBox.Show(obj.ToString());
-        }
-
-
-
+    **/
     }
 }

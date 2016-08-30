@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundOryc.Desktop.ViewModels
+namespace SoundOryc.Desktop.ViewModel
 {
     class QueueViewModel
     {

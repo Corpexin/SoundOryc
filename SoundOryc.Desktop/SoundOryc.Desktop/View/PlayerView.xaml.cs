@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SoundOryc.Desktop.Views
+namespace SoundOryc.Desktop.View
 {
     /// <summary>
     /// Interaction logic for PlayerView.xaml
@@ -24,5 +24,6 @@ namespace SoundOryc.Desktop.Views
         {
             InitializeComponent();
         }
+
     }
 }

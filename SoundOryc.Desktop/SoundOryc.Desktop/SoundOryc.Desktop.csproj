@@ -89,7 +89,6 @@
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\QueueViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
-    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\LoginView.xaml.cs">
