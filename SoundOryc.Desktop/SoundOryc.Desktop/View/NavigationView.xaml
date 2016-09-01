@@ -15,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Resources.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="boolToVis" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -35,7 +36,7 @@
         <Button Grid.Column="0" Grid.Row="0" Name="btnSideBar" Margin="12,-21,0,48"  Content="{StaticResource settings}" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Focusable="False" Padding="0" OverridesDefaultStyle="True" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="18"  FontSize="1" Height="10" MinHeight="18"  >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <cmd:EventToCommand Command="{Binding SimpleCommand2}" />
+                    <cmd:EventToCommand Command="{Binding openCloseSidebar}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
@@ -45,16 +46,56 @@
                     <Setter Property="CornerRadius" Value="12"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding searchContent}" CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+            </TextBox.InputBindings>
         </TextBox>
-        <Button x:Name="btnEngine"  Style="{StaticResource engineButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,19,126,11"  HorizontalAlignment="Right" ToolTip="Search with Netease engine"/>
-        <Button x:Name="btnSelectEngine"  Style="{StaticResource selectEngineButtonStyle}"  Height="8"  Width="10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,23,109,12"  HorizontalAlignment="Right" ToolTip="Select Search Engine"/>
-        <DockPanel x:Name="dpEngineSelection" Grid.Column="4" HorizontalAlignment="Left"  Margin="35,0,0,-10" Visibility="Collapsed">
+            
+        <Button x:Name="btnEngine"  Style="{StaticResource ButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,19,126,11"  HorizontalAlignment="Right" ToolTip="Search with Netease engine">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="/Resources/netease.png" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding isNeteaseEngineSelected}" Value="False">
+                                <Setter Property="Source" Value="/Resources/mp3with.png" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding searchContent}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button x:Name="btnSelectEngine"  Style="{StaticResource selectEngineButtonStyle}" Height="8"  Width="10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0" Margin="0,23,109,12"  HorizontalAlignment="Right" ToolTip="Select Search Engine">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding openCloseEngineSelection}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <DockPanel x:Name="dpEngineSelection" Grid.Column="4" HorizontalAlignment="Left"  Margin="35,0,0,-10" Visibility="{Binding isEngineSelectionOpened, Converter={StaticResource boolToVis}}">
             <ListView BorderBrush="#898c88" BorderThickness="1" Padding="5, 0, 5, 0">
                 <ListViewItem>
-                    <Button x:Name="btnNetease"  Style="{StaticResource neteaseButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Netease engine"/>
+                    <Button x:Name="btnNetease"  Style="{StaticResource neteaseButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Netease engine">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cmd:EventToCommand Command="{Binding selectedEngineNetease}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </ListViewItem>
                 <ListViewItem>
-                    <Button x:Name="btnMp3With"  Style="{StaticResource mp3WithButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Mp3With engine"/>
+                    <Button x:Name="btnMp3With"  Style="{StaticResource mp3WithButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Mp3With engine">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cmd:EventToCommand Command="{Binding selectedEngineMp3With}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </ListViewItem>
             </ListView>
         </DockPanel>

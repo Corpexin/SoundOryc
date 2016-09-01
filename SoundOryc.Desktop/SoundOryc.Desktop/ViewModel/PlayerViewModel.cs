@@ -7,25 +7,6 @@ namespace SoundOryc.Desktop.ViewModel
 {
     public class PlayerViewModel : ViewModelBase
     {
-        //public RelayCommand SimpleCommand { get; private set; }
-        public RelayCommand openCloseQueue
-        {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    if (QueueOpened)
-                    {
-                        QueueOpened = false;
-                    }
-                    else
-                    {
-                        QueueOpened = true;
-                    }
-                });
-            }
-        }
-
         public const string queueOpenedPropertyName = "QueueOpened";
 
         private bool _queueOpened = false;
@@ -48,11 +29,27 @@ namespace SoundOryc.Desktop.ViewModel
                 _queueOpened = value;
 
                 RaisePropertyChanged(queueOpenedPropertyName);
-                Messenger.Default.Send(QueueOpened, "Hello!");
+                Messenger.Default.Send(QueueOpened, "queueOpen");
             }
         }
 
- 
+        public RelayCommand openCloseQueue
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (QueueOpened)
+                    {
+                        QueueOpened = false;
+                    }
+                    else
+                    {
+                        QueueOpened = true;
+                    }
+                });
+            }
+        }
 
         public PlayerViewModel()
         {

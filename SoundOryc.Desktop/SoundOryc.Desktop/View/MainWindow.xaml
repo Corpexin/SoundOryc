@@ -27,7 +27,7 @@
     <!--Flyout for the sidebar with user related stuff-->
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="flSidebar" IsOpen="True"  Position="Left" Width="200" Margin="0,40,0,30" CloseButtonVisibility="Collapsed" Background="#2b323a" TitleVisibility="Collapsed" Theme="Accent">
+            <Controls:Flyout x:Name="flSidebar" IsOpen="{Binding isSOpened}"  Position="Left" Width="200" Margin="0,40,0,30" CloseButtonVisibility="Collapsed" Background="#2b323a" TitleVisibility="Collapsed" Theme="Accent">
                 <View:SidebarView DataContext="{Binding Path=SidebarViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
             </Controls:Flyout>
         </Controls:FlyoutsControl>

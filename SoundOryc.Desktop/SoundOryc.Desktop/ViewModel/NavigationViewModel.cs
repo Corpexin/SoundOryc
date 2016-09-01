@@ -6,63 +6,159 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SoundOryc.Desktop.ViewModel
 {
     public class NavigationViewModel: ViewModelBase
     {
+        public const string IsSidebarOpenedPropertyName = "isSidebarOpened";
+        private bool _isSidebarOpened = false;
 
-        public RelayCommand SimpleCommand2
+        public const string IsEngineSelectionOpenedPropertyName = "isEngineSelectionOpened";
+        private bool _isEngineSelectionOpened = false;
+
+        public const string IsNeteaseEngineSelectedPropertyName = "isNeteaseEngineSelected";
+        private bool _isNeteaseEngineSelected = true;
+        
+
+        public bool isSidebarOpened
+        {
+            get
+            {
+                return _isSidebarOpened;
+            }
+
+            set
+            {
+                if (_isSidebarOpened == value)
+                {
+                    return;
+                }
+
+                _isSidebarOpened = value;
+                RaisePropertyChanged(IsSidebarOpenedPropertyName);
+                Messenger.Default.Send(isSidebarOpened, "sidebarOpen");
+            }
+        }
+        
+
+        public bool isEngineSelectionOpened
+        {
+            get
+            {
+                return _isEngineSelectionOpened;
+            }
+
+            set
+            {
+                if (_isEngineSelectionOpened == value)
+                {
+                    return;
+                }
+
+                _isEngineSelectionOpened = value;
+                RaisePropertyChanged(IsEngineSelectionOpenedPropertyName);                
+            }
+        }
+
+        public bool isNeteaseEngineSelected
+        {
+            get
+            {
+                return _isNeteaseEngineSelected;
+            }
+
+            set
+            {
+                if (_isNeteaseEngineSelected == value)
+                {
+                    return;
+                }
+
+                _isNeteaseEngineSelected = value;
+                RaisePropertyChanged(IsNeteaseEngineSelectedPropertyName);
+            }
+        }
+
+
+
+
+        public RelayCommand openCloseSidebar
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    if (isQOpened)
+                    if (isSidebarOpened)
                     {
-                        isQOpened = false;
+                        isSidebarOpened = false;
                     }
                     else
                     {
-                        isQOpened = true;
+                        isSidebarOpened = true;
                     }
-                    
+
                 });
             }
         }
 
-
-        public const string IsQOpenedPropertyName = "isQOpened";
-
-        private bool _isQOpened = false;
-
-        public bool isQOpened
+        public RelayCommand openCloseEngineSelection
         {
             get
             {
-                return _isQOpened;
-            }
-
-            set
-            {
-                if (_isQOpened == value)
+                return new RelayCommand(() =>
                 {
-                    return;
-                }
-
-                _isQOpened = value;
-                RaisePropertyChanged(IsQOpenedPropertyName);
-                Messenger.Default.Send(isQOpened, "Hello!");
+                    if (isEngineSelectionOpened)
+                    {
+                        isEngineSelectionOpened = false;
+                    }
+                    else
+                    {
+                        isEngineSelectionOpened = true;
+                    }
+                });
             }
         }
 
+        public RelayCommand selectedEngineNetease
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    isEngineSelectionOpened = false;
+                    isNeteaseEngineSelected = true;
+                });
+            }
+        }
+
+        public RelayCommand selectedEngineMp3With
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    isEngineSelectionOpened = false;
+                    isNeteaseEngineSelected = false;
+                });
+            }
+        }
+
+        public RelayCommand searchContent
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    isSidebarOpened = true; //TODO:REPLACE. I only put it here to see if the command works =)
+                });
+            }
+        }
 
         public NavigationViewModel()
         {
-            Messenger.Default.Register<bool>(this, "Hello!", message =>
-            {
-                isQOpened = message;
-            });
+           
         }
     }
 }
