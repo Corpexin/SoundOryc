@@ -8,9 +8,15 @@ namespace SoundOryc.Desktop.ViewModel
     public class PlayerViewModel : ViewModelBase
     {
         public const string queueOpenedPropertyName = "QueueOpened";
-
         private bool _queueOpened = false;
 
+        
+        public const string selectedPlayModeOptionPropertyName = "selectedPlayModeOption";
+        private string _selectedPlayModeOption = "rall";
+
+
+        public const string isVolumeMutedPropertyName = "IsVolumeMuted";
+        private bool _isVolumeMuted = true;
 
         public bool QueueOpened
         {
@@ -33,6 +39,49 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public string selectedPlayModeOption
+        {
+            get
+            {
+                return _selectedPlayModeOption;
+            }
+
+            private set
+            {
+                if (_selectedPlayModeOption == value)
+                {
+                    return;
+                }
+
+                _selectedPlayModeOption = value;
+
+                RaisePropertyChanged(selectedPlayModeOptionPropertyName);
+            }
+        }
+
+        public bool IsVolumeMuted
+        {
+            get
+            {
+                return _isVolumeMuted;
+            }
+
+            private set
+            {
+                if (_isVolumeMuted == value)
+                {
+                    return;
+                }
+
+                _isVolumeMuted = value;
+
+                RaisePropertyChanged(isVolumeMutedPropertyName);
+            }
+        }
+
+
+
+
         public RelayCommand openCloseQueue
         {
             get
@@ -50,6 +99,51 @@ namespace SoundOryc.Desktop.ViewModel
                 });
             }
         }
+
+        
+
+        public RelayCommand changePlayMode
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (selectedPlayModeOption == "rall")
+                    {
+                        selectedPlayModeOption = "rone";
+                    }
+                    else if(selectedPlayModeOption == "rone")
+                    {
+                        selectedPlayModeOption = "shuffle";
+                    }
+                    else
+                    {
+                        selectedPlayModeOption = "rall";
+                    }
+                });
+            }
+        }
+
+        
+        public RelayCommand volumenChange
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (IsVolumeMuted)
+                    {
+                        IsVolumeMuted = false;
+                    }
+                    else
+                    {
+                        IsVolumeMuted = true;
+                    }
+                });
+            }
+        }
+
+
 
         public PlayerViewModel()
         {

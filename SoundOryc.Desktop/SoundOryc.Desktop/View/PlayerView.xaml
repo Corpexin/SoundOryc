@@ -12,7 +12,7 @@
              MinWidth="600">
 
 
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,7 +21,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9"/>
@@ -67,15 +67,47 @@
             </Rectangle>
         </Button>
         <Button x:Name="btnNext"   Style="{StaticResource nextButtonStyle}" Grid.Column="3" Grid.Row="1" Margin="0,17,0,19" Height="15" HorizontalAlignment="Left" Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="False"  MinHeight="1" Visibility="Visible" />
-        <Button x:Name="btnShuffle"  Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="18"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" ToolTip="Shuffle mode" Grid.Column="1" Margin="0.46,16,64.242,17" >
-            <DynamicResource ResourceKey="shuffleOnButton"/>
-        </Button>
         <Slider x:Name="psVolume" Style="{StaticResource Horizontal_Slider}"  Grid.Column="4" Grid.Row="1" Margin="0,13,10,12" Width="96"  Value="100" Maximum="100"  Interval="30" HorizontalAlignment="Right" Background="#00000000"  IsMoveToPointEnabled="True" />
-        <Button x:Name="btnRepeat"  Style="{StaticResource ButtonStyle}"  Grid.Column="4" Grid.Row="1" Margin="4.486,15,0,16" Width="20" Height="20" HorizontalAlignment="Left"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" ToolTip="Repeat mode"  >
-            <DynamicResource ResourceKey="repeatAllButton"/>
+        <Button x:Name="btnPlayMode"  Style="{StaticResource ButtonStyle}"  Grid.Column="1" Grid.Row="1" Margin="10,15,65,16" Height="20"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" ToolTip="Play mode"  >
+            <Image>
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="/Resources/RepeatAllButton.png" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding selectedPlayModeOption}" Value="rone">
+                                <Setter Property="Source" Value="/Resources/RepeatOneButton.png" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding selectedPlayModeOption}" Value="shuffle">
+                                <Setter Property="Source" Value="/Resources/shuffleOnButton.png" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding changePlayMode}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Button>
         <Button x:Name="btnVolume"  Style="{StaticResource ButtonStyle}"   Grid.Column="4" Grid.Row="4" Margin="0,14,119,17" Height="15" HorizontalAlignment="Right" Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  >
-            <DynamicResource ResourceKey="volumeButton"/>
+            <Image>
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="/Resources/volumeButton.png" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsVolumeMuted}" Value="False">
+                                <Setter Property="Source" Value="/Resources/volumeButtonMute.png" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding  volumenChange}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Button>
     </Grid>
 </UserControl>
