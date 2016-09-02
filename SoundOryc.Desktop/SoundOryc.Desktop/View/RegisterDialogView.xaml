@@ -8,7 +8,7 @@
                       xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       DataContext="{Binding Register}"
                       d:DesignHeight="300"
-                      d:DesignWidth="300"
+                      d:DesignWidth="500"
                       mc:Ignorable="d"
                       >
     <dialogs:CustomDialog.Resources>
@@ -20,30 +20,36 @@
     </dialogs:CustomDialog.Resources>
 
 
-
+    <dialogs:CustomDialog.DialogTop>
+        <DockPanel HorizontalAlignment="Center" Width="500" >
+            <Label  x:Name="lbl" DockPanel.Dock="Left" Content="Registration" Margin="100, 10, 10, 10" Foreground="Gray" FontSize="21.333"/>
+            <Button x:Name="closeRDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  />
+        </DockPanel>
+    </dialogs:CustomDialog.DialogTop>
     <dialogs:CustomDialog.Content>
 
 
-        <Grid Margin="0,0,0,-3">
+        <Grid Margin="-40,-20,-40,17" HorizontalAlignment="Center" Width="330">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button x:Name="closeRDialogButton"    Grid.Row="0" Width="10" Height="10"  HorizontalAlignment="Right" Margin="0,0,4,0" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  />
 
-            <TextBox x:Name="tbRUsername" Grid.Row="1"  Text=""   controls:TextBoxHelper.Watermark="email" Margin="10,0,10,0" controls:TextBoxHelper.ClearTextButton="False"  TextWrapping="WrapWithOverflow" FontSize="13" ToolTip="write email" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5" Background="#2b323a" >
+            <TextBox x:Name="tbRUsername"  Grid.Row="0"  Text=""  controls:TextBoxHelper.Watermark="email" Margin="10,0,10,10" controls:TextBoxHelper.ClearTextButton="False"  TextWrapping="WrapWithOverflow" FontSize="13" ToolTip="write email" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5" Background="#2b323a" BorderBrush="#FF767676" CaretBrush="#FF999999" Foreground="#FF787878" SelectionBrush="#FF2B323A" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="12"/>
+                        <Style.Triggers>
+                            <Trigger Property="TextBox.IsMouseOver"    Value="True">
+                                <Setter Property="BorderBrush" Value="DarkBlue"/>
+                            </Trigger>
+                         </Style.Triggers> 
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <PasswordBox x:Name="tbRPassword" Grid.Row="2" controls:TextBoxHelper.Watermark="password" Margin="10,10,10,0" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5" Background="#2b323a" >
+            <PasswordBox x:Name="tbRPassword" Grid.Row="1" controls:TextBoxHelper.Watermark="password" Margin="10,10,10,10" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Grid.ColumnSpan="5" Background="#2b323a" >
                 <PasswordBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="12"/>
@@ -51,7 +57,7 @@
                 </PasswordBox.Resources>
             </PasswordBox>
 
-            <PasswordBox x:Name="tbRePassword" Grid.Row="3" controls:TextBoxHelper.Watermark="rewrite password" Margin="10,11,10,26" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="Rewrite password" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Background="#2b323a" Grid.RowSpan="2" >
+            <PasswordBox x:Name="tbRePassword" Grid.Row="2" controls:TextBoxHelper.Watermark="rewrite password" Margin="10,11,10,26" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="Rewrite password" VerticalContentAlignment="Stretch" Padding="20,0,0,0" Background="#2b323a" Grid.RowSpan="2" >
                 <PasswordBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="12"/>
@@ -59,11 +65,11 @@
                 </PasswordBox.Resources>
             </PasswordBox>
 
-            
+
             <Label x:Name="lblRInfoRL" Grid.Row="5" Foreground="#FF898C88"  Margin="0,25,0,4" Content=""/>
         </Grid>
     </dialogs:CustomDialog.Content>
     <dialogs:CustomDialog.DialogBottom>
-        <Button  x:Name="btnRRegister" Grid.Row="4"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="register" Background="#2b323a" Foreground="#FFF79F8B" ClickMode="Press" controls:ControlsHelper.ContentCharacterCasing="Normal"  Margin="50,24,52,0" Grid.RowSpan="2"/>
+        <Button x:Name="btnRRegister"  Grid.Row="4"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="register" Background="#2b323a" Foreground="#FFF79F8B" ClickMode="Press" controls:ControlsHelper.ContentCharacterCasing="Normal"  Margin="170,10" Grid.RowSpan="2" HorizontalAlignment="Center" Width="160"/>
     </dialogs:CustomDialog.DialogBottom>
 </dialogs:CustomDialog>
