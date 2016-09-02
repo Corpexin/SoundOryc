@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SoundOryc.Desktop.View"
+             DataContext="{Binding Side, Source={StaticResource Locator}}"
+             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             dialogs:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" >
 
     <UserControl.Resources>
@@ -29,7 +32,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"  Grid.Column="0" Grid.Row="0">
-            <Button  x:Name="btnRegister" Margin="45, 0, 0, 0"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="Register" BorderBrush="{x:Null}" Foreground="#FFF79F8B"  BorderThickness="0" ClickMode="Press" Focusable="False" Background="#FF455052">
+            <Button  x:Name="btnRegister" Margin="45, 0, 0, 0"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="Register" BorderBrush="{x:Null}" Foreground="#FFF79F8B"  BorderThickness="0" ClickMode="Press" Focusable="False" Background="#FF455052" Command="{Binding openRegister}">
             </Button>
             <Button  x:Name="btnLogin" Margin="10, 0, 0, 0"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="Login" BorderBrush="{x:Null}" Foreground="#FFF79F8B"  BorderThickness="0" ClickMode="Press" Focusable="False" Background="#FF455052">
             </Button>

@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.ServiceLocation;
 using System.Diagnostics.CodeAnalysis;
 
@@ -11,11 +12,18 @@ namespace SoundOryc.Desktop.ViewModel
         private static MainViewModel _main;
         private static PlayerViewModel _player;
         private static NavigationViewModel _nav;
+        private static RegisterDialogViewModel _register;
+        private static QueueViewModel _queue;
+        private static SidebarViewModel _side;
 
         public ViewModelLocator()
         {
             CreateMain();
             CreatePlayer();
+            CreateNav();
+            CreateRegister();
+            CreateQueue();
+            CreateSide();
         }
 
 
@@ -59,6 +67,44 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public static RegisterDialogViewModel RegisterStatic
+        {
+            get
+            {
+                if (_register == null)
+                {
+                    CreateRegister();
+                }
+
+                return _register;
+            }
+        }
+
+        public static QueueViewModel QueueStatic
+        {
+            get
+            {
+                if (_queue == null)
+                {
+                    CreateQueue();
+                }
+
+                return _queue;
+            }
+        }
+        public static SidebarViewModel SideStatic
+        {
+            get
+            {
+                if (_side == null)
+                {
+                    CreateSide();
+                }
+
+                return _side;
+            }
+        }
+        
 
 
 
@@ -87,7 +133,31 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public static void CreateRegister()
+        {
+            if (_register == null)
+            {
+                _register = new RegisterDialogViewModel();
+            }
+        }
 
+        public static void CreateQueue()
+        {
+            if (_queue == null)
+            {
+                _queue = new QueueViewModel();
+            }
+        }
+
+        public static void CreateSide()
+        {
+            if (_side == null)
+            {
+                DialogCoordinator cd = new DialogCoordinator();
+                
+                _side = new SidebarViewModel();
+            }
+        }
 
 
         //
@@ -125,6 +195,39 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        [SuppressMessage("Microsoft.Performance",
+    "CA1822:MarkMembersAsStatic",
+    Justification = "This non-static member is needed for data binding purposes.")]
+        public RegisterDialogViewModel Register
+        {
+            get
+            {
+                return RegisterStatic;
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public QueueViewModel Queue
+        {
+            get
+            {
+                return QueueStatic;
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance",
+          "CA1822:MarkMembersAsStatic",
+          Justification = "This non-static member is needed for data binding purposes.")]
+        public SidebarViewModel Side
+        {
+            get
+            {
+                return SideStatic;
+            }
+        }
+
 
 
         public static void ClearMain()
@@ -145,10 +248,34 @@ namespace SoundOryc.Desktop.ViewModel
             _nav = null;
         }
 
+        public static void ClearRegister()
+        {
+            _register.Cleanup();
+            _register = null;
+        }
+
+        public static void ClearQueue()
+        {
+            _queue.Cleanup();
+            _queue = null;
+        }
+
+        public static void ClearSide()
+        {
+            _side.Cleanup();
+            _side = null;
+        }
+
         public static void Cleanup()
         {
             ClearMain();
+            ClearPlayer();
+            ClearNav();
+            ClearRegister();
+            ClearQueue();
+            ClearSide();
         }
+
 
 
     }

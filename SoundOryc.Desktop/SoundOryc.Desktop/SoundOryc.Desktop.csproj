@@ -88,7 +88,7 @@
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\QueueViewModel.cs" />
-    <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\RegisterDialogViewModel.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\LoginView.xaml.cs">
@@ -103,8 +103,8 @@
     <Compile Include="View\QueueView.xaml.cs">
       <DependentUpon>QueueView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RegisterView.xaml.cs">
-      <DependentUpon>RegisterView.xaml</DependentUpon>
+    <Compile Include="View\RegisterDialogView.xaml.cs">
+      <DependentUpon>RegisterDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SidebarView.xaml.cs">
       <DependentUpon>SidebarView.xaml</DependentUpon>
@@ -129,7 +129,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RegisterView.xaml">
+    <Page Include="View\RegisterDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

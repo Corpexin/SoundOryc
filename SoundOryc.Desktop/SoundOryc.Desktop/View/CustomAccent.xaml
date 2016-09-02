@@ -131,5 +131,5 @@
     <Thickness x:Key="ButtonBorderThickness">1</Thickness>
     <SolidColorBrush x:Key="ButtonBorderBrush" Color="red" />
     <SolidColorBrush x:Key="ButtonPressedBorderBrush" Color="red"/>
-    
+
 </ResourceDictionary>

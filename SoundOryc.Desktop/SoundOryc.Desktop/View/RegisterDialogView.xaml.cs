@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,11 @@ using System.Windows.Shapes;
 namespace SoundOryc.Desktop.View
 {
     /// <summary>
-    /// Interaction logic for RegisterView.xaml
+    /// Interaction logic for RegisterDialogView.xaml
     /// </summary>
-    public partial class RegisterView : UserControl
+    public partial class RegisterDialogView : CustomDialog
     {
-        public RegisterView()
+        public RegisterDialogView()
         {
             InitializeComponent();
         }

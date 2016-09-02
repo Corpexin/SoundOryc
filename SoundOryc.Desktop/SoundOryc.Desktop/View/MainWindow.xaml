@@ -18,9 +18,7 @@
 
     <!--All resources / styles are saved on this file -->
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary x:Key="resources" Source="Resources.xaml" />
-        </ResourceDictionary>
+        <ResourceDictionary  Source="Resources.xaml" />
     </Window.Resources>
 
 
@@ -28,7 +26,7 @@
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="flSidebar" IsOpen="{Binding isSOpened}"  Position="Left" Width="200" Margin="0,40,0,30" CloseButtonVisibility="Collapsed" Background="#2b323a" TitleVisibility="Collapsed" Theme="Accent">
-                <View:SidebarView DataContext="{Binding Path=SidebarViewModel}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+                <View:SidebarView  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
@@ -52,10 +50,10 @@
 
         <View:NavigationView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
         <View:PlayerView  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
-        
-        
+
+
         <simpleChildWindow:ChildWindow x:Name="queueWindow" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" CloseByEscape="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="15" IsOpen="{Binding isQOpened}" OverlayBrush="{x:Null}" Background="#2b323a" AllowFocusElement="False" TitleBarBackground="#2b323a" ShowTitleBar="False" EnableDropShadow="False" Height="171" Margin="12,0,-15,47" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="410" Grid.RowSpan="2" GlowBrush="#FF898C88" BorderBrush="#FF898C88" BorderThickness="1,1,1,0">
-            <View:QueueView DataContext="{Binding Path=QueueViewModel}"  />
+            <View:QueueView  />
         </simpleChildWindow:ChildWindow>
 
     </Grid>
