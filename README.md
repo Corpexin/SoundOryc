@@ -1,6 +1,6 @@
 # SoundOryc
 
-SoundOryc is a music streaming player. **Free, no Ads & up to 320 kbps**.
+SoundOryc is a music streaming player. **Free, no Ads, up to 320 kbps & Open Source**.
 
   - Search your favourite songs
   - Get the list
