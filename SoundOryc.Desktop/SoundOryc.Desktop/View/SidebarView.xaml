@@ -32,9 +32,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"  Grid.Column="0" Grid.Row="0">
-            <Button  x:Name="btnRegister" Margin="45, 0, 0, 0"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="Register" BorderBrush="{x:Null}" Foreground="#FFF79F8B"  BorderThickness="0" ClickMode="Press" Focusable="False" Background="#FF455052" Command="{Binding openRegister}">
+            <Button  x:Name="btnRegister" Margin="15,0,10,0" Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding openRegister}">
             </Button>
-            <Button  x:Name="btnLogin" Margin="10, 0, 0, 0"  VerticalAlignment="Top" FontSize="12" FontWeight="Thin" Content="Login" BorderBrush="{x:Null}" Foreground="#FFF79F8B"  BorderThickness="0" ClickMode="Press" Focusable="False" Background="#FF455052">
+            <Button  x:Name="btnLogin" Content="Login" Margin="0"  Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False">
             </Button>
         </StackPanel>
 
