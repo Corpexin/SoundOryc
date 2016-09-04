@@ -12,9 +12,10 @@ namespace SoundOryc.Desktop.ViewModel
         private static MainViewModel _main;
         private static PlayerViewModel _player;
         private static NavigationViewModel _nav;
-        private static RegisterDialogViewModel _register;
         private static QueueViewModel _queue;
         private static SidebarViewModel _side;
+        private static RegisterDialogViewModel _register;
+        private static LoginDialogViewModel _login;
 
         public ViewModelLocator()
         {
@@ -22,6 +23,7 @@ namespace SoundOryc.Desktop.ViewModel
             CreatePlayer();
             CreateNav();
             CreateRegister();
+            CreateLogin();
             CreateQueue();
             CreateSide();
         }
@@ -92,6 +94,7 @@ namespace SoundOryc.Desktop.ViewModel
                 return _queue;
             }
         }
+
         public static SidebarViewModel SideStatic
         {
             get
@@ -104,7 +107,19 @@ namespace SoundOryc.Desktop.ViewModel
                 return _side;
             }
         }
-        
+
+        public static LoginDialogViewModel LoginStatic
+        {
+            get
+            {
+                if (_login == null)
+                {
+                    CreateLogin();
+                }
+
+                return _login;
+            }
+        }
 
 
 
@@ -152,10 +167,16 @@ namespace SoundOryc.Desktop.ViewModel
         public static void CreateSide()
         {
             if (_side == null)
-            {
-                DialogCoordinator cd = new DialogCoordinator();
-                
+            {      
                 _side = new SidebarViewModel();
+            }
+        }
+
+        public static void CreateLogin()
+        {
+            if (_login == null)
+            {
+                _login = new LoginDialogViewModel();
             }
         }
 
@@ -228,6 +249,17 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        [SuppressMessage("Microsoft.Performance",
+          "CA1822:MarkMembersAsStatic",
+          Justification = "This non-static member is needed for data binding purposes.")]
+        public LoginDialogViewModel Login
+        {
+            get
+            {
+                return LoginStatic;
+            }
+        }
+
 
 
         public static void ClearMain()
@@ -266,6 +298,12 @@ namespace SoundOryc.Desktop.ViewModel
             _side = null;
         }
 
+        public static void ClearLogin()
+        {
+            _login.Cleanup();
+            _login = null;
+        }
+
         public static void Cleanup()
         {
             ClearMain();
@@ -274,6 +312,7 @@ namespace SoundOryc.Desktop.ViewModel
             ClearRegister();
             ClearQueue();
             ClearSide();
+            ClearLogin();
         }
 
 

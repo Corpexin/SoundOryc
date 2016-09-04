@@ -23,7 +23,7 @@
     <dialogs:CustomDialog.DialogTop>
         <DockPanel HorizontalAlignment="Center" Width="500" >
             <Label  x:Name="lbl" DockPanel.Dock="Left" Content="Registration" Margin="100, 10, 10, 10" Foreground="Gray" FontSize="21.333"/>
-            <Button x:Name="closeRDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  />
+            <Button x:Name="closeRDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" Command="{Binding closeRegisterDialog}" />
         </DockPanel>
     </dialogs:CustomDialog.DialogTop>
     <dialogs:CustomDialog.Content>
@@ -57,6 +57,6 @@
         </Grid>
     </dialogs:CustomDialog.Content>
     <dialogs:CustomDialog.DialogBottom>
-        <Button x:Name="btnRRegister" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" />
+        <Button x:Name="btnRRegister" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding closeRegisterDialog}" />
     </dialogs:CustomDialog.DialogBottom>
 </dialogs:CustomDialog>

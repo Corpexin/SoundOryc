@@ -14,7 +14,8 @@ namespace SoundOryc.Desktop.ViewModel
     public class SidebarViewModel: ViewModelBase
     {
 
-        private readonly RegisterDialogView _dialogView = new RegisterDialogView();
+        private readonly RegisterDialogView _dialogRView = new RegisterDialogView();
+        private readonly LoginDialogView _dialogLView = new LoginDialogView();
 
         private string _dialogResult;
         public string DialogResult
@@ -30,32 +31,66 @@ namespace SoundOryc.Desktop.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+
+        //
         private RelayCommand _openRegister;
+        private RelayCommand _openLogin;
+
         public RelayCommand openRegister
         {
             get
             {
                 return _openRegister
-                       ?? (_openRegister = new RelayCommand(ShowDialog));
+                       ?? (_openRegister = new RelayCommand(ShowRDialog));
             }
         }
-        private async void ShowDialog()
+
+        public RelayCommand openLogin
         {
-            await DialogCoordinator.Instance.ShowMetroDialogAsync(this, _dialogView);
+            get
+            {
+                return _openLogin
+                       ?? (_openLogin = new RelayCommand(ShowLDialog));
+            }
         }
 
-        private async void ProcessMessage(string messageContents)
+
+        //
+        private async void ShowRDialog()
+        {
+            await DialogCoordinator.Instance.ShowMetroDialogAsync(this, _dialogRView);
+        }
+
+        private async void ShowLDialog()
+        {
+            await DialogCoordinator.Instance.ShowMetroDialogAsync(this, _dialogLView);
+        }
+
+
+        //
+        private async void ProcessRMessage(string messageContents)
         {
             DialogResult = messageContents;
-            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogView);
+            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogLView);
+        }
+
+        private async void ProcessLMessage(string messageContents)
+        {
+            DialogResult = messageContents;
+            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogRView);
         }
 
 
+        //
         public SidebarViewModel()
         {
-
-            Messenger.Default.Register<string>(this, ProcessMessage);
+            Messenger.Default.Register<string>(this, ProcessRMessage);
+            Messenger.Default.Register<string>(this, ProcessLMessage);
         }
 
+
+
+      
     }
 }

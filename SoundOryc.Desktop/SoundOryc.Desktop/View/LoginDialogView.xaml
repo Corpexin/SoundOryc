@@ -1,0 +1,59 @@
+﻿<dialogs:CustomDialog x:Class="SoundOryc.Desktop.View.LoginDialogView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      DataContext="{Binding Login}"
+                      d:DesignHeight="250"
+                      d:DesignWidth="500"
+                      mc:Ignorable="d"
+                      >
+    <dialogs:CustomDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Resources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </dialogs:CustomDialog.Resources>
+
+
+    <dialogs:CustomDialog.DialogTop>
+        <DockPanel HorizontalAlignment="Center" Width="500" >
+            <Label  x:Name="lbl2" DockPanel.Dock="Left" Content="Login" Margin="100, 10, 10, 10" Foreground="Gray" FontSize="21.333"/>
+            <Button x:Name="closeLDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  />
+        </DockPanel>
+    </dialogs:CustomDialog.DialogTop>
+    <dialogs:CustomDialog.Content>
+
+
+        <Grid Margin="-40,-50,-40,17" HorizontalAlignment="Center" Width="330">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                
+            </Grid.RowDefinitions>
+
+            <Label Margin="20, 0, 0, 0" Content="Email"  Grid.Row="0" Foreground="#FF898C88" />
+            <TextBox x:Name="tbLUsername" Style="{StaticResource TextBoxStyle1}" Grid.Row="1"  Text=""  Margin="10,0,10,10"   TextWrapping="WrapWithOverflow" FontSize="13"  ToolTip="write email" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" BorderBrush="#FF767676" CaretBrush="#FF999999" Foreground="#FF787878" SelectionBrush="#FF2B323A" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="12"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Margin="20, 0, 0, 0" Content="Password"  Grid.Row="2" Foreground="#FF898C88" />
+            <PasswordBox x:Name="tbLPassword"  Style="{StaticResource PassBoxStyle1}" Grid.Row="3"  Margin="10,0,10,30"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" Foreground="#FF898C88" />
+
+
+            <Label x:Name="lblRInfoRL" Grid.Row="4" Foreground="#FF898C88"  Margin="0,25,0,4" Content=""/>
+        </Grid>
+    </dialogs:CustomDialog.Content>
+    <dialogs:CustomDialog.DialogBottom>
+        <Button x:Name="btnLLogin" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="login"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" />
+    </dialogs:CustomDialog.DialogBottom>
+</dialogs:CustomDialog>
