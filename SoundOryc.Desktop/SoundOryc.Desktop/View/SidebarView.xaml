@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SoundOryc.Desktop.View"
              DataContext="{Binding Side, Source={StaticResource Locator}}"
-             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-             dialogs:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" >
 
     <UserControl.Resources>

@@ -19,6 +19,15 @@ namespace SoundOryc.Desktop.ViewModel
 
         public ViewModelLocator()
         {
+
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<IDialogCoordinator, DialogCoordinator>();
+            SimpleIoc.Default.Register<RegisterDialogViewModel>();
+            SimpleIoc.Default.Register<LoginDialogViewModel>();
+
+            /**
             CreateMain();
             CreatePlayer();
             CreateNav();
@@ -26,6 +35,8 @@ namespace SoundOryc.Desktop.ViewModel
             CreateLogin();
             CreateQueue();
             CreateSide();
+            **/
+
         }
 
 
@@ -189,7 +200,7 @@ namespace SoundOryc.Desktop.ViewModel
         {
             get
             {
-                return MainStatic;
+                return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
 
@@ -223,7 +234,7 @@ namespace SoundOryc.Desktop.ViewModel
         {
             get
             {
-                return RegisterStatic;
+                return ServiceLocator.Current.GetInstance<RegisterDialogViewModel>();
             }
         }
 
@@ -256,7 +267,7 @@ namespace SoundOryc.Desktop.ViewModel
         {
             get
             {
-                return LoginStatic;
+                return ServiceLocator.Current.GetInstance<LoginDialogViewModel>();
             }
         }
 

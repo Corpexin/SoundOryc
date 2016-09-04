@@ -13,7 +13,9 @@
         NonActiveGlowBrush="#2b323a"
         NonActiveBorderBrush="#2b323a"
         NonActiveWindowTitleBrush="#2b323a" 
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        dialogs:DialogParticipation.Register="{Binding}"
+        xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro">
 
 
     <!--All resources / styles are saved on this file -->

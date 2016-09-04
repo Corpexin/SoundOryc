@@ -6,7 +6,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      DataContext="{Binding Login}"
+                      DataContext="{Binding Login, Source={StaticResource Locator}}"
                       d:DesignHeight="250"
                       d:DesignWidth="500"
                       mc:Ignorable="d"
@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Resources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Themes/Dialogs/BaseMetroDialog.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </dialogs:CustomDialog.Resources>
@@ -23,7 +24,7 @@
     <dialogs:CustomDialog.DialogTop>
         <DockPanel HorizontalAlignment="Center" Width="500" >
             <Label  x:Name="lbl2" DockPanel.Dock="Left" Content="Login" Margin="100, 10, 10, 10" Foreground="Gray" FontSize="21.333"/>
-            <Button x:Name="closeLDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  />
+            <Button x:Name="closeLDialogButton" DockPanel.Dock="Right" Style="{StaticResource ButtonStyle}" Content="{DynamicResource closeDialogButton}" Width="10" Height="10" Background="Transparent" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4,15,14,10" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible" Command="{Binding closeLoginDialog}" />
         </DockPanel>
     </dialogs:CustomDialog.DialogTop>
     <dialogs:CustomDialog.Content>

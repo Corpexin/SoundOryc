@@ -14,23 +14,7 @@ namespace SoundOryc.Desktop.ViewModel
     public class SidebarViewModel: ViewModelBase
     {
 
-        private readonly RegisterDialogView _dialogRView = new RegisterDialogView();
-        private readonly LoginDialogView _dialogLView = new LoginDialogView();
-
-        private string _dialogResult;
-        public string DialogResult
-        {
-            get { return _dialogResult; }
-            set
-            {
-                if (_dialogResult == value)
-                {
-                    return;
-                }
-                _dialogResult = value;
-                RaisePropertyChanged();
-            }
-        }
+       
 
 
         //
@@ -57,36 +41,21 @@ namespace SoundOryc.Desktop.ViewModel
 
 
         //
-        private async void ShowRDialog()
+        private  void ShowRDialog()
         {
-            await DialogCoordinator.Instance.ShowMetroDialogAsync(this, _dialogRView);
+            Messenger.Default.Send(true, "openRegister");
         }
 
-        private async void ShowLDialog()
+        private  void ShowLDialog()
         {
-            await DialogCoordinator.Instance.ShowMetroDialogAsync(this, _dialogLView);
-        }
-
-
-        //
-        private async void ProcessRMessage(string messageContents)
-        {
-            DialogResult = messageContents;
-            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogLView);
-        }
-
-        private async void ProcessLMessage(string messageContents)
-        {
-            DialogResult = messageContents;
-            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogRView);
+            Messenger.Default.Send(true, "openLogin");
         }
 
 
         //
         public SidebarViewModel()
         {
-            Messenger.Default.Register<string>(this, ProcessRMessage);
-            Messenger.Default.Register<string>(this, ProcessLMessage);
+
         }
 
 
