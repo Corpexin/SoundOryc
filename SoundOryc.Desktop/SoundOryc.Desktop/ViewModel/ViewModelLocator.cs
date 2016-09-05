@@ -16,6 +16,7 @@ namespace SoundOryc.Desktop.ViewModel
         private static SidebarViewModel _side;
         private static RegisterDialogViewModel _register;
         private static LoginDialogViewModel _login;
+        private static ContentViewModel _content;
 
         public ViewModelLocator()
         {
@@ -132,6 +133,19 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public static ContentViewModel ContentStatic
+        {
+            get
+            {
+                if (_content == null)
+                {
+                    CreateContent();
+                }
+
+                return _content;
+            }
+        }
+
 
 
         //
@@ -188,6 +202,14 @@ namespace SoundOryc.Desktop.ViewModel
             if (_login == null)
             {
                 _login = new LoginDialogViewModel();
+            }
+        }
+
+        public static void CreateContent()
+        {
+            if(_content == null)
+            {
+                _content = new ContentViewModel();
             }
         }
 
@@ -271,11 +293,22 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        [SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ContentViewModel Content
+        {
+            get
+            {
+                return ContentStatic;
+            }
+        }
+
 
 
         public static void ClearMain()
         {
-            _main.Cleanup();
+            //_main.Cleanup();
             _main = null;
         }
 
@@ -293,7 +326,7 @@ namespace SoundOryc.Desktop.ViewModel
 
         public static void ClearRegister()
         {
-            _register.Cleanup();
+            //_register.Cleanup();
             _register = null;
         }
 
@@ -311,8 +344,14 @@ namespace SoundOryc.Desktop.ViewModel
 
         public static void ClearLogin()
         {
-            _login.Cleanup();
+            //_login.Cleanup();
             _login = null;
+        }
+
+        public static void ClearContent()
+        {
+            _content.Cleanup();
+            _content = null;
         }
 
         public static void Cleanup()
@@ -324,6 +363,7 @@ namespace SoundOryc.Desktop.ViewModel
             ClearQueue();
             ClearSide();
             ClearLogin();
+            ClearContent();
         }
 
 

@@ -49,8 +49,9 @@
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
 
-
+        
         <View:NavigationView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+        <View:ContentView Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5"/>
         <View:PlayerView  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
 
 

@@ -236,7 +236,55 @@
 
         </Style>
 
-        <Style x:Key="CustomListViewItemStyle2" TargetType="{x:Type ListViewItem}">
+
+    <ContextMenu x:Key="ItemContextMenu" x:Name="menu">
+        <MenuItem x:Name="addQueue" Header="Add to Queue" Command="{Binding Path=DataContext.addQueue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  />
+        <MenuItem x:Name="addPlaylist" Header="Add to Playlist" Command="{Binding Path=DataContext.addQueue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  >
+            <MenuItem x:Name="createNew" Header="Create new..." Command="{Binding Path=DataContext.createNew, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
+        </MenuItem>
+    </ContextMenu>
+    
+
+    <Style x:Key="CustomListViewItemStyle" TargetType="{x:Type ListViewItem}">
+
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                        BorderThickness="{TemplateBinding     BorderThickness}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        Background="{TemplateBinding Background}">
+                        <Border Name="InnerBorder" CornerRadius="1"   BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MaxHeight="11" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                <GridViewRowPresenter Grid.RowSpan="2" 
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="#FFF79F8B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    
+    
+    <Style x:Key="CustomListViewItemStyle2" TargetType="{x:Type ListViewItem}">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -365,6 +413,34 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver"  Value="True">
                 <Setter Property="Foreground"  Value="#f79f8b"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style  x:Key="ButtonSelectSearchType" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#898c88"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="bg2" Background="{TemplateBinding Background}" Padding="0,0,0,0"  BorderBrush="Transparent" BorderThickness="0">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="BorderBrush"  TargetName="bg2"  Value="#f79f8b"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"  Value="True">
+                <Setter Property="Foreground"  Value="#f79f8b"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#898c88"/>
+                <Setter Property="Foreground" Value="#2b323a"/>
             </Trigger>
         </Style.Triggers>
     </Style>
