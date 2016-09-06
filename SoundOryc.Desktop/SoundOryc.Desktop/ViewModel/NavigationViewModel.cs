@@ -151,7 +151,16 @@ namespace SoundOryc.Desktop.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    isSidebarOpened = true; //TODO:REPLACE. I only put it here to see if the command works =)
+                    isSidebarOpened = false;
+                    Messenger.Default.Send("1", "lblPageDefault");
+                    if (isNeteaseEngineSelected)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
                 });
             }
         }

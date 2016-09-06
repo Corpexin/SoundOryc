@@ -84,6 +84,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Song.cs" />
+    <Compile Include="Model\SongInfo.cs" />
     <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\LoginDialogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -190,9 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\add.png" />
@@ -304,6 +303,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Desktop\ListViewLayout\ListViewLayout\ListViewLayout2008.csproj">
+      <Project>{916a9879-3f2d-471f-aafa-28f0c8a7ffa9}</Project>
+      <Name>ListViewLayout2008</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

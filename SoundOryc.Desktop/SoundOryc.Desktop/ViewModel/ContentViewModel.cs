@@ -1,7 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using SoundOryc.Desktop.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +21,12 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string albumsEnabledPropertyName = "albumsEnabled";
         private bool _albumsEnabled = true;
+
+        public const string lblPageContentPropertyName = "lblPageContent";
+        private string _lblPageContent = "1";
+
+        public const string songsListPropertyName = "songsList";
+        private ObservableCollection<Song> _songsList = new ObservableCollection<Song>();
 
         public bool songsEnabled
         {
@@ -75,6 +84,46 @@ namespace SoundOryc.Desktop.ViewModel
                 RaisePropertyChanged(albumsEnabledPropertyName);
             }
         }
+
+        public string lblPageContent
+        {
+            get
+            {
+                return _lblPageContent;
+            }
+
+            private set
+            {
+                if (_lblPageContent == value)
+                {
+                    return;
+                }
+
+                _lblPageContent = value;
+                RaisePropertyChanged(lblPageContentPropertyName);
+            }
+        }
+
+
+        public ObservableCollection<Song> songsList
+        {
+            get
+            {
+                return _songsList;
+            }
+
+            private set
+            {
+                if (_songsList == value)
+                {
+                    return;
+                }
+
+                _songsList = value;
+                RaisePropertyChanged(songsListPropertyName);
+            }
+        }
+
 
 
 
@@ -146,6 +195,24 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+
+
+        public ContentViewModel()
+        {
+            Messenger.Default.Register<string>(this, "lblPageDefault", message =>
+            {
+                lblPageContent = message;
+            });
+
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
+
+        }
 
     }
 }

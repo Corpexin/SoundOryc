@@ -6,6 +6,7 @@
              xmlns:model="clr-namespace:SoundOryc.Desktop.ViewModel"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ctrl="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              DataContext="{Binding Content, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
@@ -37,14 +38,14 @@
         <Button x:Name="btnArtists" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
         <Button x:Name="btnAlbums" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-1,25,1" />
         <Rectangle Fill="#898c88" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
-        <ListView x:Name="lvSongs"  Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True">
+        <ListView x:Name="lvSongs"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
             <ListView.View >
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                    <GridViewColumn  Width="Auto" DisplayMemberBinding="{Binding numList}" />
-                    <GridViewColumn  Width="Auto" DisplayMemberBinding="{Binding songName}" />
-                    <GridViewColumn  Width="Auto" DisplayMemberBinding="{Binding artistName}" />
-                    <GridViewColumn  Width="Auto" DisplayMemberBinding="{Binding duration}" />
-                    <GridViewColumn  Width="Auto">
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="1"  DisplayMemberBinding="{Binding numList}" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="4" DisplayMemberBinding="{Binding songName}" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="4" DisplayMemberBinding="{Binding artistName}" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="2" DisplayMemberBinding="{Binding duration}" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="1">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image x:Name="downloadImage" Source="/Resources/cloud-computing.png" Width="18" Height="18"  ToolTip="Generate download link" >
@@ -67,24 +68,6 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-            <ListViewItem>
-                <Button x:Name="btnNetease"  Style="{StaticResource neteaseButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Netease engine">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:EventToCommand Command="{Binding selectedEngineNetease}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-            </ListViewItem>
-            <ListViewItem>
-                <Button x:Name="btnMp3With"  Style="{StaticResource mp3WithButtonStyle}"  Height="15"  Width="15" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"   Grid.Column="4" Grid.Row="0"  HorizontalAlignment="Right" ToolTip="Search with Mp3With engine">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:EventToCommand Command="{Binding selectedEngineMp3With}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-            </ListViewItem>
         </ListView>
         <Button x:Name="loadNextListButton" Visibility="Visible"  Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="76,4,34,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"  ToolTip="Next search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2"  Width="10">
             <DynamicResource ResourceKey="loadNextButton"/>
@@ -94,6 +77,6 @@
             <DynamicResource ResourceKey="loadPrevButton"/>
         </Button>
 
-        <Label  x:Name="lblPage" Content="1" Visibility="Visible" Grid.Column="2" Grid.Row="2" FontFamily="Arial Unicode MS" Foreground="#FF898C88"   Background="Transparent" ClipToBounds="True" FontSize="10" HorizontalContentAlignment="Center" Margin="0,0,51,0" HorizontalAlignment="Right" Width="29"/>
+        <Label  x:Name="lblPage" Content="{Binding lblPageContent}" Visibility="Visible" Grid.Column="2" Grid.Row="2" FontFamily="Arial Unicode MS" Foreground="#FF898C88"   Background="Transparent" ClipToBounds="True" FontSize="10" HorizontalContentAlignment="Center" Margin="0,0,51,0" HorizontalAlignment="Right" Width="29"/>
     </Grid>
 </UserControl>

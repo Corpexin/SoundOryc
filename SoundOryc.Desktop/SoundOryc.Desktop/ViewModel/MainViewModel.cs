@@ -12,12 +12,14 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string IsQOpenedPropertyName = "isQOpened";
         public const string IsSOpenedPropertyName = "isSOpened";
+        public const string IsPbRingActivePropertyName = "isPbRingActive";
         private readonly RegisterDialogView _dialogRView = new RegisterDialogView();
         private readonly LoginDialogView _dialogLView = new LoginDialogView();
 
         private string _dialogResult;
         private bool _isQOpened = false;
         private bool _isSOpened = false;
+        private bool _isPbRingActive = false;
 
         public bool isQOpened
         {
@@ -54,6 +56,26 @@ namespace SoundOryc.Desktop.ViewModel
 
                 _isSOpened = value;
                 RaisePropertyChanged(IsSOpenedPropertyName);
+            }
+        }
+
+
+        public bool isPbRingActive
+        {
+            get
+            {
+                return _isPbRingActive;
+            }
+
+            set
+            {
+                if (_isPbRingActive == value)
+                {
+                    return;
+                }
+
+                _isPbRingActive = value;
+                RaisePropertyChanged(IsPbRingActivePropertyName);
             }
         }
 
