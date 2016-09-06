@@ -2,6 +2,8 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using SoundOryc.Desktop.Model;
+using SoundOryc.Desktop.Services;
+using SoundOryc.Desktop.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,9 @@ namespace SoundOryc.Desktop.ViewModel
 {
     public class ContentViewModel : ViewModelBase
     {
+        public const int TYPE_SONG = 1;
+        public const int TIPE_ARTIST = 100;
+
         public const string songsEnabledPropertyName = "songsEnabled";
         private bool _songsEnabled = true;
 
@@ -199,20 +204,29 @@ namespace SoundOryc.Desktop.ViewModel
 
         public ContentViewModel()
         {
-            Messenger.Default.Register<string>(this, "lblPageDefault", message =>
-            {
-                lblPageContent = message;
-            });
-
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-            songsList.Add(new Song("ja", "1", "hola", "paco", "3:03", "www"));
-
+            Messenger.Default.Register<NavigationViewModel>(this, "search",  message =>
+           {
+               lblPageContent = "1";
+               search(message);
+           });
         }
 
+        private async void search(NavigationViewModel message)
+        {
+            ObservableCollection<Song> result = null;
+            if (message.isNeteaseEngineSelected)
+            {
+                result = await Task.FromResult(Netease.search(message.searchText, TYPE_SONG, 1));
+            }
+            else
+            {
+                result = await Mp3With.search(message.searchText);
+            }
+
+            foreach (Song s in result)
+            {
+                songsList.Add(s);
+            }
+        }
     }
 }

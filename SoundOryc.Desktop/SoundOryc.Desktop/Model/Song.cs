@@ -8,6 +8,11 @@ namespace SoundOryc.Desktop.Model
 {
     public class Song
     {
+        public enum Source
+        {
+            NetEase, Mp3WithMe,
+        }
+
         public string id { get; set; }
         public string numList { get; set; }
         public string songName { get; set; }
@@ -15,10 +20,10 @@ namespace SoundOryc.Desktop.Model
         public string duration { get; set; }
         public string uri { get; set; }
         public SongInfo infoSong { get; set; }
-        //public Utilities.Core.Source source { get; set; }
+        public Song.Source source { get; set; }
         private String downloadImage;
 
-        public Song(string id, string numList, string songName, string artistName, string duration, string uri/**, Utilities.Core.Source source**/)
+        public Song(string id, string numList, string songName, string artistName, string duration, string uri, Song.Source source)
         {
             this.id = id;
             this.numList = numList;
@@ -26,7 +31,7 @@ namespace SoundOryc.Desktop.Model
             this.artistName = artistName;
             this.duration = duration;
             this.uri = uri;
-            //this.source = source;
+            this.source = source;
             downloadImage = "";
         }
 
@@ -34,14 +39,14 @@ namespace SoundOryc.Desktop.Model
         {
         }
 
-        public Song(string id, string songName, string artistName, string duration, string uri/**, Core.Source source**/)
+        public Song(string id, string songName, string artistName, string duration, string uri, Song.Source source)
         {
             this.id = id;
             this.songName = songName;
             this.artistName = artistName;
             this.duration = duration;
             this.uri = uri;
-            //this.source = source;
+            this.source = source;
         }
 
 

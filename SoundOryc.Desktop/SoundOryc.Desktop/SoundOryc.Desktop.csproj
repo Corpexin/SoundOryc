@@ -59,6 +59,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -86,6 +90,9 @@
     </ApplicationDefinition>
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\SongInfo.cs" />
+    <Compile Include="Services\Mp3With.cs" />
+    <Compile Include="Services\Netease.cs" />
+    <Compile Include="Utilities\JsonEncDec.cs" />
     <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\LoginDialogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -308,11 +315,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\ListViewLayout\ListViewLayout\ListViewLayout2008.csproj">
+    <ProjectReference Include="ListViewLayout\ListViewLayout\ListViewLayout2008.csproj">
       <Project>{916a9879-3f2d-471f-aafa-28f0c8a7ffa9}</Project>
       <Name>ListViewLayout2008</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

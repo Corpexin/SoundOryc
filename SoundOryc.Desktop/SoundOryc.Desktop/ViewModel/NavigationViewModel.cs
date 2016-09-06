@@ -20,7 +20,31 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string IsNeteaseEngineSelectedPropertyName = "isNeteaseEngineSelected";
         private bool _isNeteaseEngineSelected = true;
-        
+
+        public const string SearchTextPropertyName = "searchText";
+        private string _searchText="";
+
+
+
+        public string searchText
+        {
+            get
+            {
+                return _searchText;
+            }
+
+            set
+            {
+                if (_searchText == value)
+                {
+                    return;
+                }
+
+                _searchText = value;
+                RaisePropertyChanged(SearchTextPropertyName);
+            }
+        }
+
 
         public bool isSidebarOpened
         {
@@ -152,15 +176,7 @@ namespace SoundOryc.Desktop.ViewModel
                 return new RelayCommand(() =>
                 {
                     isSidebarOpened = false;
-                    Messenger.Default.Send("1", "lblPageDefault");
-                    if (isNeteaseEngineSelected)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
+                    Messenger.Default.Send(this, "search");
                 });
             }
         }

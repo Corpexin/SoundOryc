@@ -126,3 +126,9 @@ D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\Sou
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\SoundOryc.Desktop.csprojResolveAssemblyReference.cache
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Itenso.Windows.Controls.ListViewLayout.dll
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Itenso.Windows.Controls.ListViewLayout.pdb
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Itenso.Windows.Controls.ListViewLayout.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Itenso.Windows.Controls.ListViewLayout.pdb
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\View\ContentView.g.cs
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\View\ContentView.baml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Newtonsoft.Json.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Newtonsoft.Json.xml
