@@ -11,9 +11,9 @@ namespace SoundOryc.Desktop.Utilities
 {
     public class JsonEncDec
     {
-        internal static ObservableCollection<Song> getCanciones(string json, int page)
+        internal static ObservableCollection<MediaData> getCanciones(string json, int page)
         {
-            ObservableCollection<Song> listaCanciones;
+            ObservableCollection<MediaData> listaCanciones;
             int numCancion = 1;
             string numc;
             Array listaArtistas;
@@ -38,7 +38,7 @@ namespace SoundOryc.Desktop.Utilities
             try
             {
                 listaJOCanc = jUser["songs"].ToArray();
-                listaCanciones = new ObservableCollection<Song>();
+                listaCanciones = new ObservableCollection<MediaData>();
 
                 foreach (JObject jO in listaJOCanc)
                 {

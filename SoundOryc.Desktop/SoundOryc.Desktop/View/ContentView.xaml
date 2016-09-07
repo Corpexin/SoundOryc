@@ -10,18 +10,21 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              DataContext="{Binding Content, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
-             MinWidth="600"
+             MinWidth="580"
              MinHeight="360">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Resources.xaml" />
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="boolToVis" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -34,11 +37,11 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="14*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSongs" Style="{StaticResource ButtonSelectSearchType}" IsEnabled="{Binding songsEnabled}" Grid.Row="0" Grid.Column="1" FontSize="13" FontWeight="Thin" Content="songs"  ClickMode="Press" Width="70" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding songsClick}" Margin="0,0,25,0" />
-        <Button x:Name="btnArtists" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
-        <Button x:Name="btnAlbums" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-1,25,1" />
-        <Rectangle Fill="#898c88" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
-        <ListView x:Name="lvSongs"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
+        <Button x:Name="btnSongs" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}" IsEnabled="{Binding songsEnabled}" Grid.Row="0" Grid.Column="1" FontSize="13" FontWeight="Thin" Content="songs"  ClickMode="Press" Width="70" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding songsClick}" Margin="0,0,25,0" />
+        <Button x:Name="btnArtists" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
+        <Button x:Name="btnAlbums" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-1,25,1" />
+        <Rectangle Fill="#898c88" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
+        <ListView x:Name="lvSongs"   ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
             <ListView.View >
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  ctrl:ProportionalColumn.Width="1"  DisplayMemberBinding="{Binding numList}" />
@@ -69,14 +72,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="loadNextListButton" Visibility="Visible"  Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="76,4,34,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"  ToolTip="Next search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2"  Width="10">
+        <Button x:Name="loadNextListButton" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}"  Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="76,4,34,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"  ToolTip="Next search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2"  Width="10">
             <DynamicResource ResourceKey="loadNextButton"/>
         </Button>
 
-        <Button x:Name="loadPrevListButton" Visibility="Visible" Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="0,4,80,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"   ToolTip="Previous search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2" HorizontalAlignment="Right" Width="10"  >
+        <Button x:Name="loadPrevListButton" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="0,4,80,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"   ToolTip="Previous search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2" HorizontalAlignment="Right" Width="10"  >
             <DynamicResource ResourceKey="loadPrevButton"/>
         </Button>
 
-        <Label  x:Name="lblPage" Content="{Binding lblPageContent}" Visibility="Visible" Grid.Column="2" Grid.Row="2" FontFamily="Arial Unicode MS" Foreground="#FF898C88"   Background="Transparent" ClipToBounds="True" FontSize="10" HorizontalContentAlignment="Center" Margin="0,0,51,0" HorizontalAlignment="Right" Width="29"/>
+        <Label  x:Name="lblPage" Content="{Binding lblPageContent}" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Grid.Column="2" Grid.Row="2" FontFamily="Arial Unicode MS" Foreground="#FF898C88"   Background="Transparent" ClipToBounds="True" FontSize="10" HorizontalContentAlignment="Center" Margin="0,0,51,0" HorizontalAlignment="Right" Width="29"/>
     </Grid>
 </UserControl>

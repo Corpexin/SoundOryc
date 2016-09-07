@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoundOryc.Desktop.Model
 {
-    public class Song
+    public class Song : MediaData
     {
         public enum Source
         {

@@ -13,10 +13,10 @@ namespace SoundOryc.Desktop.Services
 {
     public class Netease
     {
-        internal static  ObservableCollection<Song> search(string searchText, int type, int page)
+        internal static  ObservableCollection<MediaData> searchSongs(string searchText, int type, int page)
         {
             page--;
-            ObservableCollection<Song> result = null;
+            ObservableCollection<MediaData> result = null;
 
             string s = "s=" + searchText + "&type=" + type + "&offset=" + (page * 25) + "&sub=false&limit=25";
 
@@ -65,12 +65,22 @@ namespace SoundOryc.Desktop.Services
             return result;
         }
 
+        internal static ObservableCollection<MediaData> searchAlbums(string message, int v, int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static ObservableCollection<MediaData> searchArtists(string message, int v, int page)
+        {
+            throw new NotImplementedException();
+        }
+
 
         //Populates the list with the result of json
-        private static ObservableCollection<Song> addToList(string result, int type, int page)
+        private static ObservableCollection<MediaData> addToList(string result, int type, int page)
         {
             
-            ObservableCollection<Song> songList = null;
+            ObservableCollection<MediaData> songList = null;
             switch (type)
             {
                 case 100://Artists
@@ -79,12 +89,12 @@ namespace SoundOryc.Desktop.Services
                     songList = JsonEncDec.getCanciones(result.ToString(), page);
                     if (songList == null)
                     {
-                        songList = new ObservableCollection<Song>();
+                        songList = new ObservableCollection<MediaData>();
                         songList.Add(new Song("", "", "", "No matches found...", "", "", Song.Source.NetEase));
                     }
                     break;
                 case -1://Error
-                    songList = new ObservableCollection<Song>();
+                    songList = new ObservableCollection<MediaData>();
                     songList.Add(new Song("", "", "", result, "", "", Song.Source.NetEase));
                     break;
             }

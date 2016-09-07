@@ -21,6 +21,9 @@ namespace SoundOryc.Desktop.ViewModel
         private bool _isSOpened = false;
         private bool _isPbRingActive = false;
 
+
+        
+
         public bool isQOpened
         {
             get
@@ -149,6 +152,17 @@ namespace SoundOryc.Desktop.ViewModel
             {
                 ProcessLMessage();
             });
+
+            Messenger.Default.Register<NavigationViewModel>(this, "search",  message =>
+            {
+                isPbRingActive = true;
+            });
+
+            Messenger.Default.Register<string>(this, "searchCompleted", message =>
+            {
+                isPbRingActive = false;
+            });
+
         }
 
 

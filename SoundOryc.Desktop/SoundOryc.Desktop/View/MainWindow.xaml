@@ -20,7 +20,15 @@
 
     <!--All resources / styles are saved on this file -->
     <Window.Resources>
-        <ResourceDictionary  Source="Resources.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Resources.xaml" />
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="boolToVis" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+       
     </Window.Resources>
 
 
@@ -49,9 +57,9 @@
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
 
-        
-        
-        <View:ContentView Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5"/>
+
+
+        <View:ContentView Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5" />
         <View:NavigationView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
         <View:PlayerView  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
         <Controls:ProgressRing x:Name="pbRing" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="86,123,79,157" Grid.Column="1" Grid.ColumnSpan="3" Foreground="#898c88" IsActive="{Binding isPbRingActive}" Height="59" Width="58"/>

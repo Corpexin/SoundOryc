@@ -15,8 +15,8 @@ namespace SoundOryc.Desktop.ViewModel
 {
     public class ContentViewModel : ViewModelBase
     {
-        public const int TYPE_SONG = 1;
-        public const int TIPE_ARTIST = 100;
+        public const string IsContentVisiblePropertyName = "isContentVisible";
+        private bool _isContentVisible = false;
 
         public const string songsEnabledPropertyName = "songsEnabled";
         private bool _songsEnabled = true;
@@ -32,6 +32,27 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string songsListPropertyName = "songsList";
         private ObservableCollection<Song> _songsList = new ObservableCollection<Song>();
+
+
+        public bool isContentVisible
+        {
+            get
+            {
+                return _isContentVisible;
+            }
+
+            set
+            {
+                if (_isContentVisible == value)
+                {
+                    return;
+                }
+
+                _isContentVisible = value;
+                RaisePropertyChanged(IsContentVisiblePropertyName);
+            }
+        }
+
 
         public bool songsEnabled
         {
@@ -204,29 +225,23 @@ namespace SoundOryc.Desktop.ViewModel
 
         public ContentViewModel()
         {
-            Messenger.Default.Register<NavigationViewModel>(this, "search",  message =>
-           {
-               lblPageContent = "1";
-               search(message);
-           });
+            Messenger.Default.Register<NavigationViewModel>(this, "search", async message =>
+            {
+                isContentVisible = false;
+                songsList.Clear();
+                lblPageContent = "1";
+                foreach (Song s in await Search.search(message.searchText, message.isNeteaseEngineSelected, 1, Search.TYPE_SONG))
+                {
+                    songsList.Add(s);
+                }
+
+                Messenger.Default.Send("", "searchCompleted");
+                isContentVisible = true;
+            });
+
+
         }
 
-        private async void search(NavigationViewModel message)
-        {
-            ObservableCollection<Song> result = null;
-            if (message.isNeteaseEngineSelected)
-            {
-                result = await Task.FromResult(Netease.search(message.searchText, TYPE_SONG, 1));
-            }
-            else
-            {
-                result = await Mp3With.search(message.searchText);
-            }
 
-            foreach (Song s in result)
-            {
-                songsList.Add(s);
-            }
-        }
     }
 }
