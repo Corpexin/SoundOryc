@@ -2,14 +2,17 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
+using SoundOryc.Desktop.Model;
+using SoundOryc.Desktop.Services;
 using SoundOryc.Desktop.View;
+using System.Collections.ObjectModel;
 
 namespace SoundOryc.Desktop.ViewModel
 {
 
     public class MainViewModel : ViewModelBase
     {
-
+        public const string IsContentVisiblePropertyName = "isContentVisible";
         public const string IsQOpenedPropertyName = "isQOpened";
         public const string IsSOpenedPropertyName = "isSOpened";
         public const string IsPbRingActivePropertyName = "isPbRingActive";
@@ -20,9 +23,29 @@ namespace SoundOryc.Desktop.ViewModel
         private bool _isQOpened = false;
         private bool _isSOpened = false;
         private bool _isPbRingActive = false;
+        private bool _isContentVisible = false;
 
 
-        
+
+        public bool isContentVisible
+        {
+            get
+            {
+                return _isContentVisible;
+            }
+
+            set
+            {
+                if (_isContentVisible == value)
+                {
+                    return;
+                }
+
+                _isContentVisible = value;
+                RaisePropertyChanged(IsContentVisiblePropertyName);
+            }
+        }
+
 
         public bool isQOpened
         {
@@ -63,6 +86,7 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+
         public bool isPbRingActive
         {
             get
@@ -81,6 +105,7 @@ namespace SoundOryc.Desktop.ViewModel
                 RaisePropertyChanged(IsPbRingActivePropertyName);
             }
         }
+    
 
         public string DialogResult
         {
@@ -123,6 +148,8 @@ namespace SoundOryc.Desktop.ViewModel
 
         public MainViewModel()
         {
+            Netease.fillProxies();
+
             Messenger.Default.Register<bool>(this, "queueOpen", message =>
             {
                 isQOpened = message;
@@ -153,13 +180,15 @@ namespace SoundOryc.Desktop.ViewModel
                 ProcessLMessage();
             });
 
-            Messenger.Default.Register<NavigationViewModel>(this, "search",  message =>
+            Messenger.Default.Register<string>(this, "searchStarted", message =>
             {
+                isContentVisible = true;
                 isPbRingActive = true;
             });
 
             Messenger.Default.Register<string>(this, "searchCompleted", message =>
             {
+                isContentVisible = false;
                 isPbRingActive = false;
             });
 

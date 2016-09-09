@@ -8,6 +8,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:ctrl="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              DataContext="{Binding Content, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              MinWidth="580"
@@ -41,7 +42,12 @@
         <Button x:Name="btnArtists" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
         <Button x:Name="btnAlbums" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-1,25,1" />
         <Rectangle Fill="#898c88" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
-        <ListView x:Name="lvSongs"   ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
+        <ListView x:Name="lvSongs" Background="Transparent"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <command:EventToCommand Command="{Binding selectSong}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.View >
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  ctrl:ProportionalColumn.Width="1"  DisplayMemberBinding="{Binding numList}" />
@@ -71,7 +77,9 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            
         </ListView>
+        
         <Button x:Name="loadNextListButton" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}"  Style="{StaticResource ButtonStyle}" Grid.Row="2" Margin="76,4,34,3"  BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1"  ToolTip="Next search page" RenderTransformOrigin="0.45,1.625" Grid.Column="2"  Width="10">
             <DynamicResource ResourceKey="loadNextButton"/>
         </Button>

@@ -25,7 +25,7 @@
         <Button x:Name="closeDialogQueueButton"  Style="{StaticResource ButtonStyle}"  Grid.Row="0" Width="10" Height="10"  HorizontalAlignment="Right" Margin="0,0,4,0" BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  >
             <DynamicResource ResourceKey="closeDialogQueue"/>
         </Button>
-        <ListView x:Name="lvQueueSongs"  Grid.Row="1" VerticalContentAlignment="Center"  BorderBrush="{x:Null}" Style="{DynamicResource CustomListViewStyle}" Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewQueueItemStyle}" SelectionMode="Single">
+        <ListView x:Name="lvQueueSongs"  Grid.Row="1" VerticalContentAlignment="Center"  BorderBrush="{x:Null}" Style="{DynamicResource CustomListViewStyle}" Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewQueueItemStyle}" SelectionMode="Single" ItemsSource="{Binding songsQueue}" >
             <ListView.View>
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  Width="150" DisplayMemberBinding="{Binding songName}" />

@@ -11,6 +11,8 @@ namespace SoundOryc.Desktop.Utilities
 {
     public class JsonEncDec
     {
+        public static bool highQuality = true;
+
         internal static ObservableCollection<MediaData> getCanciones(string json, int page)
         {
             ObservableCollection<MediaData> listaCanciones;
@@ -72,6 +74,61 @@ namespace SoundOryc.Desktop.Utilities
 
 
             return listaCanciones;
+        }
+
+        internal static SongInfo getInfoSong(string info)
+        {
+            SongInfo result = null;
+            JObject jObject = JObject.Parse(info);
+            int tipo = 1;
+            JToken jUser = null;
+            //Comprobacion de las calidades de la cancion
+            if (highQuality)
+            {
+                //Better quality. More slow
+                if (!jObject["songs"][0]["hMusic"].HasValues)
+                    if (!jObject["songs"][0]["mMusic"].HasValues)
+                        if (!jObject["songs"][0]["bMusic"].HasValues)
+                            if (!jObject["songs"][0]["lMusic"].HasValues)
+                                if (!jObject["songs"][0]["audition"].HasValues)
+                                    jUser = null;
+                                else
+                                    jUser = jObject["songs"][0]["audition"];
+                            else
+                                jUser = jObject["songs"][0]["lMusic"];
+                        else
+                            jUser = jObject["songs"][0]["bMusic"];
+                    else
+                        jUser = jObject["songs"][0]["mMusic"];
+                else
+                    jUser = jObject["songs"][0]["hMusic"];
+            }
+            else
+            {
+                //Worse quality. More speed
+                if (!jObject["songs"][0]["lMusic"].HasValues)
+                    if (!jObject["songs"][0]["bMusic"].HasValues)
+                        if (!jObject["songs"][0]["mMusic"].HasValues)
+                            if (!jObject["songs"][0]["hMusic"].HasValues)
+                                if (!jObject["songs"][0]["audition"].HasValues)
+                                    jUser = null;
+                                else
+                                    jUser = jObject["songs"][0]["audition"];
+                            else
+                                jUser = jObject["songs"][0]["hMusic"];
+                        else
+                            jUser = jObject["songs"][0]["mMusic"];
+                    else
+                        jUser = jObject["songs"][0]["bMusic"];
+                else
+                    jUser = jObject["songs"][0]["lMusic"];
+
+            }
+
+            if (jUser != null)
+                result = new SongInfo((string)jUser["dfsId"].ToString(), (string)(string)jUser["bitrate"].ToString(), (string)jUser["extension"].ToString(), tipo);
+
+            return result;
         }
     }
 }

@@ -8,11 +8,27 @@ using SoundOryc.Desktop.Model;
 using System.Net;
 using System.IO;
 using SoundOryc.Desktop.Utilities;
+using System.Security.Cryptography;
 
 namespace SoundOryc.Desktop.Services
 {
     public class Netease
     {
+        public static ObservableCollection<Proxy> proxies = new ObservableCollection<Proxy>();
+        public static int contP;
+
+
+        public static void fillProxies()
+        {
+            Netease.proxies.Add(new Proxy("http://"));
+            Netease.proxies.Add(new Proxy("http://219.138.27.33/"));
+            Netease.proxies.Add(new Proxy("http://49.117.146.206/"));
+            Netease.proxies.Add(new Proxy("http://49.117.146.208/"));
+            Netease.proxies.Add(new Proxy("http://49.117.146.204/"));
+            Netease.proxies.Add(new Proxy("http://117.135.251.132/"));
+        }
+
+
         internal static  ObservableCollection<MediaData> searchSongs(string searchText, int type, int page)
         {
             page--;
@@ -102,5 +118,79 @@ namespace SoundOryc.Desktop.Services
 
             
         }
+
+        internal static async Task<string> getInfoSong(Song song)
+        {
+            return await Task.Run(() => downloadInfoSong(song));
+        }
+
+
+        private static async Task<string> downloadInfoSong(Song song)
+        {
+            bool correct = false;
+            contP = 0;
+            while (!correct)
+            {
+                try
+                {
+                    string url = proxies[contP].uri + "music.163.com/api/song/detail?ids=[" + song.id + "]";
+                    string info = await getInfoTask(url);
+                    song.infoSong = JsonEncDec.getInfoSong(info);
+                    string encriptedKey = encryptSongId(song.infoSong.dfsid);
+                    song.uri = "http://p3.music.126.net/" + encriptedKey + "/" + song.infoSong.dfsid + ".mp3";
+                    correct = true;
+                }
+                catch (Exception)
+                {
+                    if (contP <= proxies.Count - 1)
+                    {
+                        contP++;
+                    }
+                    else
+                    {
+                        contP = 0;
+                    }
+                }
+            }
+
+            return song.uri;
+        }
+
+
+        //Encrypts song download id
+        public static string encryptSongId(string dfsid)
+        {
+            string encrypted;
+            byte[] byte1 = Encoding.ASCII.GetBytes("3go8&$8*3*3h0k(2)2");
+            byte[] byte2 = Encoding.ASCII.GetBytes(dfsid);
+            var byte1_len = byte1.Length;
+
+            for (int i = 0; i < byte2.Length; i++)
+            {
+                byte2[i] = (byte)(byte2[i] ^ byte1[i % byte1_len]);
+            }
+
+            MD5 m = MD5.Create();
+            encrypted = Convert.ToBase64String(m.ComputeHash(byte2)); //[:-1]??
+            encrypted = encrypted.Replace('/', '_');
+            encrypted = encrypted.Replace('+', '-');
+
+            return encrypted;
+        }
+
+
+        //Async task with a web request for downloading song information
+        private static async Task<string> getInfoTask(string url)
+        {
+            var request = WebRequest.Create(new Uri(url)) as HttpWebRequest;
+            request.Method = "GET";
+            request.Accept = "application/json";
+            WebResponse responseObject = await Task<WebResponse>.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, request);
+            var responseStream = responseObject.GetResponseStream();
+            var sr = new StreamReader(responseStream);
+            string received = await sr.ReadToEndAsync();
+            return received;
+        }
+
     }
 }

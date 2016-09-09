@@ -1,12 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-
+using SoundOryc.Desktop.Model;
+using SoundOryc.Desktop.Services;
+using SoundOryc.Desktop.Utilities;
 
 namespace SoundOryc.Desktop.ViewModel
 {
     public class PlayerViewModel : ViewModelBase
     {
+        Player player = new Player();
+
         public const string queueOpenedPropertyName = "QueueOpened";
         private bool _queueOpened = false;
 
@@ -17,6 +21,10 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string isVolumeMutedPropertyName = "IsVolumeMuted";
         private bool _isVolumeMuted = true;
+
+        
+
+
 
         public bool QueueOpened
         {
@@ -147,6 +155,17 @@ namespace SoundOryc.Desktop.ViewModel
 
         public PlayerViewModel()
         {
+            Messenger.Default.Register<Song>(this, "playSong", async message =>
+            {
+                if (message.source == Song.Source.Mp3WithMe)
+                {
+                    player.playSong(message.uri);
+                }
+                else
+                {
+                    player.playSong(await Netease.getInfoSong(message));
+                }
+            });
            
         }
     }

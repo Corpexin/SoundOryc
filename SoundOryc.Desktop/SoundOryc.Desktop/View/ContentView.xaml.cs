@@ -24,5 +24,7 @@ namespace SoundOryc.Desktop.View
         {
             InitializeComponent();
         }
+
+
     }
 }

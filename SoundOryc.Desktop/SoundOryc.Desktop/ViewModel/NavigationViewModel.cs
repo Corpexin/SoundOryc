@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using SoundOryc.Desktop.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,10 +174,11 @@ namespace SoundOryc.Desktop.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
                     isSidebarOpened = false;
-                    Messenger.Default.Send(this, "search");
+                    Messenger.Default.Send("", "searchStarted");
+                    Messenger.Default.Send(await Search.search(searchText, isNeteaseEngineSelected, 1, Search.TYPE_SONG), "fillContentList");
                 });
             }
         }

@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Proxy.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\SongInfo.cs" />
     <Compile Include="Services\Mp3With.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Utilities\JsonEncDec.cs" />
     <Compile Include="Model\MediaData.cs" />
+    <Compile Include="Utilities\Player.cs" />
     <Compile Include="Utilities\Search.cs" />
     <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\LoginDialogViewModel.cs" />
@@ -329,7 +331,17 @@
       <Name>ListViewLayout2008</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

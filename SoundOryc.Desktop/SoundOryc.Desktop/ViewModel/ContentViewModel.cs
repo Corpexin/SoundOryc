@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace SoundOryc.Desktop.ViewModel
 {
@@ -221,16 +223,30 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public RelayCommand<MouseButtonEventArgs> selectSong
+        {
+            get
+            {
+                return new RelayCommand<MouseButtonEventArgs>((e) => {
+                    Song item = (Song)((FrameworkElement)e.OriginalSource).DataContext;
+                    if (item != null)
+                    {
+                        Messenger.Default.Send(item, "addSongToQueue");
+                        Messenger.Default.Send(item, "playSong");
+                    }
+                });
+            }
+        }
 
 
         public ContentViewModel()
         {
-            Messenger.Default.Register<NavigationViewModel>(this, "search", async message =>
+            Messenger.Default.Register<ObservableCollection<MediaData>>(this, "fillContentList",  message =>
             {
                 isContentVisible = false;
                 songsList.Clear();
                 lblPageContent = "1";
-                foreach (Song s in await Search.search(message.searchText, message.isNeteaseEngineSelected, 1, Search.TYPE_SONG))
+                foreach (Song s in message)
                 {
                     songsList.Add(s);
                 }
