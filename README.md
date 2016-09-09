@@ -17,14 +17,13 @@ You can fork, copy, modify, and upload your own version if you want. Just don't 
 
 
 
-
-
-How it works?
+###How it works?
   - Search your favourite songs
-  - Get the listAmet, voluptatem, eligendi id, mollitia vel at sed sequi anim dolor.
+  - Get the list from one of our engines.
+  - Select your favourite ones
   - Enjoy listening
 
-You can also:
+###You can also:
   - Use 2 different search engines
   - Download every song you want
   - Create and modify your own playlists
