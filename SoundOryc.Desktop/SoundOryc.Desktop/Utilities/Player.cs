@@ -32,6 +32,18 @@ namespace SoundOryc.Desktop.Utilities
             }
         }
 
+        public bool isStopped
+        {
+            get
+            {
+                if (player.playState == WMPPlayState.wmppsStopped)
+                    return true;
+                else
+                    return false;
+
+            }
+        }
+
         //volume control (with getter and setter)
         public int volume
         {

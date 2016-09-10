@@ -139,3 +139,8 @@ D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Htm
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\HtmlAgilityPack.xml
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\Interop.WMPLib.dll
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\SoundOryc.Desktop.csproj.ResolveComReference.cache
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\Interop.WMPLib.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\SoundOryc.Desktop.csproj.ResolveComReference.cache
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\HtmlAgilityPack.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\HtmlAgilityPack.xml

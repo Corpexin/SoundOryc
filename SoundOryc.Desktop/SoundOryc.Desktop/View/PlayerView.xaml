@@ -35,9 +35,15 @@
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
 
-        <Slider x:Name="psTimeProgress" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,56" Value="0" Style="{DynamicResource FlatSlider}" Width="Auto" Foreground="#FFF79F8B" Background="#FF979797" BorderBrush="#FF979797" Height="Auto" Grid.RowSpan="2" IsMoveToPointEnabled="True"/>
-        <Label  x:Name="lblActualTime" Content="00:00" Grid.Column="0" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" HorizontalAlignment="Left" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="-1,4,0,41" Grid.RowSpan="2" Width="41"/>
-        <Label  x:Name="lblTotalTime" Content="00:00" Grid.Column="4" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="0,4,0,41" Grid.RowSpan="2" HorizontalAlignment="Right" Width="36"/>
+        <Slider x:Name="psTimeProgress" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="0,0,0,56" Value="{Binding sliderContent, Mode=OneWay}" Maximum="{Binding sliderMax, Mode=OneWay}" Style="{DynamicResource FlatSlider}" Width="Auto" Foreground="#FFF79F8B" Background="#FF979797" BorderBrush="#FF979797" Height="Auto" Grid.RowSpan="2" IsMoveToPointEnabled="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <cmd:EventToCommand Command="{Binding sliderClick}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Slider>
+        <Label  x:Name="lblActualTime" Content="{Binding actualTimeContent}" Grid.Column="0" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" HorizontalAlignment="Left" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="-1,4,0,41" Grid.RowSpan="2" Width="41"/>
+        <Label  x:Name="lblTotalTime" Content="{Binding totalTimeContent}" Grid.Column="4" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="0,4,0,41" Grid.RowSpan="2" HorizontalAlignment="Right" Width="36"/>
         <StackPanel Margin="20,5,0,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Width="auto">
             <Label x:Name="lblArtistName" Content="{Binding ArtistNameText}" FontFamily="Arial Unicode MS" FontWeight="Bold" Foreground="#FF898C88" FontSize="13" Height="25" Padding="2,5,5,2" HorizontalAlignment="Left"/>
             <Label  x:Name="lblSongName" Content="" FontFamily="Arial Unicode MS" Foreground="#FF898C88" HorizontalAlignment="Left" Padding="5,0"/>
