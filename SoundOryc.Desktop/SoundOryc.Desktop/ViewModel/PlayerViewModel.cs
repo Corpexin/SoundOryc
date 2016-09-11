@@ -16,6 +16,18 @@ namespace SoundOryc.Desktop.ViewModel
         Player player = new Player();
         DispatcherTimer timer = new DispatcherTimer();
 
+        public const string isPrevBtnEnabledPropertyName = "isPrevBtnEnabled";
+        private bool _isPrevBtnEnabled = false;
+
+        public const string isNextBtnEnabledPropertyName = "isNextBtnEnabled";
+        private bool _isNextBtnEnabled = false;
+
+        public const string volumeValuePropertyName = "volumeValue";
+        private int _volumeValue = 100;
+
+        public const string isSongPausedPropertyName = "isSongPaused";
+        private bool _isSongPaused = true;
+
         public const string actualTimeContentPropertyName = "actualTimeContent";
         private string _actualTimeContent = "00:00";
 
@@ -36,6 +48,86 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string sliderMaxPropertyName = "sliderMax";
         private int _sliderMax = 100;
+
+        public bool isPrevBtnEnabled
+        {
+            get
+            {
+                return _isPrevBtnEnabled;
+            }
+
+            set
+            {
+                if (_isPrevBtnEnabled == value)
+                {
+                    return;
+                }
+
+                _isPrevBtnEnabled = value;
+                RaisePropertyChanged(isPrevBtnEnabledPropertyName);
+            }
+        }
+
+
+        public bool isNextBtnEnabled
+        {
+            get
+            {
+                return _isNextBtnEnabled;
+            }
+
+            set
+            {
+                if (_isNextBtnEnabled == value)
+                {
+                    return;
+                }
+
+                _isNextBtnEnabled = value;
+                RaisePropertyChanged(isNextBtnEnabledPropertyName);
+            }
+        }
+
+
+        public int volumeValue
+        {
+            get
+            {
+                return _volumeValue;
+            }
+
+            set
+            {
+                if (_volumeValue == value)
+                {
+                    return;
+                }
+
+                _volumeValue = value;
+                RaisePropertyChanged(volumeValuePropertyName);
+                player.volume = value;
+            }
+        }
+
+
+        public bool isSongPaused
+        {
+            get
+            {
+                return _isSongPaused;
+            }
+
+            private set
+            {
+                if (_isSongPaused == value)
+                {
+                    return;
+                }
+
+                _isSongPaused = value;
+                RaisePropertyChanged(isSongPausedPropertyName);
+            }
+        }
 
 
         public string actualTimeContent
@@ -182,6 +274,27 @@ namespace SoundOryc.Desktop.ViewModel
 
 
 
+        public RelayCommand prevSong
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    player.previousSong();
+                });
+            }
+        }
+
+        public RelayCommand nextSong
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    player.nextSong();
+                });
+            }
+        }
 
         public RelayCommand openCloseQueue
         {
@@ -223,27 +336,7 @@ namespace SoundOryc.Desktop.ViewModel
                     }
                 });
             }
-        }
-
-        
-        public RelayCommand volumenChange
-        {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    if (IsVolumeMuted)
-                    {
-                        IsVolumeMuted = false;
-                    }
-                    else
-                    {
-                        IsVolumeMuted = true;
-                    }
-                });
-            }
-        }
-       
+        }       
 
         public RelayCommand<MouseButtonEventArgs> sliderClick
         {
@@ -260,6 +353,50 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public RelayCommand pausePlay
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (!player.isFinished)
+                    {
+                        if (isSongPaused)
+                        {
+                            isSongPaused = false;
+                            player.resumeSong();
+                        }
+                        else
+                        {
+                            isSongPaused = true;
+                            player.pauseSong();
+                        }
+                    }
+                });
+            }
+        }
+
+        public RelayCommand muteUnmuteSong
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (IsVolumeMuted)
+                    {
+                        IsVolumeMuted = false;
+                        player.mute = true;
+                    }
+                    else
+                    {
+                        IsVolumeMuted = true;
+                        player.mute = false;
+                    }
+                });
+            }
+        }
+
+
         public PlayerViewModel()
         {
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -275,15 +412,12 @@ namespace SoundOryc.Desktop.ViewModel
                 {
                     player.playSong(await Netease.getInfoSong(message));
                 }
+                isSongPaused = false;
                 timer.Start();
             });
            
         }
 
-        private void changeSliderValues()
-        {
-            
-        }
 
         private void tick(object sender, EventArgs e)
         {

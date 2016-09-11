@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\
+D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\
 SoundOryc.Desktop
 none
 false
 DEBUG;TRACE
-C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\App.xaml
+D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\App.xaml
 101575422737
 
 32630951466
-77885352876
+77-1800680256
 View\ContentView.xaml;View\CustomAccent.xaml;View\LoginDialogView.xaml;View\NavigationView.xaml;View\PlayerView.xaml;View\QueueView.xaml;View\RegisterDialogView.xaml;View\Resources.xaml;View\MainWindow.xaml;View\SidebarView.xaml;
 
 False

@@ -25,5 +25,9 @@ namespace SoundOryc.Desktop.View
             InitializeComponent();
         }
 
+        private void psVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }
