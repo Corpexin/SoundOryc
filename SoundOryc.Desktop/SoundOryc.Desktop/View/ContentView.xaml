@@ -47,6 +47,9 @@
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <command:EventToCommand Command="{Binding selectSong}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <command:EventToCommand  Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems, ElementName=lvSongs}" />
+                </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.View >
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">

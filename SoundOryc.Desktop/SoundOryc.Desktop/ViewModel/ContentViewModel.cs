@@ -5,6 +5,7 @@ using SoundOryc.Desktop.Model;
 using SoundOryc.Desktop.Services;
 using SoundOryc.Desktop.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,9 +33,13 @@ namespace SoundOryc.Desktop.ViewModel
         public const string lblPageContentPropertyName = "lblPageContent";
         private string _lblPageContent = "1";
 
+        private List<Song> selectedItems = new List<Song>();
+
+
         public const string songsListPropertyName = "songsList";
         private ObservableCollection<Song> _songsList = new ObservableCollection<Song>();
 
+        
 
         public bool isContentVisible
         {
@@ -239,6 +244,42 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+        public RelayCommand<IList> SelectionChangedCommand { get; private set; }
+
+
+
+        public RelayCommand<MouseButtonEventArgs> addQueue
+        {
+            get
+            {
+                return new RelayCommand<MouseButtonEventArgs>((e) => {
+                    //ADD THE LIST SELECTED ITEMS TO QUEUE WITH SEND
+                });
+            }
+        }
+
+        public RelayCommand addPlaylist
+        {
+            get
+            {
+                return new RelayCommand(() => {
+                    
+                });
+            }
+        }
+
+        public RelayCommand createNew
+        {
+            get
+            {
+                return new RelayCommand(() => {
+                    
+                });
+            }
+        }
+
+
+
         public ContentViewModel()
         {
             Messenger.Default.Register<ObservableCollection<MediaData>>(this, "fillContentList",  message =>
@@ -255,6 +296,18 @@ namespace SoundOryc.Desktop.ViewModel
                 isContentVisible = true;
             });
 
+
+            SelectionChangedCommand = new RelayCommand<IList>(items =>
+            {
+                if (items != null)
+                {
+                    selectedItems.Clear();
+                    foreach(Song s in items)
+                    {
+                        selectedItems.Add(s);
+                    }
+                }
+            });
 
         }
 

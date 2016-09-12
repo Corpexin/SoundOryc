@@ -25,6 +25,24 @@ namespace SoundOryc.Desktop.View
             InitializeComponent();
         }
 
+        private void addQueue_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = lvSongs.SelectedItems;
+            int cont = 0;
+            /**
+            foreach (Song selectedItem in selectedItems)
+            {
+                queueSongList.Add(selectedItem);
+                if (cont == 0)
+                {
+                    currentSong = queueSongList.Count - 1; // POSITIONATE ON THAT ELEMENT
+                }
+                cont++;
+            }
+            addListToQueue();
+            playSelectedSong();
+    **/
+        }
 
     }
 }
