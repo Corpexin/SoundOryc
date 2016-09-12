@@ -49,6 +49,52 @@ namespace SoundOryc.Desktop.ViewModel
         public const string sliderMaxPropertyName = "sliderMax";
         private int _sliderMax = 100;
 
+        public const string artistNamePropertyName = "artistName";
+        private string _artistName = "";
+
+        public const string songNamePropertyName = "songName";
+        private string _songName = "";
+
+
+
+        public string songName
+        {
+            get
+            {
+                return _songName;
+            }
+
+            set
+            {
+                if (_songName == value)
+                {
+                    return;
+                }
+
+                _songName = value;
+                RaisePropertyChanged(songNamePropertyName);
+            }
+        }
+
+        public string artistName
+        {
+            get
+            {
+                return _artistName;
+            }
+
+            set
+            {
+                if (_artistName == value)
+                {
+                    return;
+                }
+
+                _artistName = value;
+                RaisePropertyChanged(artistNamePropertyName);
+            }
+        }
+
         public bool isPrevBtnEnabled
         {
             get
@@ -273,29 +319,34 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
-
+        //plays previous song if posible
         public RelayCommand prevSong
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    player.previousSong();
+                    timer.Stop();
+                    Messenger.Default.Send("", "prevSongAvailable");
+
                 });
             }
         }
 
+        //plays next song if possible
         public RelayCommand nextSong
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    player.nextSong();
+                    timer.Stop();
+                    Messenger.Default.Send("", "nextSongAvailable");
                 });
             }
         }
 
+        //Open/close queue window
         public RelayCommand openCloseQueue
         {
             get
@@ -315,7 +366,7 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
         
-
+        //changes the reproduction mode Repeat All/Repeat None/Shuffle
         public RelayCommand changePlayMode
         {
             get
@@ -338,6 +389,7 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }       
 
+        //changes the reproduction time to the one clicked in slider (should be in code behind probably)
         public RelayCommand<MouseButtonEventArgs> sliderClick
         {
             get
@@ -353,6 +405,7 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        //Pause or resume the song
         public RelayCommand pausePlay
         {
             get
@@ -376,6 +429,7 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        //Mute/Unmute the volume
         public RelayCommand muteUnmuteSong
         {
             get
@@ -399,9 +453,11 @@ namespace SoundOryc.Desktop.ViewModel
 
         public PlayerViewModel()
         {
+            //creates a delay of 1 second for visual effect on slider
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += new EventHandler(tick);
 
+            //receive a song and plays it. 
             Messenger.Default.Register<Song>(this, "playSong", async message =>
             {
                 if (message.source == Song.Source.Mp3WithMe)
@@ -412,15 +468,30 @@ namespace SoundOryc.Desktop.ViewModel
                 {
                     player.playSong(await Netease.getInfoSong(message));
                 }
+                artistName = message.artistName;
+                songName = message.songName;
                 isSongPaused = false;
                 timer.Start();
             });
-           
+
+            //set nextButton enabled/disabled
+            Messenger.Default.Register<bool>(this, "nextBtn",  message =>
+            {
+                isNextBtnEnabled = message;
+            });
+
+            //set prevButton enabled/disabled
+            Messenger.Default.Register<bool>(this, "prevBtn", message =>
+            {
+                isPrevBtnEnabled = message;
+            });
+
         }
 
-
+        //every second this method is executed (only if song is playing)
         private void tick(object sender, EventArgs e)
         {
+            //changes song actual time and total time
             if(player.timeActualCad == "" || player.timeActualCad == null)
             {
                 actualTimeContent = "00:00";
@@ -431,13 +502,16 @@ namespace SoundOryc.Desktop.ViewModel
             }
             totalTimeContent = player.mediaActual.durationString;
 
+            //change slider values
             sliderMax = (int)player.mediaActual.duration;
             double percentage = (player.timeActual / player.mediaActual.duration);
             sliderContent = (int)(percentage * sliderMax);
            
+            //if the player stop playing song, the timer stop executing and check if next song can be played
             if (player.isStopped)
             {
                 timer.Stop();
+                Messenger.Default.Send("", "nextSongAvailable");
             }
         }
     }

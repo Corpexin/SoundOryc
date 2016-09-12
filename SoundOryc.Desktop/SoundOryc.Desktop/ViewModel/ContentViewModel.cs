@@ -22,7 +22,7 @@ namespace SoundOryc.Desktop.ViewModel
         private bool _isContentVisible = false;
 
         public const string songsEnabledPropertyName = "songsEnabled";
-        private bool _songsEnabled = true;
+        private bool _songsEnabled = false;
 
         public const string artistsEnabledPropertyName = "artistsEnabled";
         private bool _artistsEnabled = true;
@@ -228,20 +228,7 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
-        public RelayCommand<MouseButtonEventArgs> selectSong
-        {
-            get
-            {
-                return new RelayCommand<MouseButtonEventArgs>((e) => {
-                    Song item = (Song)((FrameworkElement)e.OriginalSource).DataContext;
-                    if (item != null)
-                    {
-                        Messenger.Default.Send(item, "addSongToQueue");
-                        Messenger.Default.Send(item, "playSong");
-                    }
-                });
-            }
-        }
+
 
 
         public RelayCommand<IList> SelectionChangedCommand { get; private set; }
@@ -253,7 +240,10 @@ namespace SoundOryc.Desktop.ViewModel
             get
             {
                 return new RelayCommand<MouseButtonEventArgs>((e) => {
-                    //ADD THE LIST SELECTED ITEMS TO QUEUE WITH SEND
+                   
+                        Messenger.Default.Send(selectedItems, "addSongToQueue");
+                    
+
                 });
             }
         }

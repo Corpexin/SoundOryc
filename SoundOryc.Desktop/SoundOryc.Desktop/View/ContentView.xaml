@@ -45,7 +45,7 @@
         <ListView x:Name="lvSongs" Background="Transparent"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <command:EventToCommand Command="{Binding selectSong}" PassEventArgsToCommand="True"/>
+                    <command:EventToCommand Command="{Binding addQueue}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionChanged">
                     <command:EventToCommand  Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems, ElementName=lvSongs}" />
