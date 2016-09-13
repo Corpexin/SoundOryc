@@ -103,6 +103,7 @@
     <Compile Include="Utilities\JsonEncDec.cs" />
     <Compile Include="Model\MediaData.cs" />
     <Compile Include="Utilities\Player.cs" />
+    <Compile Include="Utilities\RandomListGenerator.cs" />
     <Compile Include="Utilities\Search.cs" />
     <Compile Include="ViewModel\ContentViewModel.cs" />
     <Compile Include="ViewModel\LoginDialogViewModel.cs" />

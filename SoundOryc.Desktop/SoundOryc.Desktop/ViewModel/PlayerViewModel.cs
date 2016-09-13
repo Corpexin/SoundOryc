@@ -366,7 +366,7 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
         
-        //changes the reproduction mode Repeat All/Repeat None/Shuffle
+        //changes the reproduction mode Repeat All/Repeat one/Shuffle
         public RelayCommand changePlayMode
         {
             get
@@ -385,6 +385,8 @@ namespace SoundOryc.Desktop.ViewModel
                     {
                         selectedPlayModeOption = "rall";
                     }
+                    Messenger.Default.Send(selectedPlayModeOption, "changePlayMode");
+                
                 });
             }
         }       

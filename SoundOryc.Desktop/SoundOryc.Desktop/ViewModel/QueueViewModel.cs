@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using SoundOryc.Desktop.Model;
+using SoundOryc.Desktop.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,9 @@ namespace SoundOryc.Desktop.ViewModel
     {
         public const string songsQueuePropertyName = "songsQueue";
         public ObservableCollection<Song> _songsQueue = new ObservableCollection<Song>();
+        ObservableCollection<Song> randomList = new ObservableCollection<Song>();
         public int currentSong=0;
+        string playmode = "rall";
 
         public ObservableCollection<Song> songsQueue
         {
@@ -77,12 +80,22 @@ namespace SoundOryc.Desktop.ViewModel
             
             Messenger.Default.Register<string>(this, "nextSongAvailable", message =>
             {
-                if(currentSong < songsQueue.Count - 1) //if its not the last one
+                if(playmode != "rone") //repeat all & shuffle
                 {
-                    currentSong++;
-                    Messenger.Default.Send(songsQueue[currentSong], "playSong");
-                    checkNextPrevEnabled();
+                    if (currentSong < songsQueue.Count - 1) //if its not the last one
+                    {
+                        currentSong++;
+                       
+                    }
+                    else 
+                    {
+                        currentSong = 0;
+                    }
                 }
+
+                Messenger.Default.Send(songsQueue[currentSong], "playSong");
+                checkNextPrevEnabled();
+
 
             });
 
@@ -125,6 +138,31 @@ namespace SoundOryc.Desktop.ViewModel
                 }
                 checkNextPrevEnabled();
 
+            });
+
+            Messenger.Default.Register<string>(this, "changePlayMode", message =>
+            {
+                playmode = message;
+                if(playmode == "shuffle")
+                {
+                    randomList.Clear();
+                    foreach (Song s in songsQueue)
+                    {
+                        randomList.Add(s);
+                    }
+                    songsQueue.Shuffle();
+                }
+                else
+                {
+                    if(randomList.Count > 0)
+                    {
+                        songsQueue.Clear();
+                        foreach (Song s in randomList)
+                        {
+                            songsQueue.Add(s);
+                        }
+                    }
+                }
             });
         }
     }
