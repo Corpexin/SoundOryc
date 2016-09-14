@@ -41,7 +41,7 @@
             </Grid.RowDefinitions>
 
             <Label Margin="20, 0, 0, 0" Content="Email"  Grid.Row="0" Foreground="#FF898C88" />
-            <TextBox x:Name="tbRUsername" Style="{StaticResource TextBoxStyle1}" Grid.Row="1"  Text=""  Margin="10,0,10,10"   TextWrapping="WrapWithOverflow" FontSize="13"  ToolTip="write email" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" BorderBrush="#FF767676" CaretBrush="#FF999999" Foreground="#FF787878" SelectionBrush="#FF2B323A" >
+            <TextBox x:Name="tbRUsername" Style="{StaticResource TextBoxStyle1}" Grid.Row="1"  Text="{Binding emailText}"  Margin="10,0,10,10"   TextWrapping="WrapWithOverflow" FontSize="13"  ToolTip="write email" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" BorderBrush="#FF767676" CaretBrush="#FF999999" Foreground="#FF787878" SelectionBrush="#FF2B323A" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="12"/>
@@ -49,15 +49,15 @@
                 </TextBox.Resources>
             </TextBox>
             <Label Margin="20, 0, 0, 0" Content="Password"  Grid.Row="2" Foreground="#FF898C88" />
-            <PasswordBox x:Name="tbRPassword"  Style="{StaticResource PassBoxStyle1}" Grid.Row="3"  Margin="10,0,10,10"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" Foreground="#FF898C88" />
+            <PasswordBox x:Name="tbRPassword"  Style="{StaticResource PassBoxStyle1}" Grid.Row="3"  Margin="10,0,10,10" PasswordChanged="PasswordBox_PasswordChanged"  FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" Foreground="#FF898C88" />
             <Label Margin="20, 0, 0, 0" Content="Retype password"  Grid.Row="4" Foreground="#FF898C88" />
-            <PasswordBox x:Name="tbRePassword" Style="{StaticResource PassBoxStyle1}" Grid.Row="6"  Margin="10,0,10,32" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="Rewrite password" VerticalContentAlignment="Stretch" Padding="20,1,20,4" Background="#2b323a" Grid.RowSpan="2" Foreground="#FF898C88" />
+            <PasswordBox x:Name="tbRePassword" Style="{StaticResource PassBoxStyle1}" Grid.Row="6"  Margin="10,0,10,32" PasswordChanged="rePasswordBox_PasswordChanged" controls:TextBoxHelper.ClearTextButton="False"   FontSize="13" ToolTip="Rewrite password" VerticalContentAlignment="Stretch" Padding="20,1,20,4" Background="#2b323a" Grid.RowSpan="2" Foreground="#FF898C88" />
 
 
-            <Label x:Name="lblRInfoRL" Grid.Row="5" Foreground="#FF898C88"  Margin="0,25,0,4" Content=""/>
+            <Label x:Name="lblRInfoRL" Grid.Row="5" Foreground="#FF898C88"  Margin="10,25,10,4" Content="{Binding infoText}"/>
         </Grid>
     </dialogs:CustomDialog.Content>
     <dialogs:CustomDialog.DialogBottom>
-        <Button x:Name="btnRRegister" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding closeRegisterDialog}" />
+        <Button x:Name="btnRRegister" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding registerAcc}" />
     </dialogs:CustomDialog.DialogBottom>
 </dialogs:CustomDialog>

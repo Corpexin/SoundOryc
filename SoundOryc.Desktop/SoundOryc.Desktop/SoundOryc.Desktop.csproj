@@ -102,6 +102,7 @@
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Utilities\JsonEncDec.cs" />
     <Compile Include="Model\MediaData.cs" />
+    <Compile Include="Utilities\PasswordComparator.cs" />
     <Compile Include="Utilities\Player.cs" />
     <Compile Include="Utilities\RandomListGenerator.cs" />
     <Compile Include="Utilities\Search.cs" />
