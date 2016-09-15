@@ -101,19 +101,17 @@ namespace SoundOryc.Desktop.ViewModel
                             }
                             else
                             {
-                                bool success = await firebase.createUser(emailText, securePassword);
+                                bool success = await FirebaseC.createUser(emailText, securePassword);
                                 if (success)
                                 {
                                     infoText = "User created successfully. Write your email (username) and password.";
                                     Messenger.Default.Send(true, "closeRegister");
-                                    //send
-                                    openLogin("User created successfully.");
+                                    Messenger.Default.Send(true, "openInfoDialog"); 
                                 }
                                 else
                                 {
                                     infoText = "";
-                                    //SEND
-                                    await this.ShowMessageAsync("Error. Unable to create account", "Possible reasons:\n-Cannot connect to servers\n-Email is already registered\n-Email is not written correctly"); //Dialog for name
+                                    Messenger.Default.Send(false, "openInfoDialog");
                                 }
                             }
 

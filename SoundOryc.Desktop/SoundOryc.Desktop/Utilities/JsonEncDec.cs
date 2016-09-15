@@ -130,5 +130,45 @@ namespace SoundOryc.Desktop.Utilities
 
             return result;
         }
+
+        internal static List<PlayList> decodeUserInfo(string json)
+        {
+            Song.Source src;
+
+            JObject jObject = JObject.Parse(json);
+
+            //get the playLists list
+            List<PlayList> listOfPlaylist = new List<PlayList>();
+
+            foreach (JToken playList in jObject.Children())
+            {
+                List<Song> songs = new List<Song>();
+                foreach (JToken songEnc in playList.Children().Children())
+                {
+
+                    if (songEnc.HasValues)
+                    {
+                        if (songEnc["source"].ToString() == "NetEase")
+                        {
+                            src = Song.Source.NetEase;
+                        }
+                        else
+                        {
+                            src = Song.Source.Mp3WithMe;
+                        }
+                        Song s = new Song(songEnc["idSong"].ToString(), songEnc["songName"].ToString(), songEnc["artistName"].ToString(), songEnc["duration"].ToString(), songEnc["uri"].ToString(), src);
+                        songs.Add(s);
+                    }
+
+
+                }
+
+                PlayList playListDec = new PlayList(((JProperty)playList).Name, songs); //TODO: controlar que el nombre son solo letras o numeros
+                listOfPlaylist.Add(playListDec);
+            }
+
+
+            return listOfPlaylist;
+        }
     }
 }

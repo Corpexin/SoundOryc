@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using SoundOryc.Desktop.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,18 @@ namespace SoundOryc.Desktop.View
         {
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
+
+            Messenger.Default.Register<bool>(this, "openInfoDialog", async message =>
+            {
+                if (message)
+                {
+                    await this.ShowMessageAsync("User was created successfully.", "");
+                }
+                else
+                {
+                    await this.ShowMessageAsync("Error. Unable to create account.", "Possible reasons:\n-Cannot connect to servers\n-Email is already registered\n-Email is not written correctly");
+                }
+            });
         }
     }
 }
