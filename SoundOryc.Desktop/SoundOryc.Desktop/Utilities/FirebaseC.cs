@@ -86,16 +86,16 @@ namespace SoundOryc.Desktop.Utilities
 
             try
             {
-                FirebaseAuthLink auth = await authProvider.SignInWithEmailAndPasswordAsync(email, SecureStringToString(password)); //SI PASA DE AQUI ES QUE EL USUARIO EXISTE
+                FirebaseAuthLink auth = await authProvider.SignInWithEmailAndPasswordAsync(email, SecureStringToString(password)); 
                 
 
-                try //AHORA COMPROBAMOS SI EL USUARIO TIENE LISTA DE REP O NO (SI ESTA EN LA BASE DE DATOS)
+                try 
                 {
-                    FirebaseResponse response = await _client.GetAsync("users/" + auth.User.LocalId); //PUEDE QUE AQUI NO DEVUELVA NADA PORQUE EL USUARIO NO TENGA NINGUNA LISTA AUN
+                    FirebaseResponse response = await _client.GetAsync("users/" + auth.User.LocalId); 
 
                     if (!(response.Body == "null"))
                     {
-                        List<PlayList> listOfPlayLists = JsonEncDec.decodeUserInfo(response.Body); //TODO: CAMBIAR TODO ESTO PARA RECUPERAR LA INFO SIN LA PASSWORD
+                        List<PlayList> listOfPlayLists = JsonEncDec.decodeUserInfo(response.Body); 
                         if (listOfPlayLists != null)
                         {
                             user = new Model.User(auth.User.LocalId, email, password, listOfPlayLists);
@@ -142,8 +142,7 @@ namespace SoundOryc.Desktop.Utilities
                 values.Add("artistName", song.artistName);
                 values.Add("songName", song.songName);
                 values.Add("source", "" + song.source);
-                //if (song.source == Core.Source.NetEase)
-                //  song = await Netease.getInfoSong(song);
+
                 if (song.uri == null)
                 {
                     values.Add("uri", "empty");

@@ -118,12 +118,12 @@ namespace SoundOryc.Desktop.ViewModel
                         }
                         else
                         {
-                            //lblInfoRL.Content = "Both password are not the same.";
+                            infoText = "Both password are not the same.";
                         }
                     }
                     else
                     {
-                        //lblInfoRL.Content = "Username or Password are empty.";
+                        infoText = "Username or Password are empty.";
                     }
 
                 });

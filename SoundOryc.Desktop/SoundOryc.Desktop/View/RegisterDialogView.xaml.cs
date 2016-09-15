@@ -30,7 +30,7 @@ namespace SoundOryc.Desktop.View
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
-            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
+            { ((dynamic)this.DataContext).securePassword = ((PasswordBox)sender).SecurePassword; }
         }
 
         private void rePasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
