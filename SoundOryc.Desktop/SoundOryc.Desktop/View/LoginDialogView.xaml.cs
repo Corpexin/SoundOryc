@@ -25,5 +25,11 @@ namespace SoundOryc.Desktop.View
         {
             InitializeComponent();
         }
+
+        private void PasswordBoxL_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).secureLPassword = ((PasswordBox)sender).SecurePassword; }
+        }
     }
 }

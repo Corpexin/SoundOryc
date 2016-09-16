@@ -11,6 +11,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary  Source="Resources.xaml" />
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="boolToVis" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -30,11 +33,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"  Grid.Column="0" Grid.Row="0">
-            <Button  x:Name="btnRegister" Margin="15,0,10,0" Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin" Content="register"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding openRegister}"/>
-            <Button  x:Name="btnLogin" Content="login" Margin="0"  Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding openLogin}"/>
+            <Button  x:Name="btnRegister" Margin="15,0,10,0" Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin" Visibility="{Binding registerVisible, Converter={StaticResource boolToVis}}" Content="register"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding openRegister}"/>
+            <Button  x:Name="btnLogin" Content="login" Margin="0"  Style="{StaticResource ButtonTextStyle}" FontSize="15" FontWeight="Thin" Visibility="{Binding loginVisible, Converter={StaticResource boolToVis}}"  ClickMode="Press" Width="80" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding openLogin}"/>
         </StackPanel>
 
-        <Label  Grid.Column="0" Grid.Row="0" x:Name="lblUsername"  Margin="0,20, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="Username" Visibility="Collapsed"></Label>
+        <Label  Grid.Column="0" Grid.Row="0" x:Name="lblUsername"  Margin="0,20, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="{Binding usernameText}" Visibility="{Binding usernameVisible, Converter={StaticResource boolToVis}}"></Label>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <Image Width="12" Height="12" Source="/SoundOryc.Desktop;component/Resources/settings.png" Margin="56, 1, 0, 0" />
             <Label  x:Name="lblSettings" Style="{StaticResource labelStyle}"  Margin="0,0, 0, 0" Padding="10,10,10,10" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top"  Content="Settings"  Visibility="Visible"></Label>
@@ -44,9 +47,9 @@
             <Image Width="12" Height="12" Source="/SoundOryc.Desktop;component/Resources/info.png" Margin="56, 1, 0, 0" />
             <Label x:Name="lblAbout"  Style="{StaticResource labelStyle}" Margin="0,0, 0, 0" Padding="10,10,10,10" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top"  Content="About"  Visibility="Visible"></Label>
         </StackPanel>
-        <Label x:Name="lblLogout" Grid.Column="0" Grid.Row="3"   Margin="0,0, 0, 0" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#898c88" Content="Logout" Visibility="Collapsed"></Label>
-        <Label  x:Name="lblPlayLists" Grid.Column="0" Grid.Row="4"   Margin="0,0, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="PlayLists" Visibility="Collapsed"></Label>
-        <ListView  x:Name="lvPlayLists" Margin="20,0,0,0"  Grid.Column="0" Grid.Row="5"  Background="Transparent"  BorderBrush="{x:Null}"  Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle2}" SelectionMode="Single"  >
+        <Label x:Name="lblLogout" Grid.Column="0" Grid.Row="3"   Margin="0,0, 0, 0" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#898c88" Content="Logout" Visibility="{Binding logoutVisible, Converter={StaticResource boolToVis}}"></Label>
+        <Label  x:Name="lblPlayLists" Grid.Column="0" Grid.Row="4"   Margin="0,0, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="PlayLists" Visibility="{Binding lblPlaylistsVisible, Converter={StaticResource boolToVis}}"></Label>
+        <ListView  x:Name="lvPlayLists" Margin="20,0,0,0"  Grid.Column="0" Grid.Row="5"  Background="Transparent"  BorderBrush="{x:Null}"  Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle2}" SelectionMode="Single" ItemsSource="{Binding playlistsList}" >
             <ListView.View>
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  Width="150" DisplayMemberBinding="{Binding namePl}" />
