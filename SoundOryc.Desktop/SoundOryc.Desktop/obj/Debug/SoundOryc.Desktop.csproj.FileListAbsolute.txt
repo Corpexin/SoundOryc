@@ -157,3 +157,16 @@ D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Mic
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Extensions.xml
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\obj\Debug\SoundOryc.Desktop.csproj.App.config
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Firebase.Auth.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\FireSharp.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\corpe\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\bin\Debug\System.Net.Http.Primitives.xml

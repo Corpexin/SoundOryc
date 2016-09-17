@@ -427,15 +427,16 @@
     <Style  x:Key="ButtonSelectSearchType" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="#898c88"/>
         <Setter Property="Background" Value="Transparent"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="bg2" Background="{TemplateBinding Background}" Padding="0,0,0,0"  BorderBrush="Transparent" BorderThickness="0">
+                    <Border x:Name="bg2" Background="{TemplateBinding Background}" Padding="0,0,0,0"  BorderBrush="Transparent" BorderThickness="1, 1, 1, 0">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver"  Value="True">
-                            <Setter Property="BorderBrush"  TargetName="bg2"  Value="#f79f8b"/>
+                        <Trigger Property="IsEnabled"  Value="False">
+                            <Setter Property="BorderBrush"  TargetName="bg2"  Value="#898c88"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -446,8 +447,7 @@
                 <Setter Property="Foreground"  Value="#f79f8b"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#898c88"/>
-                <Setter Property="Foreground" Value="#2b323a"/>
+                <Setter Property="Background" Value="#2b323a"/>
             </Trigger>
         </Style.Triggers>
     </Style>
