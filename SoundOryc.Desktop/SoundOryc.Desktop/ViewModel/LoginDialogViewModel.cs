@@ -75,15 +75,25 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public RelayCommand enterPress
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(true, "closeLogin");
+                });
+            }
+        }
+
         public RelayCommand loginAcc
         {
             get
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!(emailLText == "") && (secureLPassword.Length != 0)) //check if textbox are not empty
+                    if (!(emailLText == "") && (secureLPassword != null) && (secureLPassword.Length != 0)) //check if textbox are not empty
                     {
-                        //WHO THE FUCK CONTROLS THE USER... sidebar?
                         User user = await FirebaseC.login(emailLText, secureLPassword);
                        
                         if (user != null)

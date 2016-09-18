@@ -299,6 +299,30 @@ namespace SoundOryc.Desktop.ViewModel
                 }
             });
 
+
+            Messenger.Default.Register<Object[]>(this, "saveSongsFirebase", async message =>
+            {
+                List<Song> auxL = new List<Song>();
+
+                foreach (Song s in selectedItems)
+                {
+                    s.numList = null;
+                    auxL.Add(s);
+                }
+                bool x = await FirebaseC.saveSong(auxL, (PlayList)message[0], (User)message[1]);
+                if (x)
+                {
+                    Messenger.Default.Send(auxL, "addSongsToPlaylists");
+                }
+                else
+                {
+                    string[] ms = new string[2];
+                    ms[1] = "Ethernet connection lost";
+                    Messenger.Default.Send(ms, "openInfoDialog");
+                }
+            });
+
+
         }
 
 

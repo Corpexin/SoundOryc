@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using SoundOryc.Desktop.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,29 +23,82 @@ namespace SoundOryc.Desktop.View
     /// </summary>
     public partial class ContentView : UserControl
     {
+        private List<MenuItem> menuItems = new List<MenuItem>();
+
         public ContentView()
         {
             InitializeComponent();
+            saveMenuItems();
+
+            Messenger.Default.Register<bool>(this, "resetContextMenu", message =>
+            {
+                resetContextMenu();
+            });
+
+            Messenger.Default.Register<ObservableCollection<PlayList>>(this, "loadPlaylistsContextMenu", message =>
+            {
+                loadPlaylistsContextMenu(message);
+            });
         }
 
-        private void addQueue_Click(object sender, RoutedEventArgs e)
+        private void saveMenuItems()
         {
-            var selectedItems = lvSongs.SelectedItems;
-            int cont = 0;
-            /**
-            foreach (Song selectedItem in selectedItems)
+            menuItems.Clear();
+            foreach (MenuItem mItem in ((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items)
             {
-                queueSongList.Add(selectedItem);
-                if (cont == 0)
-                {
-                    currentSong = queueSongList.Count - 1; // POSITIONATE ON THAT ELEMENT
-                }
-                cont++;
+                menuItems.Add(mItem);
             }
-            addListToQueue();
-            playSelectedSong();
-    **/
         }
+
+
+        //Method for reseting the listview items context menu
+        private void resetContextMenu()
+        {
+            loadDefaultContextMenu();
+            MenuItem addPl = (MenuItem)((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items[1];
+            MenuItem cn = (MenuItem)addPl.Items[0];
+            addPl.Items.Clear();
+            addPl.Items.Add(cn);
+        }
+
+        private void loadDefaultContextMenu()
+        {
+            ContextMenu menuContext = (ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value;
+            menuContext.Items.Clear();
+            foreach (MenuItem mItem in menuItems)
+            {
+                menuContext.Items.Add(mItem);
+            }
+        }
+
+        //load into context menu the playlists loaded from the account
+        private void loadPlaylistsContextMenu(ObservableCollection<PlayList> playlists)
+        {
+            if (playlists.Count != 0)
+            {
+                MenuItem addPl = (MenuItem)((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items[1];
+
+                foreach (PlayList pl in playlists)
+                {
+                    MenuItem it = new MenuItem();
+                    it.Header = pl.namePl;
+                    it.Click += new RoutedEventHandler(addPlaylist_Click);
+                    addPl.Items.Add(it);
+                }
+            }
+        }
+
+
+        //Handler for adding a song to a playlist
+        private  void addPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvSongs.SelectedItems != null)
+            {
+                Messenger.Default.Send((string)((MenuItem)sender).Header, "bindPlaylistToContextMenu");
+            }
+        }
+
+
 
     }
 }

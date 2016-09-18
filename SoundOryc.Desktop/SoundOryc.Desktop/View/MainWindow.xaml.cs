@@ -27,16 +27,9 @@ namespace SoundOryc.Desktop.View
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
             FirebaseC.loadFirebase();
-            Messenger.Default.Register<bool>(this, "openInfoDialog", async message =>
+            Messenger.Default.Register<string[]>(this, "openInfoDialog", async message =>
             {
-                if (message)
-                {
-                    await this.ShowMessageAsync("User was created successfully.", "");
-                }
-                else
-                {
-                    await this.ShowMessageAsync("Error. Unable to create account.", "Possible reasons:\n-Cannot connect to servers\n-Email is already registered\n-Email is not written correctly");
-                }
+                await this.ShowMessageAsync(message[0], message[1]);
             });
         }
     }

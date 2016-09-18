@@ -6,11 +6,14 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      xmlns:command="http://www.galasoft.ch/mvvmlight"
                       DataContext="{Binding Login, Source={StaticResource Locator}}"
                       d:DesignHeight="250"
                       d:DesignWidth="500"
                       mc:Ignorable="d"
                       >
+
     <dialogs:CustomDialog.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -31,6 +34,7 @@
 
 
         <Grid Margin="-40,-50,-40,17" HorizontalAlignment="Center" Width="330">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

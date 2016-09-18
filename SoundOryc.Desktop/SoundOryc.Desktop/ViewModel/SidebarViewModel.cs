@@ -19,6 +19,8 @@ namespace SoundOryc.Desktop.ViewModel
 
         public const string playlistsListtPropertyName = "playlistsList";
         private ObservableCollection<PlayList> _playlistsList = new ObservableCollection<PlayList>();
+        private PlayList contextPlaylistSelected;
+        private User user = null;
 
         public const string registerVisiblePropertyName = "registerVisible";
         private bool _registerVisible = true;
@@ -220,6 +222,7 @@ namespace SoundOryc.Desktop.ViewModel
         {
             Messenger.Default.Register<User>(this, "UserLogged", message =>
             {
+                user = message;
                 //load playlists
                 if (message.playLists != null)
                 {
@@ -230,8 +233,7 @@ namespace SoundOryc.Desktop.ViewModel
                     }
                 }
 
-                //send to sidebar
-                //change button login/register for user name
+                //changes visibility of elements in sidebar
                 usernameText = message.email;
                 registerVisible = false;
                 loginVisible = false;
@@ -239,9 +241,36 @@ namespace SoundOryc.Desktop.ViewModel
                 logoutVisible = true;
                 lblPlaylistsVisible = true;
 
-                //add playlists into contextMenu. NOT YET MY FRIEND. SEND TO CONTENT???
-                //resetContextMenu();
-                //loadPlaylistsMenuItems();
+                //add playlists into contextMenu.
+                Messenger.Default.Send(true, "resetContextMenu");
+                Messenger.Default.Send(playlistsList, "loadPlaylistsContextMenu");
+
+            });
+
+            Messenger.Default.Register<string>(this, "bindPlaylistToContextMenu", message =>
+            {
+                foreach (PlayList pl in playlistsList)
+                {
+                    if (pl.namePl == message)
+                    {
+                        contextPlaylistSelected = pl;
+                        Object[] ar = new Object[2];
+                        ar[0] = pl;
+                        ar[1] = user;
+                        Messenger.Default.Send(ar, "saveSongsFirebase");
+                    }
+                }
+            });
+
+            Messenger.Default.Register<List<Song>>(this, "addSongsToPlaylists", message =>
+            {
+                foreach (Song s in message)
+                {
+                    s.numList = null;
+                    contextPlaylistSelected.songs.Add(s);
+                }
+
+                //SUPPOSED TO ADD HERE RESETCONTEXTMENU() AND LOADPL..()
             });
 
         }
