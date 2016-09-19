@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SoundOryc.Desktop.ViewModel
 {
@@ -202,6 +203,11 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+
+
+
+      
+
         //
         private  void ShowRDialog()
         {
@@ -272,6 +278,8 @@ namespace SoundOryc.Desktop.ViewModel
 
                 //SUPPOSED TO ADD HERE RESETCONTEXTMENU() AND LOADPL..()
             });
+
+
 
         }
 

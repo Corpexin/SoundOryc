@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SoundOryc.Desktop.ViewModel
@@ -20,6 +21,12 @@ namespace SoundOryc.Desktop.ViewModel
     {
         public const string IsContentVisiblePropertyName = "isContentVisible";
         private bool _isContentVisible = false;
+
+        public const string IsContentVisibleUpPropertyName = "isContentVisibleUp";
+        private bool _isContentVisibleUp = false;
+
+        public const string IsContentPlaylistVisiblePropertyName = "isContentPlaylistVisible";
+        private bool _isContentPlaylistVisible = false;
 
         public const string songsEnabledPropertyName = "songsEnabled";
         private bool _songsEnabled = false;
@@ -33,13 +40,20 @@ namespace SoundOryc.Desktop.ViewModel
         public const string lblPageContentPropertyName = "lblPageContent";
         private string _lblPageContent = "1";
 
+        public const string playlistNamePropertyName = "playlistName";
+        private string _playlistName = "";
+
         private List<Song> selectedItems = new List<Song>();
 
 
         public const string songsListPropertyName = "songsList";
         private ObservableCollection<Song> _songsList = new ObservableCollection<Song>();
-
         
+
+
+
+
+
 
         public bool isContentVisible
         {
@@ -60,6 +74,43 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public bool isContentVisibleUp
+        {
+            get
+            {
+                return _isContentVisibleUp;
+            }
+
+            set
+            {
+                if (_isContentVisibleUp == value)
+                {
+                    return;
+                }
+
+                _isContentVisibleUp = value;
+                RaisePropertyChanged(IsContentVisibleUpPropertyName);
+            }
+        }
+
+        public bool isContentPlaylistVisible
+        {
+            get
+            {
+                return _isContentPlaylistVisible;
+            }
+
+            set
+            {
+                if (_isContentPlaylistVisible == value)
+                {
+                    return;
+                }
+
+                _isContentPlaylistVisible = value;
+                RaisePropertyChanged(IsContentPlaylistVisiblePropertyName);
+            }
+        }
 
         public bool songsEnabled
         {
@@ -134,6 +185,26 @@ namespace SoundOryc.Desktop.ViewModel
 
                 _lblPageContent = value;
                 RaisePropertyChanged(lblPageContentPropertyName);
+            }
+        }
+
+
+        public string playlistName
+        {
+            get
+            {
+                return _playlistName;
+            }
+
+            private set
+            {
+                if (_playlistName == value)
+                {
+                    return;
+                }
+
+                _playlistName = value;
+                RaisePropertyChanged(playlistNamePropertyName);
             }
         }
 
@@ -235,15 +306,12 @@ namespace SoundOryc.Desktop.ViewModel
 
 
 
-        public RelayCommand<MouseButtonEventArgs> addQueue
+        public RelayCommand<Song> addQueue
         {
             get
             {
-                return new RelayCommand<MouseButtonEventArgs>((e) => {
-                   
+                return new RelayCommand<Song>((e) => {
                         Messenger.Default.Send(selectedItems, "addSongToQueue");
-                    
-
                 });
             }
         }
@@ -268,6 +336,15 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public RelayCommand<Song> RemoveItem
+        {
+            get
+            {
+                return new RelayCommand<Song>((e) => {
+                    isContentVisible = false;
+                });
+            }
+        }
 
 
         public ContentViewModel()
@@ -275,6 +352,8 @@ namespace SoundOryc.Desktop.ViewModel
             Messenger.Default.Register<ObservableCollection<MediaData>>(this, "fillContentList",  message =>
             {
                 isContentVisible = false;
+                isContentPlaylistVisible = false;
+                isContentVisibleUp = false;
                 songsList.Clear();
                 lblPageContent = "1";
                 foreach (Song s in message)
@@ -284,6 +363,7 @@ namespace SoundOryc.Desktop.ViewModel
 
                 Messenger.Default.Send("", "searchCompleted");
                 isContentVisible = true;
+                isContentVisibleUp = true;
             });
 
 
@@ -319,6 +399,20 @@ namespace SoundOryc.Desktop.ViewModel
                     string[] ms = new string[2];
                     ms[1] = "Ethernet connection lost";
                     Messenger.Default.Send(ms, "openInfoDialog");
+                }
+            });
+
+
+            Messenger.Default.Register<PlayList>(this, "loadPlaylist", message =>
+            {
+                isContentVisibleUp = false;
+                playlistName = message.namePl;
+                isContentPlaylistVisible = true;
+                songsList.Clear();
+                foreach (Song s in message.songs)
+                {
+                    s.numList = null;
+                    songsList.Add(s);
                 }
             });
 

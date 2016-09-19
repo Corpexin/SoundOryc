@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SoundOryc.Desktop.View"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              DataContext="{Binding Side, Source={StaticResource Locator}}"
              mc:Ignorable="d" >
 
@@ -49,7 +51,7 @@
         </StackPanel>
         <Label x:Name="lblLogout" Grid.Column="0" Grid.Row="3"   Margin="0,0, 0, 0" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#898c88" Content="Logout" Visibility="{Binding logoutVisible, Converter={StaticResource boolToVis}}"></Label>
         <Label  x:Name="lblPlayLists" Grid.Column="0" Grid.Row="4"   Margin="0,0, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="PlayLists" Visibility="{Binding lblPlaylistsVisible, Converter={StaticResource boolToVis}}"></Label>
-        <ListView  x:Name="lvPlayLists" Margin="20,0,0,0"  Grid.Column="0" Grid.Row="5"  Background="Transparent"  BorderBrush="{x:Null}"  Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle2}" SelectionMode="Single" ItemsSource="{Binding playlistsList}" >
+        <ListView  x:Name="lvPlayLists" Margin="20,0,0,0"  Grid.Column="0" Grid.Row="5"  Background="Transparent"  BorderBrush="{x:Null}"  Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle2}" SelectionMode="Single" ItemsSource="{Binding playlistsList}" PreviewMouseLeftButtonUp="lvPlayLists_PreviewMouseLeftButtonUp"  >
             <ListView.View>
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  Width="150" DisplayMemberBinding="{Binding namePl}" />

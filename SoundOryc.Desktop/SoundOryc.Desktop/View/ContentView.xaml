@@ -38,10 +38,11 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="14*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#898c88" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
-        <Button x:Name="btnSongs" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}" IsEnabled="{Binding songsEnabled}" Grid.Row="0" Grid.Column="1" FontSize="13" FontWeight="Thin" Content="songs"  ClickMode="Press" Width="70" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding songsClick}" Margin="0,0,25,0" />
-        <Button x:Name="btnArtists" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
-        <Button x:Name="btnAlbums" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-0.066,25,0.065" />
+        <Rectangle Fill="#898c88" Visibility="{Binding isContentVisibleUp, Converter={StaticResource boolToVis}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="40,24,40,0" />
+        <Button x:Name="btnSongs" Visibility="{Binding isContentVisibleUp, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}" IsEnabled="{Binding songsEnabled}" Grid.Row="0" Grid.Column="1" FontSize="13" FontWeight="Thin" Content="songs"  ClickMode="Press" Width="70" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding songsClick}" Margin="0,0,25,0" />
+        <Button x:Name="btnArtists" Visibility="{Binding isContentVisibleUp, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding artistsEnabled}" Grid.Row="0" Grid.Column="2" FontSize="13" FontWeight="Thin" Content="artists"  ClickMode="Press" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding artistsClick}" Margin="31,0,34,0" />
+        <Button x:Name="btnAlbums" Visibility="{Binding isContentVisibleUp, Converter={StaticResource boolToVis}}" Style="{StaticResource ButtonSelectSearchType}"  IsEnabled="{Binding albumsEnabled}" Grid.Row="0" Grid.Column="3" FontSize="13" FontWeight="Thin" Content="albums"  ClickMode="Press" Width="67" Height="25" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False" Command="{Binding albumsClick}" Margin="0,-0.066,25,0.065" />
+        <Label x:Name="lblPlaylistName" Visibility="{Binding isContentPlaylistVisible, Converter={StaticResource boolToVis}}" Content="{Binding playlistName}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Foreground="#FF898C88"   Background="Transparent" FontWeight="Thin" ClipToBounds="True" FontSize="13" />
         <ListView x:Name="lvSongs" Background="Transparent"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
@@ -51,6 +52,15 @@
                     <command:EventToCommand  Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems, ElementName=lvSongs}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListView.ContextMenu>
+                <ContextMenu x:Name="menu"  >
+                    <MenuItem x:Name="addQueue" Header="Add to Queue"    Background="WhiteSmoke" Command="{Binding addQueue}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}">
+                    </MenuItem>
+                    <MenuItem x:Name="addPlaylist" Header="Add to Playlist" Command="{Binding Path=DataContext.addPlaylist, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  >
+                        <MenuItem x:Name="createNew"  Header="Create new..." Command="{Binding Path=DataContext.createNew, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View >
                 <GridView  ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn  ctrl:ProportionalColumn.Width="1"  DisplayMemberBinding="{Binding numList}" />

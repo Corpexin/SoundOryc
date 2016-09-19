@@ -28,11 +28,11 @@ namespace SoundOryc.Desktop.View
         public ContentView()
         {
             InitializeComponent();
-            saveMenuItems();
+            //saveMenuItems();
 
             Messenger.Default.Register<bool>(this, "resetContextMenu", message =>
             {
-                resetContextMenu();
+                //resetContextMenu();
             });
 
             Messenger.Default.Register<ObservableCollection<PlayList>>(this, "loadPlaylistsContextMenu", message =>
@@ -44,7 +44,11 @@ namespace SoundOryc.Desktop.View
         private void saveMenuItems()
         {
             menuItems.Clear();
-            foreach (MenuItem mItem in ((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items)
+            ContextMenu ct = ((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value);
+            MenuItem[] a = new MenuItem[ct.Items.Count];
+            ct.Items.CopyTo(a, 0);
+
+            foreach (MenuItem mItem in a)
             {
                 menuItems.Add(mItem);
             }
@@ -74,9 +78,11 @@ namespace SoundOryc.Desktop.View
         //load into context menu the playlists loaded from the account
         private void loadPlaylistsContextMenu(ObservableCollection<PlayList> playlists)
         {
+            
             if (playlists.Count != 0)
             {
-                MenuItem addPl = (MenuItem)((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items[1];
+                //MenuItem addPl = (MenuItem)((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items[1];
+                MenuItem addPl = (MenuItem) lvSongs.ContextMenu.Items[1];
 
                 foreach (PlayList pl in playlists)
                 {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using SoundOryc.Desktop.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,15 @@ namespace SoundOryc.Desktop.View
         public SidebarView()
         {
             InitializeComponent();
+        }
+
+        private void lvPlayLists_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                Messenger.Default.Send((PlayList)item, "loadPlaylist");
+            }
         }
     }
 }
