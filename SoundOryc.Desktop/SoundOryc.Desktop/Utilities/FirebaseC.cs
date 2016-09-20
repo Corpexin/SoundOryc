@@ -134,7 +134,9 @@ namespace SoundOryc.Desktop.Utilities
         public static async Task<bool> saveSong(List<Song> songs, PlayList pl, Model.User user)
         {
             bool x = true;
-            int position = pl.songs.Count();
+
+            int position = pl.songs.Max(t => t.fbCont) + 1; //this code is very professional
+
             foreach (Song song in songs)
             {
                 Dictionary<string, string> values = new Dictionary<string, string>();
@@ -244,5 +246,26 @@ namespace SoundOryc.Desktop.Utilities
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
         }
+
+        internal static async Task<bool> deleteSongs(PlayList playlist, List<int> songIndexList, Model.User user)
+        {
+            bool x;
+            try
+            {
+                foreach (int i in songIndexList)
+                {
+                    var response = await _client.DeleteAsync("users/" + user.UID + "/" + playlist.namePl + "/" +i+ "/");
+                }
+
+                x = true;
+            }
+            catch (FirebaseException)
+            {
+                x = false;
+            }
+            return x;
+        }
+
+        
     }
 }

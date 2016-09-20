@@ -15,6 +15,7 @@ namespace SoundOryc.Desktop.Model
 
         public string id { get; set; }
         public string numList { get; set; }
+        public int fbCont { get; set; }
         public string songName { get; set; }
         public string artistName { get; set; }
         public string duration { get; set; }
@@ -39,8 +40,9 @@ namespace SoundOryc.Desktop.Model
         {
         }
 
-        public Song(string id, string songName, string artistName, string duration, string uri, Song.Source source)
+        public Song(int fbCont, string id, string songName, string artistName, string duration, string uri, Song.Source source)
         {
+            this.fbCont = fbCont;
             this.id = id;
             this.songName = songName;
             this.artistName = artistName;

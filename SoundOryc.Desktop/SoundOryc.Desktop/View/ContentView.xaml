@@ -59,7 +59,7 @@
                     <MenuItem x:Name="addPlaylist"  Header="Add to Playlist" Visibility="{Binding isAddPlaylistMIVisible, Converter={StaticResource boolToVis}}" Command="{Binding Path=DataContext.addPlaylist, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  >
                         <MenuItem x:Name="createNew"  Header="Create new..." Command="{Binding Path=DataContext.createNew, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
                     </MenuItem>
-                    <MenuItem x:Name="deleteSong"  Header="Delete from Playlist" Visibility="{Binding isDeleteSongMIVisible, Converter={StaticResource boolToVis}}" Command="{Binding Path=DataContext.deleteSong, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  />
+                    <MenuItem x:Name="deleteSong"  Header="Delete from Playlist" Visibility="{Binding isDeleteSongMIVisible, Converter={StaticResource boolToVis}}"  Command="{Binding deleteSongFromPlayList}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View >

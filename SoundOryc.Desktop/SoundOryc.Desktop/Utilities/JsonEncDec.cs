@@ -133,6 +133,7 @@ namespace SoundOryc.Desktop.Utilities
 
         internal static List<PlayList> decodeUserInfo(string json)
         {
+            int cont = 0;
             Song.Source src;
 
             JObject jObject = JObject.Parse(json);
@@ -143,9 +144,9 @@ namespace SoundOryc.Desktop.Utilities
             foreach (JToken playList in jObject.Children())
             {
                 List<Song> songs = new List<Song>();
+                var x = playList.Children();
                 foreach (JToken songEnc in playList.Children().Children())
                 {
-
                     if (songEnc.HasValues)
                     {
                         if (songEnc["source"].ToString() == "NetEase")
@@ -156,12 +157,13 @@ namespace SoundOryc.Desktop.Utilities
                         {
                             src = Song.Source.Mp3WithMe;
                         }
-                        Song s = new Song(songEnc["idSong"].ToString(), songEnc["songName"].ToString(), songEnc["artistName"].ToString(), songEnc["duration"].ToString(), songEnc["uri"].ToString(), src);
+                        Song s = new Song(cont, songEnc["idSong"].ToString(), songEnc["songName"].ToString(), songEnc["artistName"].ToString(), songEnc["duration"].ToString(), songEnc["uri"].ToString(), src);
                         songs.Add(s);
                     }
-
+                    cont++;
 
                 }
+                cont = 0;
 
                 PlayList playListDec = new PlayList(((JProperty)playList).Name, songs); //TODO: controlar que el nombre son solo letras o numeros
                 listOfPlaylist.Add(playListDec);

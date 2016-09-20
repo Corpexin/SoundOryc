@@ -399,7 +399,28 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
-       
+        public RelayCommand<Song> deleteSongFromPlayList
+        {
+            get
+            {
+                return new RelayCommand<Song>((e) => {
+                    if (selectedItems.Count != 0)
+                    {
+                        List<Song> aux = new List<Song>();
+                        foreach(Song s in selectedItems)
+                        {
+                            aux.Add(s);
+                        }
+                        foreach (Song s in aux)
+                        {
+                            songsList.Remove(s);
+                        }
+                       
+                        Messenger.Default.Send(aux, "deleteSongsFromPlaylist");
+                    }
+                });
+            }
+        }
 
 
         public ContentViewModel()
@@ -440,7 +461,7 @@ namespace SoundOryc.Desktop.ViewModel
                 }
             });
 
-
+            //SHOULD CALL PROGRESS DIALOG
             Messenger.Default.Register<Object[]>(this, "saveSongsFirebase", async message =>
             {
                 List<Song> auxL = new List<Song>();
@@ -466,6 +487,7 @@ namespace SoundOryc.Desktop.ViewModel
 
             Messenger.Default.Register<PlayList>(this, "loadPlaylist", message =>
             {
+                isContextmenuVisible = true;
                 isContentVisibleUp = false;
                 isAddPlaylistMIVisible = false;
                 isDeleteSongMIVisible = true;

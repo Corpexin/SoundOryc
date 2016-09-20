@@ -41,7 +41,7 @@ namespace SoundOryc.Desktop.Services
                 }
                 catch (WebException)
                 {
-                    result.Add(new Song("", "No matches found...", "", "", "", Song.Source.NetEase));
+                    result.Add(new Song(0, "", "No matches found...", "", "", "", Song.Source.NetEase));
                 }
             }
 

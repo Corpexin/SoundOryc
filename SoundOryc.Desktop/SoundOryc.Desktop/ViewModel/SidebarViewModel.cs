@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
 using SoundOryc.Desktop.Model;
+using SoundOryc.Desktop.Utilities;
 using SoundOryc.Desktop.View;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace SoundOryc.Desktop.ViewModel
         public const string usernameTextPropertyName = "usernameText";
         private string _usernameText = "";
 
+        public PlayList selectedPlaylist;
         
 
 
@@ -226,6 +228,11 @@ namespace SoundOryc.Desktop.ViewModel
         //
         public SidebarViewModel()
         {
+            Messenger.Default.Register<PlayList>(this, "loadPlaylist", message =>
+            {
+                selectedPlaylist = message;
+            });
+
             Messenger.Default.Register<User>(this, "UserLogged", message =>
             {
                 user = message;
@@ -276,15 +283,66 @@ namespace SoundOryc.Desktop.ViewModel
                     contextPlaylistSelected.songs.Add(s);
                 }
 
-                //SUPPOSED TO ADD HERE RESETCONTEXTMENU() AND LOADPL..()
+            });
+
+            Messenger.Default.Register<List<Song>>(this, "deleteSongsFromPlaylist", message =>
+            {
+
+
+                int cont = 0;
+                //delete from firebase. SHOULD CALL PROGRESS DIALOG
+                List<int> songIndexList = new List<int>();
+                foreach(Song s in selectedPlaylist.songs)
+                {
+                    if (message.Contains(s))
+                    {
+                        songIndexList.Add(cont);
+                    }
+                    cont++;
+                }
+
+                deleteSongsFromFirebase(selectedPlaylist, songIndexList, message);
+
+                
             });
 
 
 
         }
 
+        private async void deleteSongsFromFirebase(PlayList playlist, List<int> songIndexList, List<Song> songs)
+        {
+
+            bool x = await FirebaseC.deleteSongs(playlist, songIndexList, user);
+            if (x)
+            {
+                //care async
+                foreach (Song s in songs)
+                {
+                    selectedPlaylist.songs.Remove(s);
+                }
+                //reOrganize Indexes. hacer cuando se obtengan los indices
+                //bool y = await FirebaseC.sortSongs(selectedPlaylist, user);
 
 
-      
+                //if 0 songs, deletes the playlist from lvplaylists
+                /** SEND TO CONTENT TO ASK FOR REMAINING SONGS THEN COMEBACK IF ITS LAST SONG AND DELETE PLAYLIST
+                if (searchSongList.Count == 0)
+                {
+                    continu = false;
+                    //delete local
+                    playLists.Remove(selectedPlaylist);
+                    addListToPlaylist();
+                    resetContextMenu();
+                    loadPlaylistsMenuItems();
+                }**/
+            }
+            else
+            {
+                //SEND MAIN
+                //await this.ShowMessageAsync("", "Ethernet connection lost");
+            }
+
+        }
     }
 }
