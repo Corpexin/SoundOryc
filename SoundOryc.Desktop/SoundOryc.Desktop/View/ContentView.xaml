@@ -46,19 +46,20 @@
         <ListView x:Name="lvSongs" Background="Transparent"  ctrl:ListViewLayoutManager.Enabled="true" Grid.Column="0"  Grid.Row="1"  Margin="0, 5, 0, 0" VerticalContentAlignment="Stretch" Grid.ColumnSpan="5" BorderBrush="{x:Null}"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle}" AllowDrop="True" ItemsSource="{Binding songsList}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <command:EventToCommand Command="{Binding addQueue}" PassEventArgsToCommand="True"/>
+                    <command:EventToCommand Command="{Binding addQueueAlone}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionChanged">
                     <command:EventToCommand  Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems, ElementName=lvSongs}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.ContextMenu>
-                <ContextMenu x:Name="menu"  >
-                    <MenuItem x:Name="addQueue" Header="Add to Queue"    Background="WhiteSmoke" Command="{Binding addQueue}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}">
+                <ContextMenu x:Name="menu" Visibility="{Binding isContextmenuVisible, Converter={StaticResource boolToVis}}" >
+                    <MenuItem x:Name="addQueue" Header="Add to Queue"  Background="WhiteSmoke" Command="{Binding addQueue}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}">
                     </MenuItem>
-                    <MenuItem x:Name="addPlaylist" Header="Add to Playlist" Command="{Binding Path=DataContext.addPlaylist, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  >
+                    <MenuItem x:Name="addPlaylist"  Header="Add to Playlist" Visibility="{Binding isAddPlaylistMIVisible, Converter={StaticResource boolToVis}}" Command="{Binding Path=DataContext.addPlaylist, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  >
                         <MenuItem x:Name="createNew"  Header="Create new..." Command="{Binding Path=DataContext.createNew, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
                     </MenuItem>
+                    <MenuItem x:Name="deleteSong"  Header="Delete from Playlist" Visibility="{Binding isDeleteSongMIVisible, Converter={StaticResource boolToVis}}" Command="{Binding Path=DataContext.deleteSong, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke"  />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View >
