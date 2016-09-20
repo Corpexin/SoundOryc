@@ -31,6 +31,18 @@ namespace SoundOryc.Desktop.View
             {
                 await this.ShowMessageAsync(message[0], message[1]);
             });
+
+            Messenger.Default.Register<bool>(this, "resizeWindow", message =>
+            {
+                if (message)
+                {
+                    content.Margin = new Thickness(200, 20, 5, 0);
+                }
+                else
+                {
+                    content.Margin = new Thickness(20, 20, 5, 0);
+                }
+            });
         }
     }
 }

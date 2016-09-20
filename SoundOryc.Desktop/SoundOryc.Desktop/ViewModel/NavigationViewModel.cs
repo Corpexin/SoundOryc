@@ -118,10 +118,12 @@ namespace SoundOryc.Desktop.ViewModel
                     if (isSidebarOpened)
                     {
                         isSidebarOpened = false;
+                        Messenger.Default.Send(false, "resizeWindow");
                     }
                     else
                     {
                         isSidebarOpened = true;
+                        Messenger.Default.Send(true, "resizeWindow");
                     }
 
                 });

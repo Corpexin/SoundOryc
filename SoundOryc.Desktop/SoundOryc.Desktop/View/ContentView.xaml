@@ -11,7 +11,7 @@
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              DataContext="{Binding Content, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
-             MinWidth="580"
+             
              MinHeight="360">
 
     <UserControl.Resources>

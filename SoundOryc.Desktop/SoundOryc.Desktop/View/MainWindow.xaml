@@ -59,7 +59,7 @@
 
 
 
-        <View:ContentView Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5" Margin="0,20,0,0"/>
+        <View:ContentView x:Name="content" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5" Margin="0,20,0,0"/>
         <View:NavigationView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
         <View:PlayerView  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
         <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5"   Fill="#2b323a" Visibility="{Binding isContentVisible, Converter={StaticResource boolToVis}}"/>
