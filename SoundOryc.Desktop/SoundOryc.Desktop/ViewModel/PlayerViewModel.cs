@@ -52,6 +52,9 @@ namespace SoundOryc.Desktop.ViewModel
         public const string artistNamePropertyName = "artistName";
         private string _artistName = "";
 
+        public const string artistNameTooltipPropertyName = "artistNameTooltip";
+        private string _artistNameTooltip = "";
+
         public const string songNamePropertyName = "songName";
         private string _songName = "";
 
@@ -92,6 +95,25 @@ namespace SoundOryc.Desktop.ViewModel
 
                 _artistName = value;
                 RaisePropertyChanged(artistNamePropertyName);
+            }
+        }
+
+        public string artistNameTooltip
+        {
+            get
+            {
+                return _artistNameTooltip;
+            }
+
+            set
+            {
+                if (_artistNameTooltip == value)
+                {
+                    return;
+                }
+
+                _artistNameTooltip = value;
+                RaisePropertyChanged(artistNameTooltipPropertyName);
             }
         }
 
@@ -462,18 +484,28 @@ namespace SoundOryc.Desktop.ViewModel
             //receive a song and plays it. 
             Messenger.Default.Register<Song>(this, "playSong", async message =>
             {
+                bool x;
+                artistName = "Loading song...";
                 if (message.source == Song.Source.Mp3WithMe)
                 {
-                    player.playSong(message.uri);
+                    x = player.playSong(message.uri);
                 }
                 else
                 {
-                    player.playSong(await Netease.getInfoSong(message));
+                    x = player.playSong(await Netease.getInfoSong(message));
                 }
-                artistName = message.artistName;
-                songName = message.songName;
-                isSongPaused = false;
-                timer.Start();
+                if (x)
+                {
+                    artistName = message.artistName;
+                    songName = message.songName;
+                    isSongPaused = false;
+                    timer.Start();
+                }
+                else
+                {
+                    artistName = "Failed loading song...";
+                }
+                
             });
 
             //set nextButton enabled/disabled
@@ -493,8 +525,9 @@ namespace SoundOryc.Desktop.ViewModel
         //every second this method is executed (only if song is playing)
         private void tick(object sender, EventArgs e)
         {
+            artistNameTooltip = player.estatusString;
             //changes song actual time and total time
-            if(player.timeActualCad == "" || player.timeActualCad == null)
+            if (player.timeActualCad == "" || player.timeActualCad == null)
             {
                 actualTimeContent = "00:00";
             }

@@ -84,10 +84,18 @@ namespace SoundOryc.Desktop.Utilities
         }
 
         //play a song from an uri
-        public void playSong(string uri)
+        public bool playSong(string uri)
         {
-            player.controls.stop();
-            player.URL = uri;
+            if (uri != null)
+            {
+                player.controls.stop();
+                player.URL = uri;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //continue playing a song

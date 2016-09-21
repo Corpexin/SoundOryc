@@ -128,6 +128,7 @@
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\SongInfo.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Services\Class1.cs" />
     <Compile Include="Services\Mp3With.cs" />
     <Compile Include="Services\Netease.cs" />
     <Compile Include="Model\Album.cs" />

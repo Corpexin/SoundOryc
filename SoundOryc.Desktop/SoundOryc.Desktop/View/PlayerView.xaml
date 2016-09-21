@@ -45,7 +45,7 @@
         <Label  x:Name="lblActualTime" Content="{Binding actualTimeContent}" Grid.Column="0" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" HorizontalAlignment="Left" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="-1,4,0,41" Grid.RowSpan="2" Width="41"/>
         <Label  x:Name="lblTotalTime" Content="{Binding totalTimeContent}" Grid.Column="4" Grid.Row="0" FontFamily="Arial Unicode MS" Foreground="#FF898C88" Padding="5,0"  Background="Transparent" ClipToBounds="True" FontSize="10" Margin="0,4,0,41" Grid.RowSpan="2" HorizontalAlignment="Right" Width="36"/>
         <StackPanel Margin="20,5,0,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Width="auto">
-            <Label x:Name="lblArtistName" Content="{Binding artistName}" FontFamily="Arial Unicode MS" FontWeight="Bold" Foreground="#FF898C88" FontSize="13" Height="25" Padding="2,5,5,2" HorizontalAlignment="Left"/>
+            <Label x:Name="lblArtistName" Content="{Binding artistName}" ToolTip="{Binding artistNameTooltip}" FontFamily="Arial Unicode MS" FontWeight="Bold" Foreground="#FF898C88" FontSize="13" Height="25" Padding="2,5,5,2" HorizontalAlignment="Left"/>
             <Label  x:Name="lblSongName" Content="{Binding songName}" FontFamily="Arial Unicode MS" Foreground="#FF898C88" HorizontalAlignment="Left" Padding="5,0"/>
         </StackPanel>
         <Button x:Name="btnQueue" Style="{StaticResource ButtonStyle}"  Grid.Column="3" Grid.Row="1" Height="18"   BorderBrush="Transparent" Padding="0,0,0,0" BorderThickness="0,0,0,0" FontSize="1" IsEnabled="True"  MinHeight="1" Visibility="Visible"  ToolTip="Songs Queue" RenderTransformOrigin="0.529,0.917" Margin="56.731,16,1.54,17">

@@ -9,6 +9,7 @@ using System.Net;
 using System.IO;
 using SoundOryc.Desktop.Utilities;
 using System.Security.Cryptography;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace SoundOryc.Desktop.Services
 {
@@ -16,11 +17,12 @@ namespace SoundOryc.Desktop.Services
     {
         public static ObservableCollection<Proxy> proxies = new ObservableCollection<Proxy>();
         public static int contP;
-
+        public static int contS;
 
         public static void fillProxies()
         {
             Netease.proxies.Add(new Proxy("http://"));
+            Netease.proxies.Add(new Proxy("http://111.11.122.7/"));
             Netease.proxies.Add(new Proxy("http://219.138.27.33/"));
             Netease.proxies.Add(new Proxy("http://49.117.146.206/"));
             Netease.proxies.Add(new Proxy("http://49.117.146.208/"));
@@ -121,15 +123,29 @@ namespace SoundOryc.Desktop.Services
 
         internal static async Task<string> getInfoSong(Song song)
         {
-            return await Task.Run(() => downloadInfoSong(song));
+            string s =  await Task.Run(() => downloadInfoSong(song));
+            if (s != null)
+            {
+                return s;
+            }
+            else
+            {
+                String[] st = new String[2];
+                st[0] = "Error. couldn't load song";
+                st[1] = "Tried to get the link using every proxy available 2 times. None of them seems to work. Try again or add some more proxies.";
+                Messenger.Default.Send(st, "openInfoDialog");
+                return s;
+            }
+            
         }
 
 
         private static async Task<string> downloadInfoSong(Song song)
         {
-            bool correct = false;
+            bool goOut = false;
             contP = 0;
-            while (!correct)
+            contS = 0;
+            while (!goOut)
             {
                 try
                 {
@@ -138,18 +154,28 @@ namespace SoundOryc.Desktop.Services
                     song.infoSong = JsonEncDec.getInfoSong(info);
                     string encriptedKey = encryptSongId(song.infoSong.dfsid);
                     song.uri = "http://p3.music.126.net/" + encriptedKey + "/" + song.infoSong.dfsid + ".mp3";
-                    correct = true;
+                    goOut = true;
                 }
                 catch (Exception)
                 {
-                    if (contP <= proxies.Count - 1)
-                    {
-                        contP++;
+                    if (contS < proxies.Count * 2) {
+                        if (contP <= proxies.Count - 1)
+                        {
+                            contP++;
+                        }
+                        else
+                        {
+                            contP = 0;
+                        }
+                        contS++;
                     }
                     else
                     {
-                        contP = 0;
+                        goOut = true;
+                        song.uri = null;
                     }
+
+                    
                 }
             }
 
