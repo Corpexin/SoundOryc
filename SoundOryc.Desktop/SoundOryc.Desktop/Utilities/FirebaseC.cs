@@ -130,10 +130,9 @@ namespace SoundOryc.Desktop.Utilities
 
 
 
-        public static async Task<bool> saveSong(List<Song> songs, PlayList pl, Model.User user)
+        public static async Task<List<int>> saveSong(List<Song> songs, PlayList pl, Model.User user)
         {
-            bool x = true;
-
+            List<int> resultList = new List<int>();
             int position = pl.songs.Max(t => t.fbCont) + 1; //this code is very professional
 
             foreach (Song song in songs)
@@ -157,14 +156,15 @@ namespace SoundOryc.Desktop.Utilities
                 try
                 {
                     var response = await _client.SetAsync("users/" + user.UID + "/" + pl.namePl + "/" + position + "/", values);
+                    resultList.Add(position);
                 }
                 catch (FirebaseException)
                 {
-                    x = false;
+                    resultList = null;
                 }
                 position++;
             }
-            return x;
+            return resultList;
         }
 
         public static async Task<bool> createPlaylist(ObservableCollection<Song> songs, string result, Model.User user)

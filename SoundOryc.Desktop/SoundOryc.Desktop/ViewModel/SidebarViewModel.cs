@@ -275,13 +275,21 @@ namespace SoundOryc.Desktop.ViewModel
                 }
             });
 
-            Messenger.Default.Register<List<Song>>(this, "addSongsToPlaylists", message =>
+            Messenger.Default.Register<Object[]>(this, "addSongsToPlaylists", message =>
             {
-                foreach (Song s in message)
+                List<Song> songL = (List<Song>)message[0];
+                List<int> songP = (List<int>)message[1];
+
+                if(songL.Count == songP.Count) //weaak check, but should work
                 {
-                    s.numList = null;
-                    contextPlaylistSelected.songs.Add(s);
+                    for (int i = 0; i < songL.Count; i++)
+                    {
+                        songL[i].numList = null;
+                        songL[i].fbCont = songP[i]; //this is the motherf%#@ key for deleting from firebase correctly
+                        contextPlaylistSelected.songs.Add(songL[i]);
+                    }
                 }
+                
 
             });
 

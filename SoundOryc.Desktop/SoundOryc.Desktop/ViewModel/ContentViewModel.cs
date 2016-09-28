@@ -464,17 +464,23 @@ namespace SoundOryc.Desktop.ViewModel
             //SHOULD CALL PROGRESS DIALOG
             Messenger.Default.Register<Object[]>(this, "saveSongsFirebase", async message =>
             {
+                Object[] r = new Object[2];
+
                 List<Song> auxL = new List<Song>();
 
+                
                 foreach (Song s in selectedItems)
                 {
                     s.numList = null;
                     auxL.Add(s);
                 }
-                bool x = await FirebaseC.saveSong(auxL, (PlayList)message[0], (User)message[1]);
-                if (x)
+                List<int> resultList = await FirebaseC.saveSong(auxL, (PlayList)message[0], (User)message[1]);
+                if (resultList.Count != 0)
                 {
-                    Messenger.Default.Send(auxL, "addSongsToPlaylists");
+                    //this is just fucked up =$
+                    r[0] = auxL;
+                    r[1] = resultList;
+                    Messenger.Default.Send(r, "addSongsToPlaylists");
                 }
                 else
                 {
