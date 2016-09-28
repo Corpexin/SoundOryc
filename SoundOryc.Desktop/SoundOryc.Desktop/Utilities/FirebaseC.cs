@@ -18,7 +18,6 @@ namespace SoundOryc.Desktop.Utilities
 {
     public static class FirebaseC
     {
-        
         private static FirebaseClient _client;
         private static FirebaseAuthProvider authProvider;
 

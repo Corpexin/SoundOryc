@@ -289,16 +289,14 @@ namespace SoundOryc.Desktop.ViewModel
             {
 
 
-                int cont = 0;
                 //delete from firebase. SHOULD CALL PROGRESS DIALOG
                 List<int> songIndexList = new List<int>();
                 foreach(Song s in selectedPlaylist.songs)
                 {
                     if (message.Contains(s))
                     {
-                        songIndexList.Add(cont);
+                        songIndexList.Add(s.fbCont);
                     }
-                    cont++;
                 }
 
                 deleteSongsFromFirebase(selectedPlaylist, songIndexList, message);
