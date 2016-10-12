@@ -145,7 +145,7 @@ namespace SoundOryc.Desktop.Utilities
             {
                 List<Song> songs = new List<Song>();
                 var x = playList.Children();
-                foreach (JToken songEnc in playList.Children().Children())
+                foreach (JToken songEnc in playList.Children().Children()) //TODO: sometimes another children() here...
                 {
                     if (songEnc.HasValues)
                     {

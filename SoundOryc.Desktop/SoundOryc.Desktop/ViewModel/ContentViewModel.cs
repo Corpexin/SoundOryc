@@ -423,6 +423,21 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+        public RelayCommand<Song> createNew
+        {
+            get
+            {
+                return new RelayCommand<Song>((e) => {
+                    if (selectedItems.Count != 0)
+                    {
+                        //Call to create new playlist dialog
+                        Messenger.Default.Send(selectedItems, "createNew");
+                    }
+                });
+            }
+        }
+
+
         public ContentViewModel()
         {
             Messenger.Default.Register<ObservableCollection<MediaData>>(this, "fillContentList",  message =>
