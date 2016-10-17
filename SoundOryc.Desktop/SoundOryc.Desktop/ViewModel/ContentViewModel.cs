@@ -430,8 +430,11 @@ namespace SoundOryc.Desktop.ViewModel
                 return new RelayCommand<Song>((e) => {
                     if (selectedItems.Count != 0)
                     {
-                        //Call to create new playlist dialog
-                        Messenger.Default.Send(selectedItems, "createNew");
+                        //Open write name dialog
+                        Object[] msg = new Object[2];
+                        msg[0] = "Write a name for your new playlist!";
+                        msg[1] = selectedItems;
+                        Messenger.Default.Send(msg, "openWritePlaylistNameDialog");
                     }
                 });
             }
@@ -492,10 +495,20 @@ namespace SoundOryc.Desktop.ViewModel
                 List<int> resultList = await FirebaseC.saveSong(auxL, (PlayList)message[0], (User)message[1]);
                 if (resultList.Count != 0)
                 {
-                    //this is just fucked up =$
-                    r[0] = auxL;
-                    r[1] = resultList;
-                    Messenger.Default.Send(r, "addSongsToPlaylists");
+                    switch((int)message[2])
+                    {
+                        case 0: //case songs added through context menu
+                            r[0] = auxL;
+                            r[1] = resultList;
+                            Messenger.Default.Send(r, "addSongsToContextPlaylists");
+                            break;
+                        case 1://case songs added through "create new" button
+                               //add songs locally and add playlist to context menu
+                               //add playlists into contextMenu.
+                            Messenger.Default.Send(true, "reloadContextMenu");
+                            break;
+                    }
+                                  
                 }
                 else
                 {
@@ -514,10 +527,17 @@ namespace SoundOryc.Desktop.ViewModel
                 isDeleteSongMIVisible = true;
                 playlistName = message.namePl;
                 isContentPlaylistVisible = true;
-                songsList.Clear();
-                foreach (Song s in message.songs)
+                List<Song> aux = new List<Song>();
+                foreach(Song s in message.songs)
                 {
-                    s.numList = null;
+                    Song s2 = new Song(s.fbCont, s.id, s.songName, s.artistName, s.duration, s.uri, s.source);
+                    s2.numList = null;
+                    aux.Add(s2);
+                }
+                message.songs = aux;
+                songsList.Clear();
+                foreach (Song s in aux)
+                {
                     songsList.Add(s);
                 }
             });
@@ -527,6 +547,8 @@ namespace SoundOryc.Desktop.ViewModel
                 isAddPlaylistMIVisible = true;
                 isUserLogged = true;
             });
+
+          
         }
 
 

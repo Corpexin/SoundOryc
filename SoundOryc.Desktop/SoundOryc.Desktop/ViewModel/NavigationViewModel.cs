@@ -115,18 +115,22 @@ namespace SoundOryc.Desktop.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if (isSidebarOpened)
-                    {
-                        isSidebarOpened = false;
-                        Messenger.Default.Send(false, "resizeWindow");
-                    }
-                    else
-                    {
-                        isSidebarOpened = true;
-                        Messenger.Default.Send(true, "resizeWindow");
-                    }
-
+                    resizeWindow();
                 });
+            }
+        }
+
+        private void resizeWindow()
+        {
+            if (isSidebarOpened)
+            {
+                isSidebarOpened = false;
+                Messenger.Default.Send(false, "resizeWindow");
+            }
+            else
+            {
+                isSidebarOpened = true;
+                Messenger.Default.Send(true, "resizeWindow");
             }
         }
 
@@ -178,7 +182,11 @@ namespace SoundOryc.Desktop.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    isSidebarOpened = false;
+                    if (isSidebarOpened)
+                    {
+                        isSidebarOpened = false;
+                        Messenger.Default.Send(false, "resizeWindow");
+                    }
                     Messenger.Default.Send("", "searchStarted");
                     Messenger.Default.Send(await Search.search(searchText, isNeteaseEngineSelected, 1, Search.TYPE_SONG), "fillContentList");
                 });

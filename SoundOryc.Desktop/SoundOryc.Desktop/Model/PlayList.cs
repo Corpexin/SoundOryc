@@ -8,6 +8,10 @@ namespace SoundOryc.Desktop.Model
 {
     public class PlayList
     {
+        private List<Song> list;
+        private object v;
+
+
         public PlayList(string namePl, List<Song> songs)
         {
             this.namePl = namePl;

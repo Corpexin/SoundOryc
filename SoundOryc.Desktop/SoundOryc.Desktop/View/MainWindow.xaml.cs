@@ -47,97 +47,31 @@ namespace SoundOryc.Desktop.View
                 }
             });
 
-            Messenger.Default.Register<List<Song>>(this, "createNew", async message =>
+            Messenger.Default.Register<Object[]>(this, "openWritePlaylistNameDialog", async message =>
             {
-                if (message.Count != 0)
+                string result = await this.ShowInputAsync((string)message[0], ""); //Dialog for name
+
+                if (result == null)
                 {
-                    bool correct = true;
-                    String result = null;
-                    String text = "Write a name for your new playlist!";
-                    int cont = 0;
-
-                    while (correct)
+                    message[0] = "Name is empty. Re-write name";
+                    Messenger.Default.Send(message, "openWritePlaylistNameDialog"); //Reopen Dialog
+                }
+                else
+                {
+                    if (result.ToString().Contains("/") || result.ToString() == "" || result.ToString() == null || result.Contains("-"))
                     {
-                       result = await this.ShowInputAsync(text, ""); //Dialog for name
-
-                       correct = false;
-                       if (result == null)
-                            {
-                                correct = false;
-                            }
-                            else
-                            {
-                                if (result.ToString().Contains("/") || result.ToString() == "" || result.ToString() == null)
-                                {
-                                    correct = true;
-                                    if (cont == 0)
-                                    {
-                                        text = "Name incorrect. " + text;
-                                    }
-                                    cont++;
-                                }
-                                else
-                                {
-                                    //check if the name already exists in the playlists list
-                                    foreach (PlayList pl in playLists)
-                                    {
-                                        if (result.ToString() == pl.namePl)
-                                        {
-                                            correct = true;
-                                            if (cont == 0)
-                                            {
-                                                text = "Name already exists. " + text;
-                                            }
-                                            cont++;
-                                        }
-                                    }
-                                }
-                            }
-
-
-                        }
-
-
-                        if (result != null && !((String)result).Contains("-")) //exceptions here
-                        {
-                            ObservableCollection<Song> list = new ObservableCollection<Song>();
-                            //create playlist in firebase
-                            foreach (Song s in lvSongs.SelectedItems)
-                            {
-                                list.Add(s);
-                            }
-
-                            bool x = await firebase.createPlaylist(list, result, user);
-
-                            if (x)
-                            {
-                                List<Song> lst = new List<Song>();
-                                foreach (Song s in lvSongs.SelectedItems)
-                                {
-                                    s.numList = null;
-                                    lst.Add(s);
-                                }
-                                //add playlist in local
-                                playLists.Add(new PlayList(result, lst));
-                                addListToPlaylist();
-
-                                resetContextMenu();
-                                loadPlaylistsMenuItems();
-                            }
-                            else
-                            {
-                                await this.ShowMessageAsync("", "Ethernet connection lost");
-                            }
-
-                        }
+                        message[0] = "Name Contains invalid characters. Re-write name";
+                        Messenger.Default.Send(message, "openWritePlaylistNameDialog"); //Reopen Dialog
                     }
                     else
                     {
-                        var result2 = await this.ShowMessageAsync("Need to login", "If you want to create a playlist you first need to register and enter with one account.");
+                        Object[] msg = new Object[2];
+                        msg[0] = result.ToString();
+                        msg[1] = message[1];
+                        Messenger.Default.Send(msg, "checkIfPlaylistExists");
                     }
-
                 }
-
-            }
+            });
+        }
     }
 }

@@ -255,7 +255,7 @@ namespace SoundOryc.Desktop.ViewModel
                 lblPlaylistsVisible = true;
 
                 //add playlists into contextMenu.
-                Messenger.Default.Send(true, "resetContextMenu");
+                //Messenger.Default.Send(true, "resetContextMenu");
                 Messenger.Default.Send(playlistsList, "loadPlaylistsContextMenu");
 
             });
@@ -267,20 +267,21 @@ namespace SoundOryc.Desktop.ViewModel
                     if (pl.namePl == message)
                     {
                         contextPlaylistSelected = pl;
-                        Object[] ar = new Object[2];
+                        Object[] ar = new Object[3];
                         ar[0] = pl;
                         ar[1] = user;
+                        ar[2] = 0;
                         Messenger.Default.Send(ar, "saveSongsFirebase");
                     }
                 }
             });
 
-            Messenger.Default.Register<Object[]>(this, "addSongsToPlaylists", message =>
+            Messenger.Default.Register<Object[]>(this, "addSongsToContextPlaylists", message =>
             {
                 List<Song> songL = (List<Song>)message[0];
                 List<int> songP = (List<int>)message[1];
 
-                if(songL.Count == songP.Count) //weaak check, but should work
+                if(songL.Count == songP.Count) //weak check, but should work
                 {
                     for (int i = 0; i < songL.Count; i++)
                     {
@@ -295,8 +296,6 @@ namespace SoundOryc.Desktop.ViewModel
 
             Messenger.Default.Register<List<Song>>(this, "deleteSongsFromPlaylist", message =>
             {
-
-
                 //delete from firebase. SHOULD CALL PROGRESS DIALOG
                 List<int> songIndexList = new List<int>();
                 foreach(Song s in selectedPlaylist.songs)
@@ -313,7 +312,41 @@ namespace SoundOryc.Desktop.ViewModel
             });
 
 
+            Messenger.Default.Register<Object[]>(this, "checkIfPlaylistExists", message =>
+            {
+                bool same = false;
+                //check if the name already exists in the playlists list
+                foreach (PlayList pl in playlistsList)
+                {
+                    if ((string)message[0] == pl.namePl)
+                    {
+                        same = true;
+                    }
+                }
 
+                if (same)
+                {
+                    message[0] = "Name Contains invalid characters. Re-write name";
+                    Messenger.Default.Send(message, "openWritePlaylistNameDialog"); //Reopen Dialog
+                }
+                else
+                {
+                    //Create local playlist with songs
+                    PlayList pl = new PlayList((string)message[0], (List<Song>)message[1]);
+                    playlistsList.Add(pl);
+                    Object[] msg = new Object[3];
+                    msg[0] = pl;
+                    msg[1] = user;
+                    msg[2] = 1;
+                    Messenger.Default.Send(msg, "saveSongsFirebase");
+                }
+            });
+
+          Messenger.Default.Register<bool>(this, "reloadContextMenu", message =>
+          {
+              //add playlists into contextMenu.
+              Messenger.Default.Send(playlistsList, "loadPlaylistsContextMenu");
+          });
         }
 
         private async void deleteSongsFromFirebase(PlayList playlist, List<int> songIndexList, List<Song> songs)
