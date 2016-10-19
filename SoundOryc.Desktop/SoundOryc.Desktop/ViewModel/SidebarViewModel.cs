@@ -345,6 +345,7 @@ namespace SoundOryc.Desktop.ViewModel
           Messenger.Default.Register<bool>(this, "reloadContextMenu", message =>
           {
               //add playlists into contextMenu.
+              Messenger.Default.Send(true, "resetContextMenu");
               Messenger.Default.Send(playlistsList, "loadPlaylistsContextMenu");
           });
         }
