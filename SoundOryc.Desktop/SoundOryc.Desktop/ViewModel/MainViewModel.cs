@@ -140,7 +140,8 @@ namespace SoundOryc.Desktop.ViewModel
 
         private async void ProcessLMessage()
         {
-            await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogLView);
+            if(_dialogLView.IsVisible)
+                await DialogCoordinator.Instance.HideMetroDialogAsync(this, _dialogLView);
         }
 
 

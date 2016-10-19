@@ -42,6 +42,7 @@ namespace SoundOryc.Desktop.ViewModel
         public const string usernameTextPropertyName = "usernameText";
         private string _usernameText = "";
 
+
         public PlayList selectedPlaylist;
         
 
@@ -205,10 +206,32 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+        public RelayCommand<PlayList> deletePlayList
+        {
+            get
+            {
+                return new RelayCommand<PlayList>(async (e) =>
+                {
+                    if (e != null && playlistsList.Contains(e))
+                    {
+                        //local delete
+                        playlistsList.Remove(e);
+
+                        //firebase delete
+                        if(!await FirebaseC.deletePlaylist(e, user))
+                        {
+                            Messenger.Default.Send(new String[] {"Cannot delete playlist in the cloud.", "Check your connection." }, "openInfoDialog");
+                        }
+
+                        //content delete
+
+                    }
+                });
+            }
+        }
 
 
 
-      
 
         //
         private  void ShowRDialog()

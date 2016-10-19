@@ -57,6 +57,11 @@
                     <GridViewColumn  Width="150" DisplayMemberBinding="{Binding namePl}" />
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu x:Name="menuPl" >
+                    <MenuItem x:Name="deletePlaylist"  Header="Delete Playlist" Command="{Binding deletePlayList}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
 
     </Grid>
