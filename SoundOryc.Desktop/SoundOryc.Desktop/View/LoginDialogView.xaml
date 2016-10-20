@@ -52,13 +52,18 @@
                 </TextBox.Resources>
             </TextBox>
             <Label Margin="20, 0, 0, 0" Content="Password"  Grid.Row="2" Foreground="#FF898C88" />
-            <PasswordBox x:Name="tbLPassword" PasswordChanged="PasswordBoxL_PasswordChanged" Style="{StaticResource PassBoxStyle1}" Grid.Row="3"  Margin="10,0,10,30"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" Foreground="#FF898C88" />
+            <PasswordBox x:Name="tbLPassword" PasswordChanged="PasswordBoxL_PasswordChanged" Style="{StaticResource PassBoxStyle1}" Grid.Row="3"  Margin="10,0,10,30"   FontSize="13" ToolTip="write password" VerticalContentAlignment="Stretch" Padding="20,2,20,3" Grid.ColumnSpan="5" Background="#2b323a" Foreground="#FF898C88" >
+                <PasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding loginAcc}" CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}" />
+                </PasswordBox.InputBindings>
+            </PasswordBox>
 
 
             <Label x:Name="lblRInfoRL" Grid.Row="4" Foreground="#FF898C88"  Margin="0,25,0,4" Content="{Binding infoLText}"/>
         </Grid>
     </dialogs:CustomDialog.Content>
     <dialogs:CustomDialog.DialogBottom>
-        <Button x:Name="btnLLogin" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="login"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False"  Command="{Binding loginAcc}"/>
+        <Button x:Name="btnLLogin" Style="{StaticResource ButtonTextStyle}"   FontSize="15" FontWeight="Thin" Content="login"  ClickMode="Press" Width="100" Height="25" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="10,2,10,5" UseLayoutRounding="False"  Command="{Binding loginAcc}">
+        </Button>
     </dialogs:CustomDialog.DialogBottom>
 </dialogs:CustomDialog>

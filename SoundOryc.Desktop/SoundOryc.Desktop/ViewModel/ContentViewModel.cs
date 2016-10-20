@@ -540,6 +540,8 @@ namespace SoundOryc.Desktop.ViewModel
                 {
                     songsList.Add(s);
                 }
+                Messenger.Default.Send(true, "hidePlaylists");
+
             });
 
             Messenger.Default.Register<User>(this, "UserLogged", message =>

@@ -186,6 +186,7 @@ namespace SoundOryc.Desktop.ViewModel
                     {
                         isSidebarOpened = false;
                         Messenger.Default.Send(false, "resizeWindow");
+                        Messenger.Default.Send(true, "showPlaylists");
                     }
                     Messenger.Default.Send("", "searchStarted");
                     Messenger.Default.Send(await Search.search(searchText, isNeteaseEngineSelected, 1, Search.TYPE_SONG), "fillContentList");

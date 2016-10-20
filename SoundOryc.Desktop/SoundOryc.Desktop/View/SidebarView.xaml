@@ -49,7 +49,11 @@
             <Image Width="12" Height="12" Source="/SoundOryc.Desktop;component/Resources/info.png" Margin="56, 1, 0, 0" />
             <Label x:Name="lblAbout"  Style="{StaticResource labelStyle}" Margin="0,0, 0, 0" Padding="10,10,10,10" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top"  Content="About"  Visibility="Visible"></Label>
         </StackPanel>
-        <Label x:Name="lblLogout" Grid.Column="0" Grid.Row="3"   Margin="0,0, 0, 0" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#898c88" Content="Logout" Visibility="{Binding logoutVisible, Converter={StaticResource boolToVis}}"></Label>
+        <Label x:Name="lblLogout" Grid.Column="0" Grid.Row="3"   Margin="0,0, 0, 0" FontSize="13"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#898c88" Content="Logout" Visibility="{Binding logoutVisible, Converter={StaticResource boolToVis}}" >
+            <Label.InputBindings>
+                <MouseBinding Command="{Binding logout}" MouseAction="LeftClick" />
+            </Label.InputBindings>
+        </Label>
         <Label  x:Name="lblPlayLists" Grid.Column="0" Grid.Row="4"   Margin="0,0, 0, 0" FontSize="16"  HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFF79F8B" Content="PlayLists" Visibility="{Binding lblPlaylistsVisible, Converter={StaticResource boolToVis}}"></Label>
         <ListView  x:Name="lvPlayLists" Margin="20,0,0,0"  Grid.Column="0" Grid.Row="5"  Background="Transparent"  BorderBrush="{x:Null}"  Foreground="#898c88"  ItemContainerStyle="{DynamicResource CustomListViewItemStyle2}" SelectionMode="Single" ItemsSource="{Binding playlistsList}" PreviewMouseLeftButtonUp="lvPlayLists_PreviewMouseLeftButtonUp"  >
             <ListView.View>

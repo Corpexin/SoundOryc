@@ -30,6 +30,13 @@ namespace SoundOryc.Desktop.View
             InitializeComponent();
             saveMenuItems();
 
+            Messenger.Default.Register<bool>(this, "deleteContextMenu", message =>
+            {
+                loadDefaultContextMenu();
+                ((MenuItem)this.lvSongs.ContextMenu.Items[1]).Items.Clear();
+                ((MenuItem)this.lvSongs.ContextMenu.Items[1]).Visibility = Visibility.Collapsed;
+            });
+
             Messenger.Default.Register<bool>(this, "resetContextMenu", message =>
             {
                 resetContextMenu();
@@ -38,6 +45,18 @@ namespace SoundOryc.Desktop.View
             Messenger.Default.Register<ObservableCollection<PlayList>>(this, "loadPlaylistsContextMenu", message =>
             {
                 loadPlaylistsContextMenu(message);
+            });
+
+
+
+            Messenger.Default.Register<bool>(this, "hidePlaylists", message =>
+            {
+                ((MenuItem)this.lvSongs.ContextMenu.Items[1]).Visibility = Visibility.Collapsed;
+            });
+
+            Messenger.Default.Register<bool>(this, "showPlaylists", message =>
+            {
+                ((MenuItem)this.lvSongs.ContextMenu.Items[1]).Visibility = Visibility.Visible;
             });
         }
 
@@ -83,7 +102,7 @@ namespace SoundOryc.Desktop.View
             {
                 //MenuItem addPl = (MenuItem)((ContextMenu)((Setter)this.lvSongs.ItemContainerStyle.Setters[4]).Value).Items[1];
                 MenuItem addPl = (MenuItem) lvSongs.ContextMenu.Items[1];
-
+                addPl.Visibility = Visibility.Visible;
                 foreach (PlayList pl in playlists)
                 {
                     MenuItem it = new MenuItem();

@@ -206,6 +206,29 @@ namespace SoundOryc.Desktop.ViewModel
         }
 
 
+
+        public RelayCommand logout
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    usernameText = "";
+                    registerVisible = true;
+                    loginVisible = true;
+                    usernameVisible = false;
+                    logoutVisible = false;
+                    lblPlaylistsVisible = false;
+                    playlistsList.Clear();
+                    user = null;
+
+                    //TODO> esto reinicia el contextmenu, pero sigue dejando la opcion de create new...
+                    Messenger.Default.Send(true, "deleteContextMenu");
+                });
+            }
+        }
+
+
         public RelayCommand<PlayList> deletePlayList
         {
             get
