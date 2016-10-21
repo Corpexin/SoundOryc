@@ -40,6 +40,11 @@
                     <GridViewColumn  Width="50" DisplayMemberBinding="{Binding duration}" />
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu x:Name="menuQueue" >
+                    <MenuItem x:Name="deleteFromQueue"  Header="Delete from Queue" Command="{Binding deleteFromQueue}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </Grid>
 </UserControl>

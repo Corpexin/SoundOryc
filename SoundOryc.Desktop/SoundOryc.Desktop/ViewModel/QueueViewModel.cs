@@ -55,6 +55,21 @@ namespace SoundOryc.Desktop.ViewModel
             }
         }
 
+        public RelayCommand<Song> deleteFromQueue
+        {
+            get
+            {
+                return new RelayCommand<Song>((e) =>
+                {
+                    if (e != null)
+                    {
+                        //local delete
+                        songsQueue.Remove(e);
+                    }
+                });
+            }
+        }
+
         public void checkNextPrevEnabled()
         {
             if(currentSong < songsQueue.Count - 1) {
