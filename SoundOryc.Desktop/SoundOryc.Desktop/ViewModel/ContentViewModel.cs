@@ -550,7 +550,15 @@ namespace SoundOryc.Desktop.ViewModel
                 isUserLogged = true;
             });
 
-          
+            Messenger.Default.Register<int>(this, "removeSongAtIndex", message =>
+            {
+                songsList.RemoveAt(message);
+            });
+
+            Messenger.Default.Register<Object[]>(this, "insertSongAtIndex", message =>
+            {
+                songsList.Insert((int)message[0], (Song)message[1]);
+            });
         }
 
 

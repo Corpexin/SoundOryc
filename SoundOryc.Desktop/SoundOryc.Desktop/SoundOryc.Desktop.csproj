@@ -167,6 +167,9 @@
     <Compile Include="View\RegisterDialogView.xaml.cs">
       <DependentUpon>RegisterDialogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Resources.xaml.cs">
+      <DependentUpon>Resources.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SidebarView.xaml.cs">
       <DependentUpon>SidebarView.xaml</DependentUpon>
     </Compile>

@@ -24,10 +24,13 @@ namespace SoundOryc.Desktop.View
     public partial class ContentView : UserControl
     {
         private List<MenuItem> menuItems = new List<MenuItem>();
+        private Song draggedSong;
+        private bool modoPlayList;
 
         public ContentView()
         {
             InitializeComponent();
+            modoPlayList = false;
             saveMenuItems();
 
             Messenger.Default.Register<bool>(this, "deleteContextMenu", message =>
@@ -57,6 +60,96 @@ namespace SoundOryc.Desktop.View
             Messenger.Default.Register<bool>(this, "showPlaylists", message =>
             {
                 ((MenuItem)this.lvSongs.ContextMenu.Items[1]).Visibility = Visibility.Visible;
+            });
+
+            Messenger.Default.Register<PlayList>(this, "loadPlaylist", message =>
+            {
+                modoPlayList = true;
+            });
+
+
+            Messenger.Default.Register<string>(this, "searchStarted", message =>
+            {
+                modoPlayList = false;
+            });
+
+
+
+            Messenger.Default.Register<Object[]>(this, "ItemPreviewMouseMove", message =>
+            {
+                object sender = message[0];
+                MouseEventArgs e = (MouseEventArgs)message[1];
+
+                var listboxItem = sender as ListBoxItem;
+                if (listboxItem == null)
+                    return;
+                draggedSong = listboxItem.DataContext as Song;
+
+                if (draggedSong == null)
+                    return;
+                var data = new DataObject();
+                data.SetData(draggedSong);
+                // provide some data for DnD in other applications (Word, ...)
+                //data.SetData(DataFormats.StringFormat, sourceFileData.ToString());
+                if (modoPlayList)
+                {
+                    DragDropEffects effect = DragDrop.DoDragDrop(listboxItem, data, DragDropEffects.Move | DragDropEffects.Copy);
+                }
+
+
+            });
+
+
+            Messenger.Default.Register<Object[]>(this, "ItemDrop", message =>
+            {
+                object sender = message[0];
+                DragEventArgs e = (DragEventArgs)message[1];
+                var listBoxItem = sender as ListBoxItem;
+
+                var targetFile = listBoxItem.DataContext as Song;
+                if (targetFile != null)
+                {
+                    int targetIndex = lvSongs.Items.IndexOf(targetFile);
+                    int sourceIndex = lvSongs.Items.IndexOf(draggedSong);
+                    double y = e.GetPosition(listBoxItem).Y;
+                    bool insertAfter = y > listBoxItem.ActualHeight / 2;
+                    if (insertAfter)
+                    {
+                        targetIndex++;
+                    }
+                    if (sourceIndex > targetIndex)
+                    {
+                        if (sourceIndex != -1)
+                        {
+                            Messenger.Default.Send(sourceIndex, "removeSongAtIndex");
+
+                        }
+                        Object[] obj = new Object[2];
+                        obj[0] = targetIndex;
+                        obj[1] = draggedSong;
+                        Messenger.Default.Send(obj, "insertSongAtIndex");
+
+                    }
+                    else
+                    {
+                        Object[] obj = new Object[2];
+                        obj[0] = targetIndex;
+                        obj[1] = draggedSong;
+                        Messenger.Default.Send(obj, "insertSongAtIndex");
+
+                        if (sourceIndex != -1)
+                        {
+                            Messenger.Default.Send(sourceIndex, "removeSongAtIndex");
+                        }
+
+                    }
+
+                }
+                //btnSavePlayList.Visibility = Visibility.Visible;
+                e.Handled = true;
+
+
+
             });
         }
 
@@ -122,8 +215,7 @@ namespace SoundOryc.Desktop.View
                 Messenger.Default.Send((string)((MenuItem)sender).Header, "bindPlaylistToContextMenu");
             }
         }
-
-
+       
 
     }
 }
