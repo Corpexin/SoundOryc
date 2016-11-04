@@ -102,6 +102,8 @@ namespace SoundOryc.Desktop.View
 
             Messenger.Default.Register<Object[]>(this, "ItemDrop", message =>
             {
+                //TODO: LLAMAR A ABRIR DIALOG
+                Messenger.Default.Send(true, "loadingContent");
                 object sender = message[0];
                 DragEventArgs e = (DragEventArgs)message[1];
                 var listBoxItem = sender as ListBoxItem;
@@ -145,11 +147,8 @@ namespace SoundOryc.Desktop.View
                     }
 
                 }
-                //btnSavePlayList.Visibility = Visibility.Visible;
+
                 e.Handled = true;
-
-
-
             });
         }
 

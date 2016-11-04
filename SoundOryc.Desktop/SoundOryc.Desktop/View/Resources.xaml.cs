@@ -24,6 +24,7 @@ namespace SoundOryc.Desktop.View
             obj[1] = e;
             Messenger.Default.Send(obj, "ItemPreviewMouseMove");
         }
+
         private void ListViewItemDrop(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(typeof(Song)) && !e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -35,6 +36,7 @@ namespace SoundOryc.Desktop.View
             obj[1] = e;
             Messenger.Default.Send(obj, "ItemDrop");
         }
+
         private void ListViewItemDragOver(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(typeof(Song)) && !e.Data.GetDataPresent(DataFormats.FileDrop))

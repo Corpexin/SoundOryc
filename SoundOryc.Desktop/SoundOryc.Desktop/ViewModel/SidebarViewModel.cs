@@ -357,6 +357,7 @@ namespace SoundOryc.Desktop.ViewModel
                 
             });
 
+           
 
             Messenger.Default.Register<Object[]>(this, "checkIfPlaylistExists", message =>
             {
@@ -394,6 +395,45 @@ namespace SoundOryc.Desktop.ViewModel
               Messenger.Default.Send(true, "resetContextMenu");
               Messenger.Default.Send(playlistsList, "loadPlaylistsContextMenu");
           });
+
+
+            Messenger.Default.Register<bool>(this, "removePlaylistFromList", async message =>
+            {
+                //deletes whole playlist in firebase
+                bool result = await FirebaseC.deletePlaylist(selectedPlaylist, user);
+                if (result)
+                {
+                    selectedPlaylist.songs.Clear();
+                }
+                else
+                {
+                    String[] x = new String[2];
+                    x[0] = "Error. Could not change playlist songs order.";
+                    x[1] = "Check your connection and try again.";
+                    Messenger.Default.Send(x, "openInfoDialog");
+                    Messenger.Default.Send(false, "loadingContent");
+                }
+            });
+
+            Messenger.Default.Register<ObservableCollection<Song>>(this, "ReAddSongToPlaylist", async message =>
+            {
+                foreach (Song s in message)
+                {
+                    selectedPlaylist.songs.Add(s);
+                }
+
+                bool result = await FirebaseC.createPlaylist(message, selectedPlaylist.namePl, user);
+
+                if (!result)
+                {
+                    String[] x = new String[2];
+                    x[0] = "Error. Could not change playlist songs order.";
+                    x[1] = "Check your connection and try again.";
+                    Messenger.Default.Send(x, "openInfoDialog");
+                }
+                Messenger.Default.Send(false, "loadingContent");
+            });
+
         }
 
         private async void deleteSongsFromFirebase(PlayList playlist, List<int> songIndexList, List<Song> songs)
@@ -407,21 +447,7 @@ namespace SoundOryc.Desktop.ViewModel
                 {
                     selectedPlaylist.songs.Remove(s);
                 }
-                //reOrganize Indexes. hacer cuando se obtengan los indices
-                //bool y = await FirebaseC.sortSongs(selectedPlaylist, user);
-
-
-                //if 0 songs, deletes the playlist from lvplaylists
-                /** SEND TO CONTENT TO ASK FOR REMAINING SONGS THEN COMEBACK IF ITS LAST SONG AND DELETE PLAYLIST
-                if (searchSongList.Count == 0)
-                {
-                    continu = false;
-                    //delete local
-                    playLists.Remove(selectedPlaylist);
-                    addListToPlaylist();
-                    resetContextMenu();
-                    loadPlaylistsMenuItems();
-                }**/
+               
             }
             else
             {

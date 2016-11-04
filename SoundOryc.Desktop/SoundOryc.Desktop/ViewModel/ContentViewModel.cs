@@ -552,12 +552,20 @@ namespace SoundOryc.Desktop.ViewModel
 
             Messenger.Default.Register<int>(this, "removeSongAtIndex", message =>
             {
+                //delete playlist in playlistList
+                Messenger.Default.Send(true, "removePlaylistFromList");
+                //deletes from local
                 songsList.RemoveAt(message);
             });
 
             Messenger.Default.Register<Object[]>(this, "insertSongAtIndex", message =>
             {
+                //add to local
                 songsList.Insert((int)message[0], (Song)message[1]);
+
+                //add whole playlist to firebase
+                Messenger.Default.Send(songsList, "ReAddSongToPlaylist");
+
             });
         }
 

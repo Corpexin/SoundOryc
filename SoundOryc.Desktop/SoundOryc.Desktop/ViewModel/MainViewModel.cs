@@ -193,6 +193,21 @@ namespace SoundOryc.Desktop.ViewModel
                 isPbRingActive = false;
             });
 
+            Messenger.Default.Register<bool>(this, "loadingContent", message =>
+            {
+                if (message)
+                {
+                    isContentVisible = true;
+                    isPbRingActive = true;
+                }
+                else
+                {
+                    isContentVisible = false;
+                    isPbRingActive = false;
+                }
+                
+            });
+
         }
 
 
