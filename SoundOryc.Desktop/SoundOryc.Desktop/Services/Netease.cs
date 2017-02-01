@@ -22,13 +22,13 @@ namespace SoundOryc.Desktop.Services
         public static void fillProxies()
         {
             Netease.proxies.Add(new Proxy("http://"));
-            Netease.proxies.Add(new Proxy("http://183.95.80.168/"));
-            Netease.proxies.Add(new Proxy("http://111.11.122.7/"));
-            Netease.proxies.Add(new Proxy("http://219.138.27.33/"));
-            Netease.proxies.Add(new Proxy("http://49.117.146.206/"));
-            Netease.proxies.Add(new Proxy("http://49.117.146.208/"));
-            Netease.proxies.Add(new Proxy("http://49.117.146.204/"));
-            Netease.proxies.Add(new Proxy("http://117.135.251.132/"));
+            //Netease.proxies.Add(new Proxy("http://183.95.80.168/"));
+            //Netease.proxies.Add(new Proxy("http://111.11.122.7/"));
+            //Netease.proxies.Add(new Proxy("http://219.138.27.33/"));
+            //Netease.proxies.Add(new Proxy("http://49.117.146.206/"));
+            //Netease.proxies.Add(new Proxy("http://49.117.146.208/"));
+            //Netease.proxies.Add(new Proxy("http://49.117.146.204/"));
+            //Netease.proxies.Add(new Proxy("http://117.135.251.132/"));
         }
 
 
@@ -150,7 +150,7 @@ namespace SoundOryc.Desktop.Services
             {
                 try
                 {
-                    string url = proxies[contP].uri + "103.251.128.86/api/song/detail?ids=[" + song.id + "]";
+                    string url = proxies[contP].uri + "music.163.com/api/song/detail?ids=[" + song.id + "]";
                     string info = await getInfoTask(url);
                     song.infoSong = JsonEncDec.getInfoSong(info);
                     string encriptedKey = encryptSongId(song.infoSong.dfsid);
