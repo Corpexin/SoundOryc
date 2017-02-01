@@ -8,3 +8,8 @@ D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayou
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\ListViewLayout2008.csprojResolveAssemblyReference.cache
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\Itenso.Windows.Controls.ListViewLayout.dll
 D:\Documentos\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\Itenso.Windows.Controls.ListViewLayout.pdb
+C:\Users\amadridn\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\bin\Debug\Itenso.Windows.Controls.ListViewLayout.dll
+C:\Users\amadridn\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\bin\Debug\Itenso.Windows.Controls.ListViewLayout.pdb
+C:\Users\amadridn\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\ListViewLayout2008.csprojResolveAssemblyReference.cache
+C:\Users\amadridn\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\Itenso.Windows.Controls.ListViewLayout.dll
+C:\Users\amadridn\Documents\GitHub\SoundOryc\SoundOryc.Desktop\SoundOryc.Desktop\ListViewLayout\ListViewLayout\obj\Debug\Itenso.Windows.Controls.ListViewLayout.pdb
